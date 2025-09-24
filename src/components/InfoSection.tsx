@@ -133,11 +133,8 @@ const InfoSection = () => {
         
         {/* Countries Section */}
         <div className="text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-            Countries that need the <span className="text-primary-light">Thailand Visa On Arrival</span>
-          </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            All passengers traveling to Thailand are required to apply online.
+            See the complete list of countries below.
           </p>
         </div>
         
