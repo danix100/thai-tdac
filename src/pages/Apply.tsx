@@ -641,7 +641,7 @@ const Apply = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
                       {/* Departure Country */}
                       <div className="space-y-3">
-                        <Label className="text-base md:text-lg font-bold text-slate-800">
+                        <Label className="text-base md:text-lg font-bold text-slate-800 min-h-[1.75rem] flex items-start">
                           Departure Country. Country/Territory where you Boarded
                         </Label>
                         <Select>
@@ -660,7 +660,9 @@ const Apply = () => {
 
                       {/* Purpose */}
                       <div className="space-y-3">
-                        <Label className="text-base md:text-lg font-bold text-slate-800">Purpose</Label>
+                        <Label className="text-base md:text-lg font-bold text-slate-800 min-h-[1.75rem] flex items-start">
+                          Purpose
+                        </Label>
                         <Select>
                           <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
                             <SelectValue placeholder="Select one" />
