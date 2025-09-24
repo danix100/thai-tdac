@@ -1,4 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 
 const FAQSection = () => {
   const faqData = [
@@ -64,6 +65,15 @@ const FAQSection = () => {
             </AccordionItem>
           ))}
         </Accordion>
+
+        <div className="text-center mt-12">
+          <Button 
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 text-lg rounded-lg shadow-md transition-all duration-200 hover:shadow-lg"
+          >
+            Apply For Your Thai Visa On Arrival
+          </Button>
+        </div>
       </div>
     </section>
   );
