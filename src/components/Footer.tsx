@@ -6,7 +6,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/src/assets/thailand-flag.svg"
+                src="https://www.svgrepo.com/show/405628/flag-for-flag-thailand.svg"
                 alt="Thailand Flag"
                 className="w-10 h-6 object-contain"
               />
