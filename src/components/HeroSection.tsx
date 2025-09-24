@@ -5,13 +5,16 @@ import bannerImage from "@/assets/phuket-beach-banner.webp";
 const HeroSection = () => {
   return (
     <section className="relative bg-white font-quicksand">
-      <div className="flex flex-col lg:flex-row items-stretch min-h-[600px] relative">
+      <div className="flex flex-col lg:flex-row items-stretch min-h-[500px] lg:min-h-[600px] relative">
         {/* Image Section */}
-        <div className="w-full lg:w-2/5 flex-shrink-0 relative z-10">
+        <div className="w-full lg:w-2/5 flex-shrink-0 relative z-10 overflow-hidden">
           <img
             src={bannerImage}
             alt="Beautiful Phuket beach with traditional longtail boat and limestone cliffs"
-            className="w-full h-full object-cover object-right"
+            className="
+              w-full h-full object-cover object-right-top
+              lg:clip-right-circle
+            "
           />
         </div>
 
@@ -77,6 +80,15 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Custom CSS */}
+      <style jsx>{`
+        @media (min-width: 1024px) {
+          .clip-right-circle {
+            clip-path: circle(85% at 100% 50%);
+          }
+        }
+      `}</style>
     </section>
   );
 };
