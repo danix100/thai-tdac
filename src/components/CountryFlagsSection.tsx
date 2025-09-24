@@ -96,15 +96,15 @@ const CountryFlagsSection = () => {
               className="p-2 hover:shadow-soft transition-all duration-300 cursor-pointer hover:scale-105 border-primary/10 bg-white"
               onClick={() => handleCountryClick(country)}
             >
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex items-center gap-2">
                 <img
                   src={country.flag_url}
                   alt={`${country.country} flag`}
-                  className="w-full h-8 object-cover flex-shrink-0"
+                  className="w-6 h-4 object-cover flex-shrink-0"
                   style={{ borderRadius: '3px' }}
                   loading="lazy"
                 />
-                <span className="text-xs font-medium text-foreground text-center leading-tight">
+                <span className="text-xs font-medium text-foreground leading-tight truncate">
                   {country.country}
                 </span>
               </div>

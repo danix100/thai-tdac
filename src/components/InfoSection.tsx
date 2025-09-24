@@ -133,9 +133,6 @@ const InfoSection = () => {
         
         {/* Countries Section */}
         <div className="text-center">
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            See the complete list of countries below.
-          </p>
         </div>
         
       </div>
