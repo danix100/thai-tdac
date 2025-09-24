@@ -135,8 +135,14 @@ const Apply = () => {
       
       <main className="py-8 font-quicksand">
         <div className="container mx-auto px-4 max-w-6xl">
-          {/* Horizontal Stepper for Mobile and Tablet */}
-          <div className="lg:hidden mb-8">
+          {/* Mobile Title Only */}
+          <div className="md:hidden mb-6">
+            <h1 className="text-2xl font-bold text-slate-800">Prerequisite</h1>
+            <div className="w-12 h-1 bg-primary mt-2"></div>
+          </div>
+
+          {/* Horizontal Stepper for Tablet Only */}
+          <div className="hidden md:block lg:hidden mb-8">
             <div className="bg-white rounded-lg shadow-soft p-6">
               <div className="flex items-center justify-center">
                 {steps.map((step, index) => (
