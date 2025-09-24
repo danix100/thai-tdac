@@ -74,19 +74,14 @@ const HowToApply = () => {
             <span className="text-[#00B67A] font-semibold text-lg sm:text-xl">
               Great
             </span>
-            <div className="flex gap-1">
-              {[...Array(4)].map((_, i) => (
-                <img
-                  key={i}
-                  src="https://images-static.trustpilot.com/api/stars/4/star.svg"
-                  alt="Trustpilot star"
-                  className="w-7 h-7 sm:w-8 sm:h-8"
-                />
-              ))}
-            </div>
-            <span className="text-black text-sm sm:text-base font-medium">
+            <span className="text-black text-sm sm:text-base font-medium flex items-center gap-1">
               30,207 reviews on{" "}
-              <span className="text-[#00B67A]">★ Trustpilot</span>
+              <img
+                src="https://images-static.trustpilot.com/api/stars/4/star.svg"
+                alt="Trustpilot star"
+                className="w-6 h-6 inline-block"
+              />
+              <span className="text-[#00B67A]">Trustpilot</span>
             </span>
           </div>
         </div>
