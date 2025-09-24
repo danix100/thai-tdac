@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import HowToApply from "@/components/HowToApply";
 import InfoSection from "@/components/InfoSection";
 import CountryFlagsSection from "@/components/CountryFlagsSection";
+import VisaGuideSection from "@/components/VisaGuideSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -13,6 +14,7 @@ const Index = () => {
       <HowToApply />
       <InfoSection />
       <CountryFlagsSection />
+      <VisaGuideSection />
       <Footer />
     </div>
   );
