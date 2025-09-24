@@ -16,7 +16,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-black/20" />
 
         {/* Content Section - Semi-transparent overlay */}
-        <div className="relative bg-white/85 backdrop-blur-md w-3/5 md:w-3/5 lg:w-3/5 flex items-start pt-2 md:pt-3 lg:pt-2">
+        <div className="relative bg-white/85 backdrop-blur-md w-3/5 md:w-3/5 lg:w-3/5 flex items-start pt-2 md:pt-3 lg:pt-2 pb-2 md:pb-3 lg:pb-6">
           <div className="p-4 md:p-6 lg:p-12 w-full">
             <div className="space-y-3 md:space-y-4 lg:space-y-6 text-left">
               {/* Headline */}
