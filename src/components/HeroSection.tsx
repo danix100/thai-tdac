@@ -6,19 +6,17 @@ const HeroSection = () => {
   return (
     <section className="font-quicksand">
       {/* Desktop and Tablet */}
-      <div className="hidden sm:flex max-h-[400px] md:max-h-[450px] lg:max-h-[500px]">
-        {/* Image Section - Left */}
-        <div 
-          className="w-2/5 md:w-2/5 lg:w-2/5 bg-cover bg-center relative"
-          style={{
-            backgroundImage: `url(${bannerImage})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
+      <div 
+        className="hidden sm:flex relative bg-cover bg-center items-start justify-end max-h-[400px] md:max-h-[450px] lg:max-h-[500px]"
+        style={{
+          backgroundImage: `url(${bannerImage})`,
+        }}
+      >
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 bg-black/20" />
 
-        {/* Content Section - Right */}
-        <div className="w-3/5 md:w-3/5 lg:w-3/5 bg-white flex items-start pt-4 md:pt-6 lg:pt-4">
+        {/* Content Section - Semi-transparent overlay */}
+        <div className="relative bg-white/85 backdrop-blur-md w-3/5 md:w-3/5 lg:w-3/5 flex items-start pt-2 md:pt-3 lg:pt-2">
           <div className="p-4 md:p-6 lg:p-12 w-full">
             <div className="space-y-3 md:space-y-4 lg:space-y-6 text-left">
               {/* Headline */}
