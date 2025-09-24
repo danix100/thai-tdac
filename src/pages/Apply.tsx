@@ -607,13 +607,15 @@ const Apply = () => {
                     )}
 
                     {/* Submit Button */}
-                    <div className="pt-6 border-t border-gray-200">
-                      <Button
-                        type="submit"
-                        className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 text-lg rounded-lg shadow-md hover:shadow-lg transition-all"
-                      >
-                        Continue to Travel Information
-                      </Button>
+                   <Button
+  type="submit"
+  className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-bold 
+             px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-lg shadow-md 
+             hover:shadow-lg transition-all"
+>
+  Continue to Travel Information
+</Button>
+
                     </div>
                   </form>
                 </Form>
