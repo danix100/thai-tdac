@@ -36,7 +36,10 @@ const HowToApply = () => {
           {steps.map((step, index) => {
             const IconComponent = step.icon;
             return (
-                <Card key={index} className="relative p-8 bg-white shadow-soft hover:shadow-elegant transition-all duration-300 transform hover:scale-105 border-primary/10">
+              <Card
+                key={index}
+                className="relative p-8 bg-white shadow-soft hover:shadow-elegant transition-all duration-300 transform hover:scale-105 border-primary/10"
+              >
                 <div className="text-center">
                   <div className="relative mb-6">
                     <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
@@ -55,10 +58,6 @@ const HowToApply = () => {
                     {step.description}
                   </p>
                 </div>
-                
-                {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-primary/60 to-primary/30 z-10"></div>
-                )}
               </Card>
             );
           })}
