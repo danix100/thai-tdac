@@ -24,7 +24,7 @@ const Header = () => {
           
           <Button 
             size="lg"
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg"
+            className="bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg"
           >
             Apply For Thailand Digital Arrival Card
           </Button>

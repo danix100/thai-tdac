@@ -5,7 +5,7 @@ import bannerImage from "@/assets/phuket-beach-banner.webp";
 
 const HeroSection = () => {
   return (
-    <section className="relative bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 py-0 overflow-hidden font-quicksand">
+    <section className="relative bg-white py-0 overflow-hidden font-quicksand">
       <div className="flex min-h-[600px]">
         {/* Image Section - Left Side */}
         <div className="w-full lg:w-2/5 relative">
@@ -17,10 +17,10 @@ const HeroSection = () => {
         </div>
         
         {/* Content Section - Right Side */}
-        <div className="w-full lg:w-3/5 flex items-center justify-center p-8 lg:p-16">
+        <div className="w-full lg:w-3/5 flex items-center justify-center p-8 lg:p-16 bg-white">
           <div className="space-y-8 text-center lg:text-left max-w-2xl">
             <div>
-              <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-red-600 mb-6 leading-tight">
+              <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-primary mb-6 leading-tight">
                 Thailand Digital Arrival Card
               </h1>
               <p className="text-xl lg:text-2xl text-gray-800 mb-8 leading-relaxed font-medium">
@@ -31,21 +31,21 @@ const HeroSection = () => {
             {/* Process Steps */}
             <div className="grid md:grid-cols-2 gap-8">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <FileText className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FileText className="w-8 h-8 text-primary-foreground" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Complete application</h3>
+                  <h3 className="text-xl font-bold text-primary mb-2">Complete application</h3>
                   <p className="text-gray-700 font-medium">Complete the application form.</p>
                 </div>
               </div>
               
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-8 h-8 text-primary-foreground" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Receive you document</h3>
+                  <h3 className="text-xl font-bold text-primary mb-2">Receive you document</h3>
                   <p className="text-gray-700 font-medium">Receive your digital arrival card (PDF) via email.</p>
                 </div>
               </div>
@@ -55,14 +55,14 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button 
                 size="lg"
-                className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-primary hover:bg-primary-dark text-primary-foreground font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 Apply For Thailand Digital Arrival Card
               </Button>
               <Button 
                 variant="outline"
                 size="lg"
-                className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-bold px-8 py-4 rounded-lg transition-all duration-300"
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-8 py-4 rounded-lg transition-all duration-300"
               >
                 Contact us
               </Button>

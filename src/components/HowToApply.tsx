@@ -36,13 +36,13 @@ const HowToApply = () => {
           {steps.map((step, index) => {
             const IconComponent = step.icon;
             return (
-              <Card key={index} className="relative p-8 bg-white shadow-soft hover:shadow-elegant transition-all duration-300 transform hover:scale-105 border-primary/10">
+                <Card key={index} className="relative p-8 bg-white shadow-soft hover:shadow-elegant transition-all duration-300 transform hover:scale-105 border-primary/10">
                 <div className="text-center">
                   <div className="relative mb-6">
-                    <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                       <IconComponent className="w-8 h-8 text-primary-foreground" />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-light text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
                       {step.number}
                     </div>
                   </div>
