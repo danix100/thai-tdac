@@ -16,11 +16,19 @@ const Footer = () => {
               Your personal information is securely encrypted using SSL.
             </p>
             <div className="flex gap-3">
-              <div className="w-8 h-6 bg-yellow-400 rounded flex items-center justify-center">
-                <span className="text-xs font-bold text-black">🔒</span>
+              <div className="w-8 h-6 bg-white/20 rounded flex items-center justify-center p-1">
+                <img 
+                  src="https://www.svgrepo.com/show/510183/secure.svg"
+                  alt="Secure"
+                  className="w-full h-full filter brightness-0 invert"
+                />
               </div>
-              <div className="w-8 h-6 bg-green-500 rounded flex items-center justify-center">
-                <span className="text-xs font-bold text-white">$</span>
+              <div className="w-8 h-6 bg-white/20 rounded flex items-center justify-center p-1">
+                <img 
+                  src="https://www.svgrepo.com/show/383769/security-protection-ssl-certificate.svg"
+                  alt="SSL Certificate"
+                  className="w-full h-full filter brightness-0 invert"
+                />
               </div>
             </div>
           </div>
