@@ -8,11 +8,11 @@ const HeroSection = () => {
       className="relative bg-cover bg-center min-h-[600px] flex items-center"
       style={{ backgroundImage: `url(${bannerImage})` }}
     >
-      {/* Overlay for readability */}
+      {/* Overlay for better contrast */}
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Content Box */}
-      <div className="relative w-full lg:w-1/2 ml-auto bg-white p-8 lg:p-16 shadow-2xl">
+      {/* Floating Transparent Content Box */}
+      <div className="relative w-full lg:w-1/2 ml-auto bg-white/80 backdrop-blur-md p-8 lg:p-16 rounded-2xl shadow-2xl">
         <div className="space-y-8 text-center lg:text-left max-w-2xl mx-auto">
           <div>
             <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-primary mb-6 leading-tight">
