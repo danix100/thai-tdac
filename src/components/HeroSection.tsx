@@ -8,7 +8,6 @@ const HeroSection = () => {
       className="relative bg-cover bg-center min-h-[600px] flex items-start justify-center lg:justify-end font-quicksand"
       style={{
         backgroundImage: `url(${bannerImage})`,
-        transform: "scaleX(-1)", // Flip horizontally
       }}
     >
       {/* Overlay for readability */}
