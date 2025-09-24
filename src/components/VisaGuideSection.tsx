@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import thailandCoupleImage from '@/assets/thailand-couple.png';
 
 const VisaGuideSection = () => {
@@ -16,7 +15,7 @@ const VisaGuideSection = () => {
           </div>
           
           {/* Content */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-6">
+          <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-4">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary leading-tight">
               How to Get an Thailand Visa On Arrival
             </h2>
@@ -37,21 +36,6 @@ const VisaGuideSection = () => {
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button 
-                size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-3"
-              >
-                Apply Now
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-3"
-              >
-                Learn More
-              </Button>
-            </div>
           </div>
         </div>
       </div>
