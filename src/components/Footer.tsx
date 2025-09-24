@@ -53,10 +53,10 @@ const Footer = () => {
         
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
           <p className="text-primary-foreground/80 text-sm mb-2">
-            © 2025 thailandarrivalcardtourist. All rights reserved.
+            © 2025 thaidigitalarrival.com All rights reserved.
           </p>
           <p className="text-primary-foreground/60 text-xs">
-            Legal Disclaimer: thailandarrivalcardtourist.com is not affiliated with the Government or its sponsors.
+            Legal Disclaimer: thaidigitalarrival.com is not affiliated with the Government or its sponsors.
           </p>
         </div>
       </div>
