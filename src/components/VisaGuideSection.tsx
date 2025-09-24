@@ -4,18 +4,9 @@ const VisaGuideSection = () => {
   return (
     <section className="py-16 bg-background font-quicksand">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 max-w-6xl mx-auto">
-          {/* Image */}
-          <div className="w-full lg:w-1/2 flex-shrink-0">
-            <img 
-              src={thailandCoupleImage}
-              alt="Couple in traditional Thai dress at temple"
-              className="w-full h-full object-cover rounded-lg shadow-soft"
-            />
-          </div>
-          
+        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Content */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-4">
+          <div className="w-full md:w-3/5 lg:w-1/2 flex flex-col justify-center space-y-4 order-2 md:order-1">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary leading-tight">
               How to Get an Thailand Visa On Arrival
             </h2>
@@ -35,7 +26,15 @@ const VisaGuideSection = () => {
                 understand the steps involved.
               </p>
             </div>
-            
+          </div>
+          
+          {/* Image */}
+          <div className="w-full md:w-2/5 lg:w-1/2 flex-shrink-0 order-1 md:order-2">
+            <img 
+              src={thailandCoupleImage}
+              alt="Couple in traditional Thai dress at temple"
+              className="w-full h-full object-cover rounded-lg shadow-soft"
+            />
           </div>
         </div>
       </div>
