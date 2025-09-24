@@ -5,18 +5,18 @@ import bannerImage from "@/assets/phuket-beach-banner.webp";
 const HeroSection = () => {
   return (
     <section className="relative bg-white font-quicksand">
-      <div className="flex flex-col lg:flex-row min-h-[600px]">
-        {/* Image Section - Smaller portion on desktop */}
-        <div className="w-full lg:w-2/5 relative">
+      <div className="flex flex-col lg:flex-row min-h-[600px] relative">
+        {/* Image Section */}
+        <div className="w-full lg:w-2/5 relative z-10">
           <img
             src={bannerImage}
             alt="Beautiful Phuket beach with traditional longtail boat and limestone cliffs"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover lg:relative lg:z-20 lg:translate-x-10 lg:shadow-xl lg:rounded-xl"
           />
         </div>
 
         {/* Content Section */}
-        <div className="w-full lg:w-3/5 flex items-center justify-center p-6 sm:p-8 lg:p-16 bg-white">
+        <div className="w-full lg:w-3/5 flex items-center justify-center p-6 sm:p-8 lg:p-16 bg-white relative z-0">
           <div className="space-y-6 sm:space-y-8 text-center lg:text-left max-w-2xl">
             <div>
               <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-primary mb-4 sm:mb-6 leading-tight">
