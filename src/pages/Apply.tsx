@@ -260,8 +260,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.arrivalDate`}
                             render={({ field }) => (
-                              <FormItem className="flex flex-col">
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Arrival Date <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <Popover>
@@ -304,8 +304,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.passport`}
                             render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Passport <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
@@ -325,8 +325,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.firstName`}
                             render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Name <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
@@ -346,8 +346,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.lastName`}
                             render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Last Name <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
@@ -367,8 +367,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.birthDate`}
                             render={({ field }) => (
-                              <FormItem className="flex flex-col">
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Birth Date <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <Popover>
@@ -413,8 +413,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.nationality`}
                             render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Nationality <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -444,8 +444,8 @@ const Apply = () => {
                           control={form.control}
                           name={`travelers.${index}.countryOfResidence`}
                           render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                            <FormItem className="space-y-3">
+                              <FormLabel className="text-lg font-bold text-slate-800">
                                 Country/Territory of Residence <span className="text-red-500">*</span>
                               </FormLabel>
                               <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -475,8 +475,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.email`}
                             render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Email <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
@@ -497,8 +497,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.confirmEmail`}
                             render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Confirm Email <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
@@ -519,8 +519,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.phoneCode`}
                             render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Phone Code <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -548,8 +548,8 @@ const Apply = () => {
                             control={form.control}
                             name={`travelers.${index}.phone`}
                             render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-lg font-bold text-slate-800 mb-2">
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-lg font-bold text-slate-800">
                                   Phone <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
@@ -638,7 +638,7 @@ const Apply = () => {
                   <div className="space-y-8">
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8">Arrival Information</h2>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
                       {/* Departure Country */}
                       <div className="space-y-3">
                         <Label className="text-base md:text-lg font-bold text-slate-800">
