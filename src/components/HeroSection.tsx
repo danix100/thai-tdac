@@ -9,7 +9,7 @@ const HeroSection = () => {
       <div className="hidden sm:flex min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
         {/* Image Section - Left */}
         <div 
-          className="w-3/5 md:w-3/5 lg:w-3/5 bg-cover bg-center relative"
+          className="w-2/5 md:w-2/5 lg:w-2/5 bg-cover bg-center relative"
           style={{
             backgroundImage: `url(${bannerImage})`,
           }}
@@ -18,7 +18,7 @@ const HeroSection = () => {
         </div>
 
         {/* Content Section - Right */}
-        <div className="w-2/5 md:w-2/5 lg:w-2/5 bg-white flex items-center">
+        <div className="w-3/5 md:w-3/5 lg:w-3/5 bg-white flex items-center">
           <div className="p-4 md:p-6 lg:p-12 w-full">
             <div className="space-y-3 md:space-y-4 lg:space-y-6 text-left">
               {/* Headline */}
