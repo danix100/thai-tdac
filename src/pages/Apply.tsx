@@ -129,7 +129,6 @@ const Apply = () => {
     { number: 1, title: "Prerequisite", active: currentStep === 1 },
     { number: 2, title: "Travel Information", active: currentStep === 2 },
     { number: 3, title: "Payment", active: currentStep === 3 },
-    { number: 4, title: "Confirmation", active: currentStep === 4 },
   ];
 
   return (
@@ -139,18 +138,20 @@ const Apply = () => {
       <main className="py-8 font-quicksand">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Mobile Title Only */}
-          <div className="md:hidden mb-6">
-            <h1 className="text-2xl font-bold text-slate-800">
-              {currentStep === 1 && "Prerequisite"}
-              {currentStep === 2 && "Travel Information"}
-              {currentStep === 3 && "Payment"}
-              {currentStep === 4 && "Confirmation"}
-            </h1>
-            <div className="w-12 h-1 bg-primary mt-2"></div>
-          </div>
+          {currentStep <= 3 && (
+            <div className="md:hidden mb-6">
+              <h1 className="text-2xl font-bold text-slate-800">
+                {currentStep === 1 && "Prerequisite"}
+                {currentStep === 2 && "Travel Information"}
+                {currentStep === 3 && "Payment"}
+              </h1>
+              <div className="w-12 h-1 bg-primary mt-2"></div>
+            </div>
+          )}
 
           {/* Horizontal Stepper for Tablet Only */}
-          <div className="hidden md:block lg:hidden mb-8">
+          {currentStep <= 3 && (
+            <div className="hidden md:block lg:hidden mb-8">
             <div className="bg-white rounded-lg shadow-soft p-6">
               <div className="flex items-center justify-center">
                 {steps.map((step, index) => (
@@ -183,10 +184,12 @@ const Apply = () => {
               </div>
             </div>
           </div>
+          )}
 
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Desktop Stepper Sidebar */}
-            <div className="hidden lg:block lg:w-64 lg:sticky lg:top-24 lg:h-fit">
+            {currentStep <= 3 && (
+              <div className="hidden lg:block lg:w-64 lg:sticky lg:top-24 lg:h-fit">
               <div className="bg-white rounded-lg shadow-soft p-6">
                 <h2 className="text-xl font-bold text-slate-800 mb-6">Application Steps</h2>
                 <div className="space-y-6">
@@ -222,6 +225,7 @@ const Apply = () => {
                 </div>
               </div>
             </div>
+            )}
 
             {/* Main Content */}
             <div className="flex-1">
