@@ -27,7 +27,7 @@ const InfoSection = () => {
   ];
 
   return (
-    <div className="py-16 bg-background">
+    <div className="py-16 bg-background font-quicksand">
       <div className="container mx-auto px-4 space-y-16">
         
         {/* What is Thailand Visa on Arrival Section */}
