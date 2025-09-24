@@ -70,14 +70,14 @@ const HowToApply = () => {
 
         {/* Trustpilot Rating */}
         <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-3 bg-white rounded-full px-8 py-5 shadow-soft">
+          <div className="inline-flex items-center gap-4 bg-white rounded-lg px-10 py-6 shadow-soft text-lg sm:text-xl lg:text-2xl">
             {/* Great + Big Trustpilot SVG */}
-            <span className="flex items-center gap-2 font-semibold text-[#00B67A]">
+            <span className="flex items-center gap-3 font-semibold text-[#00B67A]">
               Great
               <img
                 src="https://images-static.trustpilot.com/api/stars/4/star.svg"
                 alt="Trustpilot rating"
-                className="w-24 h-24 align-middle" // 1.5x bigger
+                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-28 lg:h-28 align-middle"
               />
             </span>
 
