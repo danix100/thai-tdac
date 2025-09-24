@@ -13,7 +13,7 @@ const CountryFlagsSection = () => {
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
 
-  const INITIAL_DISPLAY_COUNT = 24; // Show 4 rows of 6 countries initially
+  const INITIAL_DISPLAY_COUNT = 20; // Show 4 rows of 5 countries initially
 
   useEffect(() => {
     const loadCountries = async () => {
@@ -89,22 +89,22 @@ const CountryFlagsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-6 gap-3 max-w-6xl mx-auto">
+        <div className="grid grid-cols-5 gap-4 max-w-5xl mx-auto">
           {displayedCountries.map((country, index) => (
             <Card
               key={index}
-              className="p-2 hover:shadow-soft transition-all duration-300 cursor-pointer hover:scale-105 border-primary/10 bg-white"
+              className="p-3 hover:shadow-soft transition-all duration-300 cursor-pointer hover:scale-105 border-primary/10 bg-white"
               onClick={() => handleCountryClick(country)}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <img
                   src={country.flag_url}
                   alt={`${country.country} flag`}
-                  className="w-6 h-4 object-cover flex-shrink-0"
+                  className="w-8 h-6 object-cover flex-shrink-0"
                   style={{ borderRadius: '3px' }}
                   loading="lazy"
                 />
-                <span className="text-xs font-medium text-foreground leading-tight truncate">
+                <span className="text-sm font-medium text-foreground leading-tight truncate">
                   {country.country}
                 </span>
               </div>
