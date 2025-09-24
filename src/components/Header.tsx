@@ -30,12 +30,14 @@ const Header = () => {
           </div>
 
           {/* Apply button */}
-          <Button 
-            size="lg"
-            className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg text-sm sm:text-base"
-          >
-            Apply For Thailand Digital Arrival Card
-          </Button>
+          <Link to="/apply">
+            <Button 
+              size="lg"
+              className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg text-sm sm:text-base"
+            >
+              Apply For Thailand Digital Arrival Card
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
