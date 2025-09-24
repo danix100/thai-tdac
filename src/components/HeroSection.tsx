@@ -6,7 +6,7 @@ const HeroSection = () => {
   return (
     <section className="font-quicksand">
       {/* Desktop and Tablet */}
-      <div className="hidden sm:flex">
+      <div className="hidden sm:flex max-h-[400px] md:max-h-[450px] lg:max-h-[500px]">
         {/* Image Section - Left */}
         <div 
           className="w-2/5 md:w-2/5 lg:w-2/5 bg-cover bg-center relative"
@@ -18,7 +18,7 @@ const HeroSection = () => {
         </div>
 
         {/* Content Section - Right */}
-        <div className="w-3/5 md:w-3/5 lg:w-3/5 bg-white flex items-start pt-8 md:pt-12 lg:pt-16">
+        <div className="w-3/5 md:w-3/5 lg:w-3/5 bg-white flex items-start pt-4 md:pt-6 lg:pt-8">
           <div className="p-4 md:p-6 lg:p-12 w-full">
             <div className="space-y-3 md:space-y-4 lg:space-y-6 text-left">
               {/* Headline */}
