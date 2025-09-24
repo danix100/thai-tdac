@@ -83,9 +83,9 @@ const InfoSection = () => {
         </div>
         
         {/* Advantages Section */}
-        <div className="space-y-8">
+        <div className="bg-slate-900 rounded-3xl p-8 lg:p-12 space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
               Advantages of processing your application with us
             </h2>
           </div>
@@ -94,14 +94,14 @@ const InfoSection = () => {
             {advantages.map((advantage, index) => {
               const IconComponent = advantage.icon;
               return (
-                <Card key={index} className="p-6 text-center bg-white shadow-soft hover:shadow-elegant transition-all duration-300 border-primary/10">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <IconComponent className="w-6 h-6 text-primary-foreground" />
+                <Card key={index} className="p-6 text-center bg-white/10 backdrop-blur-sm border-white/20 shadow-soft hover:shadow-elegant hover:bg-white/15 transition-all duration-300">
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <IconComponent className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">
+                  <h3 className="font-semibold text-white mb-2">
                     {advantage.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-white/80">
                     {advantage.description}
                   </p>
                 </Card>
