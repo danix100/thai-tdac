@@ -5,41 +5,50 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-5 bg-gradient-to-b from-red-600 via-white to-red-600 rounded-sm border border-gray-300 relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-red-600 via-blue-600 to-red-600 opacity-80 rounded-sm">
-                  <div className="absolute top-1 left-1 right-1 bottom-1 bg-white/90 rounded-sm"></div>
-                </div>
-              </div>
+              <img
+                src="/src/assets/thailand-flag.svg"
+                alt="Thailand Flag"
+                className="w-10 h-6 object-contain"
+              />
               <span className="text-xl font-bold text-primary-foreground">Thailand TDAC</span>
             </div>
-            <p className="text-primary-foreground/80 text-sm leading-relaxed">
-              Official Thailand Digital Arrival Card processing service for all international travelers.
+            <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
+              Your personal information is securely encrypted using SSL.
             </p>
+            <div className="flex gap-3">
+              <div className="w-8 h-6 bg-yellow-400 rounded flex items-center justify-center">
+                <span className="text-xs font-bold text-black">🔒</span>
+              </div>
+              <div className="w-8 h-6 bg-green-500 rounded flex items-center justify-center">
+                <span className="text-xs font-bold text-white">$</span>
+              </div>
+            </div>
           </div>
           
           <div>
-            <h3 className="font-semibold text-primary-foreground mb-4">Quick Links</h3>
+            <h3 className="font-semibold text-primary-foreground mb-4">Resources</h3>
             <ul className="space-y-2 text-primary-foreground/80 text-sm">
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Apply Now</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Check Status</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Contact Support</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">FAQ</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">FAQs</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">Contact us</a></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="font-semibold text-primary-foreground mb-4">Support</h3>
+            <h3 className="font-semibold text-primary-foreground mb-4">Legal</h3>
             <ul className="space-y-2 text-primary-foreground/80 text-sm">
-              <li>24/7 Customer Support</li>
-              <li>Email: support@thailandtdac.com</li>
-              <li>Refund Guarantee</li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">Terms of Use</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">Cookie Policy</a></li>
             </ul>
           </div>
         </div>
         
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
-          <p className="text-primary-foreground/60 text-sm">
-            © 2024 Thailand TDAC. All rights reserved. | Processing service for Thailand Digital Arrival Card.
+          <p className="text-primary-foreground/80 text-sm mb-2">
+            © 2024 thailandarrivalcardtourist. All rights reserved.
+          </p>
+          <p className="text-primary-foreground/60 text-xs">
+            Legal Disclaimer: thailandarrivalcardtourist.com is not affiliated with the Government or its sponsors.
           </p>
         </div>
       </div>
