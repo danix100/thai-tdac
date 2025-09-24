@@ -8,17 +8,18 @@ const HeroSection = () => {
       className="relative bg-cover bg-center min-h-[600px] flex items-start justify-center lg:justify-end font-quicksand"
       style={{ backgroundImage: `url(${bannerImage})` }}
     >
-      {/* Overlay for readability */}
+      {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/20" />
 
       {/* Content Box */}
-      <div className="relative mt-12 sm:mt-16 lg:mt-20 bg-white/85 backdrop-blur-md p-6 sm:p-8 lg:p-12 max-w-2xl w-full lg:w-3/5 shadow-2xl">
+      <div className="relative bg-white/85 backdrop-blur-md p-6 sm:p-8 lg:p-12 max-w-2xl w-full lg:w-3/5 shadow-2xl">
         <div className="space-y-5 sm:space-y-6 text-center lg:text-left">
+          {/* Headline */}
           <div>
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-primary mb-3 sm:mb-4 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-3 sm:mb-4 leading-tight">
               Thailand Digital Arrival Card
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-800 mb-5 sm:mb-6 leading-relaxed font-medium">
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-800 mb-5 sm:mb-6 leading-relaxed font-medium">
               All travellers must present the Thailand Digital Arrival Card to arrival in Thailand
             </p>
           </div>
@@ -58,14 +59,14 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-3">
             <Button
               size="lg"
-              className="w-full sm:w-auto sm:min-w-[260px] bg-primary hover:bg-primary-dark text-primary-foreground font-bold px-6 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="w-full sm:w-auto sm:min-w-[280px] bg-primary hover:bg-primary-dark text-primary-foreground font-bold px-6 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Apply For Thailand Digital Arrival Card
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto sm:min-w-[200px] border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-6 sm:px-8 py-3 sm:py-4 transition-all duration-300"
+              className="w-full sm:w-auto sm:min-w-[220px] border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-6 sm:px-8 py-3 sm:py-4 transition-all duration-300"
             >
               Contact us
             </Button>
