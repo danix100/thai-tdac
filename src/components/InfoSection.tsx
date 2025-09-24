@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Clock, Shield, Headphones, RefreshCw } from "lucide-react";
+import arrivalCardImage from "@/assets/arrival-card.png";
 
 const InfoSection = () => {
   const advantages = [
@@ -31,55 +32,53 @@ const InfoSection = () => {
       <div className="container mx-auto px-4 space-y-16">
         
         {/* What is Thailand Visa on Arrival Section */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-primary">
-              What Is an <span className="text-primary-light">Thailand Visa On Arrival</span>?
-            </h2>
-            
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>
-                The <strong className="text-primary">Thailand Visa On Arrival</strong>, is a <strong>mandatory document</strong> for travelers visiting Thailand. The system gathers important information about international visitors entering and leaving the country.
-              </p>
+        <div className="mx-4 lg:mx-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h2 className="text-3xl lg:text-4xl font-bold text-primary">
+                What Is an <span className="text-primary-light">Thailand Visa On Arrival</span>?
+              </h2>
               
-              <p>
-                The purpose of the Travel Declaration Card is to <strong className="text-primary">facilitate the immigration process on arrival in Thailand</strong> and collect data for statistical and security purposes.
-              </p>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  The <strong className="text-primary">Thailand Visa On Arrival</strong>, is a <strong>mandatory document</strong> for travelers visiting Thailand. The system gathers important information about international visitors entering and leaving the country.
+                </p>
+                
+                <p>
+                  The purpose of the Travel Declaration Card is to <strong className="text-primary">facilitate the immigration process on arrival in Thailand</strong> and collect data for statistical and security purposes.
+                </p>
+                
+                <p>
+                  Previously, the Thailand Visa On Arrival was a physical form that passengers had to fill out upon arrival. The system has now moved to an electronic format, removing all physical paperwork.
+                </p>
+              </div>
               
-              <p>
-                Previously, the Thailand Visa On Arrival was a physical form that passengers had to fill out upon arrival. The system has now moved to an electronic format, removing all physical paperwork.
-              </p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg"
-                className="bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-6 py-3 rounded-lg shadow-soft transition-all duration-200"
-              >
-                Entry to Thailand &gt;&gt;
-              </Button>
-              <Button 
-                variant="outline"
-                size="lg"
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-6 py-3 rounded-lg transition-all duration-200"
-              >
-                Check status
-              </Button>
-            </div>
-          </div>
-          
-          <div className="flex justify-center">
-            <div className="w-full max-w-md bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 shadow-soft">
-              <div className="bg-white rounded-xl p-6 shadow-elegant">
-                <div className="text-center">
-                  <div className="w-16 h-10 bg-primary rounded mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-primary-foreground font-bold text-sm">TDAC</span>
-                  </div>
-                  <h3 className="font-bold text-primary mb-2">Digital Arrival Card</h3>
-                  <p className="text-sm text-muted-foreground">Thailand Immigration</p>
-                </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  size="lg"
+                  className="bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-6 py-3 rounded-lg shadow-soft transition-all duration-200"
+                >
+                  Entry to Thailand &gt;&gt;
+                </Button>
+                <Button 
+                  variant="outline"
+                  size="lg"
+                  className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-6 py-3 rounded-lg transition-all duration-200"
+                >
+                  Check status
+                </Button>
               </div>
             </div>
+            
+              <div className="flex justify-center">
+                <div className="w-full max-w-md">
+                  <img 
+                    src={arrivalCardImage} 
+                    alt="Thailand Digital Arrival Card Preview" 
+                    className="w-full h-auto rounded-lg shadow-soft"
+                  />
+                </div>
+              </div>
           </div>
         </div>
         
