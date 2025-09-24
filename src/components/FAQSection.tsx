@@ -1,8 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
-const FAQ = () => {
+const FAQSection = () => {
   const faqData = [
     {
       question: "What is the Thailand Digital Arrival Card (TDAC)?",
@@ -39,40 +37,36 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main className="py-16 font-quicksand">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl lg:text-5xl font-bold text-primary mb-4">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              All the information you need to know about the Thailand Visa On Arrival
-            </p>
-          </div>
-
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqData.map((faq, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`item-${index}`}
-                className="border border-primary/10 rounded-lg px-6 bg-white shadow-soft"
-              >
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:text-primary py-6 text-base lg:text-lg">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-6 text-base leading-relaxed">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+    <section className="py-16 bg-background font-quicksand">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            All the information you need to know about the Thailand Visa On Arrival
+          </p>
         </div>
-      </main>
-      <Footer />
-    </div>
+
+        <Accordion type="single" collapsible className="space-y-4">
+          {faqData.map((faq, index) => (
+            <AccordionItem 
+              key={index} 
+              value={`item-${index}`}
+              className="border border-primary/10 rounded-lg px-6 bg-white shadow-soft"
+            >
+              <AccordionTrigger className="text-left font-semibold text-foreground hover:text-primary py-6 text-base lg:text-lg">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground pb-6 text-base leading-relaxed">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
   );
 };
 
-export default FAQ;
+export default FAQSection;

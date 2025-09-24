@@ -29,24 +29,13 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Navigation and Apply button */}
-          <div className="flex items-center gap-6">
-            <nav className="hidden md:flex items-center gap-6">
-              <Link to="/" className="text-gray-700 hover:text-primary font-medium transition-colors">
-                Home
-              </Link>
-              <Link to="/faq" className="text-gray-700 hover:text-primary font-medium transition-colors">
-                FAQ
-              </Link>
-            </nav>
-            
-            <Button 
-              size="lg"
-              className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg text-sm sm:text-base"
-            >
-              Apply For Thailand Digital Arrival Card
-            </Button>
-          </div>
+          {/* Apply button */}
+          <Button 
+            size="lg"
+            className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg text-sm sm:text-base"
+          >
+            Apply For Thailand Digital Arrival Card
+          </Button>
         </div>
       </div>
     </header>
