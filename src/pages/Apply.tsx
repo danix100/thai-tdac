@@ -124,9 +124,9 @@ const Apply = () => {
   };
 
   const steps = [
-    { number: 1, title: "Prerequisite", active: true },
-    { number: 2, title: "Travel Information", active: false },
-    { number: 3, title: "Payment", active: false },
+    { number: 1, title: "Prerequisite", active: currentStep === 1 },
+    { number: 2, title: "Travel Information", active: currentStep === 2 },
+    { number: 3, title: "Payment", active: currentStep === 3 },
   ];
 
   return (
@@ -137,7 +137,11 @@ const Apply = () => {
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Mobile Title Only */}
           <div className="md:hidden mb-6">
-            <h1 className="text-2xl font-bold text-slate-800">Prerequisite</h1>
+            <h1 className="text-2xl font-bold text-slate-800">
+              {currentStep === 1 && "Prerequisite"}
+              {currentStep === 2 && "Travel Information"}
+              {currentStep === 3 && "Payment"}
+            </h1>
             <div className="w-12 h-1 bg-primary mt-2"></div>
           </div>
 
@@ -217,7 +221,8 @@ const Apply = () => {
 
             {/* Main Content */}
             <div className="flex-1">
-              <div className="bg-white rounded-lg shadow-soft p-8">
+              <div className="bg-white rounded-lg shadow-soft p-4 md:p-8">
+                {currentStep === 1 && (
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
                     {fields.map((field, index) => (
@@ -609,14 +614,124 @@ const Apply = () => {
                     {/* Submit Button */}
                     <div className="pt-6 border-t border-gray-200">
                       <Button
-                        type="submit"
-                        className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 text-lg rounded-lg shadow-md hover:shadow-lg transition-all"
+                        type="button"
+                        onClick={() => setCurrentStep(2)}
+                        className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-4 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-lg shadow-md hover:shadow-lg transition-all"
                       >
-                        Continue to Travel Information
+                        <span className="block md:hidden">Continue</span>
+                        <span className="hidden md:block">Continue to Travel Information</span>
                       </Button>
                     </div>
                   </form>
                 </Form>
+                )}
+
+                {currentStep === 2 && (
+                  <div className="space-y-8">
+                    <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8">Arrival Information</h2>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                      {/* Departure Country */}
+                      <div className="space-y-3">
+                        <Label className="text-base md:text-lg font-bold text-slate-800">
+                          Departure Country. Country/Territory where you Boarded
+                        </Label>
+                        <Select>
+                          <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
+                            <SelectValue placeholder="Select one" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="us">United States</SelectItem>
+                            <SelectItem value="uk">United Kingdom</SelectItem>
+                            <SelectItem value="ca">Canada</SelectItem>
+                            <SelectItem value="au">Australia</SelectItem>
+                            <SelectItem value="sg">Singapore</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      {/* Purpose */}
+                      <div className="space-y-3">
+                        <Label className="text-base md:text-lg font-bold text-slate-800">Purpose</Label>
+                        <Select>
+                          <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
+                            <SelectValue placeholder="Select one" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="tourism">Tourism</SelectItem>
+                            <SelectItem value="business">Business</SelectItem>
+                            <SelectItem value="transit">Transit</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    {/* Flight Number */}
+                    <div className="space-y-3">
+                      <Label className="text-base md:text-lg font-bold text-slate-800">Flight Number</Label>
+                      <Input 
+                        placeholder="1234567" 
+                        className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary text-gray-400"
+                      />
+                    </div>
+
+                    {/* Accommodation Information */}
+                    <div className="space-y-6 mt-12">
+                      <h3 className="text-xl md:text-2xl font-bold text-slate-800">Accommodation Information</h3>
+                      
+                      {/* Province of Hotel */}
+                      <div className="space-y-3">
+                        <Label className="text-base md:text-lg font-bold text-slate-800">
+                          Province of Hotel/Accommodation
+                        </Label>
+                        <Select>
+                          <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
+                            <SelectValue placeholder="Select one" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="bangkok">Bangkok</SelectItem>
+                            <SelectItem value="phuket">Phuket</SelectItem>
+                            <SelectItem value="chiang-mai">Chiang Mai</SelectItem>
+                            <SelectItem value="pattaya">Pattaya</SelectItem>
+                            <SelectItem value="krabi">Krabi</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      {/* Address */}
+                      <div className="space-y-3">
+                        <Label className="text-base md:text-lg font-bold text-slate-800">
+                          Address or name of Hotel/Accommodation
+                        </Label>
+                        <textarea
+                          className="w-full min-h-[120px] p-4 border-2 border-gray-200 rounded-md hover:border-primary focus:border-primary focus:outline-none resize-none text-gray-400"
+                          placeholder="Insert the address of the hotel or accommodation where you will be staying in Thailand."
+                        />
+                      </div>
+                    </div>
+
+                    {/* Navigation Buttons */}
+                    <div className="pt-6 border-t border-gray-200 flex flex-col md:flex-row gap-4 md:justify-between">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setCurrentStep(1)}
+                        className="w-full md:w-auto border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold px-4 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-lg transition-all order-2 md:order-1"
+                      >
+                        Back to Prerequisite
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setCurrentStep(3)}
+                        className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-4 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-lg shadow-md hover:shadow-lg transition-all order-1 md:order-2"
+                      >
+                        <span className="block md:hidden">Continue</span>
+                        <span className="hidden md:block">Continue to Payment</span>
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
