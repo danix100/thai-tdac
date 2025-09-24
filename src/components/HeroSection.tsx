@@ -7,7 +7,7 @@ const HeroSection = () => {
     <section className="font-quicksand">
       {/* Desktop and Tablet */}
       <div
-        className="hidden sm:flex relative bg-cover bg-center items-start justify-center lg:justify-end min-h-screen"
+        className="hidden sm:flex relative bg-cover bg-center items-center justify-center lg:justify-end"
         style={{
           backgroundImage: `url(${bannerImage})`,
         }}
