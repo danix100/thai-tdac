@@ -84,12 +84,48 @@ const Apply = () => {
       <main className="py-8 font-quicksand">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Left Sidebar - Stepper (Desktop) / Title (Mobile) */}
+            {/* Left Sidebar - Stepper (Desktop) / Title (Mobile) / Floating (Tablet) */}
             <div className="lg:w-64 lg:sticky lg:top-24 lg:h-fit">
               {/* Mobile Title */}
-              <div className="lg:hidden mb-6">
+              <div className="md:hidden mb-6">
                 <h1 className="text-2xl font-bold text-slate-800">Prerequisite</h1>
                 <div className="w-12 h-1 bg-primary mt-2"></div>
+              </div>
+              
+              {/* Tablet Floating Stepper */}
+              <div className="hidden md:block lg:hidden fixed top-24 left-4 z-40 bg-white rounded-lg shadow-lg p-4 border">
+                <h2 className="text-lg font-bold text-slate-800 mb-4">Steps</h2>
+                <div className="space-y-4">
+                  {steps.map((step, index) => (
+                    <div key={step.number} className="flex items-start">
+                      <div className="flex flex-col items-center mr-3">
+                        <div
+                          className={cn(
+                            "w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold",
+                            step.active
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-gray-200 text-gray-500"
+                          )}
+                        >
+                          {step.number}
+                        </div>
+                        {index < steps.length - 1 && (
+                          <div className="w-0.5 h-8 bg-gray-200 mt-1" />
+                        )}
+                      </div>
+                      <div className="mt-1">
+                        <span
+                          className={cn(
+                            "text-sm font-semibold",
+                            step.active ? "text-slate-800" : "text-gray-500"
+                          )}
+                        >
+                          {step.title}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
               
               {/* Desktop Stepper */}
@@ -116,7 +152,7 @@ const Apply = () => {
                       <div className="mt-2">
                         <span
                           className={cn(
-                            "text-sm font-semibold",
+                            "text-base font-semibold",
                             step.active ? "text-slate-800" : "text-gray-500"
                           )}
                         >
@@ -130,11 +166,11 @@ const Apply = () => {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1">
+            <div className="flex-1 md:ml-36 lg:ml-0">
               <div className="bg-white rounded-lg shadow-soft p-8">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8 items-start">
                       {/* Arrival Date */}
                       <FormField
                         control={form.control}
@@ -142,7 +178,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="flex flex-col">
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Arrival Date
+                              Arrival Date <span className="text-red-500">*</span>
                             </FormLabel>
                             <Popover>
                               <PopoverTrigger asChild>
@@ -186,7 +222,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Passport
+                              Passport <span className="text-red-500">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -207,7 +243,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Name
+                              Name <span className="text-red-500">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -228,7 +264,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Last Name
+                              Last Name <span className="text-red-500">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -249,7 +285,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="flex flex-col">
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Birth Date
+                              Birth Date <span className="text-red-500">*</span>
                             </FormLabel>
                             <Popover>
                               <PopoverTrigger asChild>
@@ -295,7 +331,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Nationality
+                              Nationality <span className="text-red-500">*</span>
                             </FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
@@ -326,7 +362,7 @@ const Apply = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                            Country/Territory of Residence
+                            Country/Territory of Residence <span className="text-red-500">*</span>
                           </FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
@@ -349,7 +385,7 @@ const Apply = () => {
                       )}
                     />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8 items-start">
                       {/* Email */}
                       <FormField
                         control={form.control}
@@ -357,7 +393,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Email
+                              Email <span className="text-red-500">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -379,7 +415,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Confirm Email
+                              Confirm Email <span className="text-red-500">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -401,7 +437,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Phone Code
+                              Phone Code <span className="text-red-500">*</span>
                             </FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
@@ -430,7 +466,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-lg font-bold text-slate-800 mb-2">
-                              Phone
+                              Phone <span className="text-red-500">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -452,7 +488,7 @@ const Apply = () => {
                       render={({ field }) => (
                         <FormItem className="space-y-4">
                           <FormLabel className="text-lg font-bold text-slate-800">
-                            Gender
+                            Gender <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
                             <RadioGroup
