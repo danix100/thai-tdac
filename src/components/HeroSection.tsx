@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { FileText, Mail } from "lucide-react";
-import bannerImage from "@/assets/phuket-beach-banner.webp";
+import bannerImage from "@/assets/thailand-beach-boat.jpg";
 
 const HeroSection = () => {
   return (
     <section
-      className="relative bg-cover bg-center min-h-[600px] flex items-start justify-center lg:justify-end font-quicksand"
+      className="relative bg-cover bg-center flex items-start justify-center lg:justify-end font-quicksand"
       style={{
         backgroundImage: `url(${bannerImage})`,
       }}
