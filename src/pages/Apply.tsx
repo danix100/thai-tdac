@@ -3,7 +3,8 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { format } from "date-fns";
-import { CalendarIcon, UserIcon, X } from "lucide-react";
+import { CalendarIcon, UserIcon, X, CreditCard, Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -65,6 +66,7 @@ type FormData = z.infer<typeof formSchema>;
 
 const Apply = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const navigate = useNavigate();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -127,6 +129,7 @@ const Apply = () => {
     { number: 1, title: "Prerequisite", active: currentStep === 1 },
     { number: 2, title: "Travel Information", active: currentStep === 2 },
     { number: 3, title: "Payment", active: currentStep === 3 },
+    { number: 4, title: "Confirmation", active: currentStep === 4 },
   ];
 
   return (
@@ -141,6 +144,7 @@ const Apply = () => {
               {currentStep === 1 && "Prerequisite"}
               {currentStep === 2 && "Travel Information"}
               {currentStep === 3 && "Payment"}
+              {currentStep === 4 && "Confirmation"}
             </h1>
             <div className="w-12 h-1 bg-primary mt-2"></div>
           </div>
@@ -728,6 +732,143 @@ const Apply = () => {
                       >
                         <span className="block md:hidden">Continue</span>
                         <span className="hidden md:block">Continue to Payment</span>
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                {currentStep === 3 && (
+                  <div className="space-y-8">
+                    <div className="text-center mb-8">
+                      <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">Confirm Payment</h2>
+                    </div>
+
+                    <div className="max-w-md mx-auto space-y-6">
+                      {/* Card Number */}
+                      <div className="space-y-3">
+                        <Label className="text-base font-medium text-slate-800">Card Number</Label>
+                        <div className="relative">
+                          <Input 
+                            placeholder="1234 5678 9012 3456"
+                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary pr-20"
+                          />
+                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex gap-1">
+                            <div className="w-8 h-5 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">VISA</div>
+                            <div className="w-8 h-5 bg-red-600 rounded text-white text-xs flex items-center justify-center font-bold">MC</div>
+                            <div className="w-8 h-5 bg-blue-400 rounded text-white text-xs flex items-center justify-center font-bold">AE</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Expiration and CVV */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-3">
+                          <Label className="text-base font-medium text-slate-800">Expiration (MM/YY)</Label>
+                          <Input 
+                            placeholder="12/25"
+                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                          />
+                        </div>
+                        <div className="space-y-3">
+                          <Label className="text-base font-medium text-slate-800">CVV</Label>
+                          <Input 
+                            placeholder="123"
+                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Pay Now Button */}
+                      <Button
+                        type="button"
+                        onClick={() => setCurrentStep(4)}
+                        className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 text-lg rounded-lg shadow-md hover:shadow-lg transition-all mt-8"
+                      >
+                        Pay Now
+                      </Button>
+
+                      {/* Security Info */}
+                      <div className="text-center space-y-2 mt-6">
+                        <p className="text-sm text-slate-600">We accept all major credit cards.</p>
+                        <div className="flex items-center justify-center gap-2 text-sm text-slate-600">
+                          <Lock className="h-4 w-4 text-green-500" />
+                          <span>Secure payment.</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Navigation Buttons */}
+                    <div className="pt-6 border-t border-gray-200 flex justify-start">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setCurrentStep(2)}
+                        className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold px-8 py-3 text-base rounded-lg transition-all"
+                      >
+                        Previous
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                {currentStep === 4 && (
+                  <div className="space-y-8 text-center max-w-2xl mx-auto">
+                    <div className="space-y-6">
+                      <div className="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center">
+                        <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      
+                      <h2 className="text-3xl md:text-4xl font-bold text-slate-800">Thank You!</h2>
+                      
+                      <div className="space-y-4">
+                        <p className="text-lg text-slate-600">
+                          Your application has been submitted successfully.
+                        </p>
+                        <p className="text-base text-slate-500">
+                          Updates will be sent to your email address. Please check your inbox for confirmation and further instructions.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-col md:flex-row gap-4 justify-center pt-8">
+                      <Button
+                        type="button"
+                        onClick={() => navigate('/')}
+                        className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 text-lg rounded-lg shadow-md hover:shadow-lg transition-all"
+                      >
+                        Back to Home
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                          setCurrentStep(1);
+                          // Reset form data
+                          form.reset({
+                            travelers: [
+                              {
+                                arrivalDate: undefined,
+                                passport: "",
+                                firstName: "",
+                                lastName: "",
+                                birthDate: undefined,
+                                nationality: "",
+                                countryOfResidence: "",
+                                email: "",
+                                confirmEmail: "",
+                                phoneCode: "",
+                                phone: "",
+                                gender: undefined,
+                              }
+                            ]
+                          });
+                        }}
+                        className="w-full md:w-auto border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-8 py-4 text-lg rounded-lg transition-all"
+                      >
+                        Apply Again
                       </Button>
                     </div>
                   </div>
