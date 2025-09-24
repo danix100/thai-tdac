@@ -638,10 +638,10 @@ const Apply = () => {
                   <div className="space-y-8">
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8">Arrival Information</h2>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+                    <div className="space-y-6">
                       {/* Departure Country */}
                       <div className="space-y-3">
-                        <Label className="text-base md:text-lg font-bold text-slate-800 min-h-[1.75rem] flex items-start">
+                        <Label className="text-base md:text-lg font-bold text-slate-800">
                           Departure Country. Country/Territory where you Boarded
                         </Label>
                         <Select>
@@ -660,7 +660,7 @@ const Apply = () => {
 
                       {/* Purpose */}
                       <div className="space-y-3">
-                        <Label className="text-base md:text-lg font-bold text-slate-800 min-h-[1.75rem] flex items-start">
+                        <Label className="text-base md:text-lg font-bold text-slate-800">
                           Purpose
                         </Label>
                         <Select>
