@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 interface Country {
   country: string;
@@ -10,6 +11,9 @@ interface Country {
 const CountryFlagsSection = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showAll, setShowAll] = useState(false);
+
+  const INITIAL_DISPLAY_COUNT = 24; // Show 4 rows of 6 countries initially
 
   useEffect(() => {
     const loadCountries = async () => {
@@ -56,6 +60,8 @@ const CountryFlagsSection = () => {
     // TODO: Navigate to URL when provided
   };
 
+  const displayedCountries = showAll ? countries : countries.slice(0, INITIAL_DISPLAY_COUNT);
+
   if (loading) {
     return (
       <section className="py-16 bg-background font-quicksand">
@@ -83,22 +89,22 @@ const CountryFlagsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
-          {countries.map((country, index) => (
+        <div className="grid grid-cols-6 gap-3 max-w-6xl mx-auto">
+          {displayedCountries.map((country, index) => (
             <Card
               key={index}
-              className="p-3 hover:shadow-soft transition-all duration-300 cursor-pointer hover:scale-105 border-primary/10 bg-white"
+              className="p-2 hover:shadow-soft transition-all duration-300 cursor-pointer hover:scale-105 border-primary/10 bg-white"
               onClick={() => handleCountryClick(country)}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col items-center gap-2">
                 <img
                   src={country.flag_url}
                   alt={`${country.country} flag`}
-                  className="w-8 h-6 object-cover rounded-sm shadow-sm flex-shrink-0"
+                  className="w-full h-8 object-cover flex-shrink-0"
                   style={{ borderRadius: '3px' }}
                   loading="lazy"
                 />
-                <span className="text-sm font-medium text-foreground truncate">
+                <span className="text-xs font-medium text-foreground text-center leading-tight">
                   {country.country}
                 </span>
               </div>
@@ -106,11 +112,31 @@ const CountryFlagsSection = () => {
           ))}
         </div>
 
-        <div className="text-center mt-8">
-          <p className="text-muted-foreground">
-            Total: {countries.length} countries
-          </p>
-        </div>
+        {!showAll && countries.length > INITIAL_DISPLAY_COUNT && (
+          <div className="text-center mt-8">
+            <Button
+              onClick={() => setShowAll(true)}
+              variant="outline"
+              size="lg"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-3 rounded-lg transition-all duration-200"
+            >
+              Show More Countries ({countries.length - INITIAL_DISPLAY_COUNT} more)
+            </Button>
+          </div>
+        )}
+        
+        {showAll && (
+          <div className="text-center mt-8">
+            <Button
+              onClick={() => setShowAll(false)}
+              variant="outline"
+              size="lg"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-3 rounded-lg transition-all duration-200"
+            >
+              Show Less
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
