@@ -71,6 +71,7 @@ const HeroSection = () => {
                 <Button
                   variant="outline"
                   size="lg"
+                  onClick={() => window.location.href = '/contact'}
                   className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 transition-all duration-300 text-xs md:text-sm lg:text-base"
                 >
                   Contact us
@@ -149,6 +150,7 @@ const HeroSection = () => {
                 <Button
                   variant="outline"
                   size="lg"
+                  onClick={() => window.location.href = '/contact'}
                   className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-4 py-3 transition-all duration-300 text-sm"
                 >
                   Contact us
