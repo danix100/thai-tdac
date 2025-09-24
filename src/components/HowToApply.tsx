@@ -77,7 +77,7 @@ const HowToApply = () => {
               <img
                 src="https://images-static.trustpilot.com/api/stars/4/star.svg"
                 alt="Trustpilot rating"
-                className="w-16 h-16 align-middle" // Bigger star
+                className="w-24 h-24 align-middle" // 1.5x bigger
               />
             </span>
 
