@@ -13,31 +13,33 @@ const Header = () => {
 
       {/* Main header */}
       <div className="bg-white shadow-sm border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-4">
-          
-          {/* Logo / Flag + Title */}
-          <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-3">
-              <img
-                src="https://www.svgrepo.com/show/405628/flag-for-flag-thailand.svg"
-                alt="Thailand Flag"
-                className="w-10 h-6 sm:w-12 sm:h-8 object-contain"
-              />
-              <span className="text-lg sm:text-2xl font-bold text-gray-800">
-                Thailand TDAC
-              </span>
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Logo / Flag + Title */}
+            <div className="flex items-center gap-3">
+              <Link to="/" className="flex items-center gap-3">
+                <img
+                  src="https://www.svgrepo.com/show/405628/flag-for-flag-thailand.svg"
+                  alt="Thailand Flag"
+                  className="w-8 h-5 sm:w-10 sm:h-6 lg:w-12 lg:h-8 object-contain"
+                />
+                <span className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800">
+                  Thailand TDAC
+                </span>
+              </Link>
+            </div>
+
+            {/* Apply button */}
+            <Link to="/apply" className="w-full sm:w-auto">
+              <Button 
+                size="lg"
+                className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-4 sm:px-6 lg:px-8 py-2 sm:py-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg text-sm sm:text-base"
+              >
+                <span className="hidden sm:inline">Apply For Thailand Digital Arrival Card</span>
+                <span className="sm:hidden">Apply Now</span>
+              </Button>
             </Link>
           </div>
-
-          {/* Apply button */}
-          <Link to="/apply">
-            <Button 
-              size="lg"
-              className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg text-sm sm:text-base"
-            >
-              Apply For Thailand Digital Arrival Card
-            </Button>
-          </Link>
         </div>
       </div>
     </header>
