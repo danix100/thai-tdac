@@ -118,4 +118,26 @@ const InfoSection = () => {
           
           <div className="space-y-4 text-center max-w-4xl mx-auto">
             <p className="text-lg text-muted-foreground">
-              <strong className="text-primary">Yes</strong>, every arriving traveler must have an approved Travel Declaration Card to enter or
+              <strong className="text-primary">Yes</strong>, every arriving traveler must have an approved Travel Declaration Card to enter or leave Thailand.
+            </p>
+            
+            <p className="text-lg text-muted-foreground">
+              <strong className="text-primary-dark">Entry will be denied without this required document.</strong>
+            </p>
+            
+            <p className="text-muted-foreground">
+              Note that a Travel Declaration Card is different from a visa. Even if a visa is not required, <strong className="text-primary">the Travel Declaration Card is always necessary.</strong>
+            </p>
+          </div>
+        </div>
+        
+        {/* Countries Section */}
+        <div className="text-center">
+        </div>
+        
+      </div>
+    </div>
+  );
+};
+
+export default InfoSection;
