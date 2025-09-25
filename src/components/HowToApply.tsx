@@ -80,7 +80,7 @@ const HowToApply = () => {
               />
             </span>
             <span className="text-black font-medium">
-              30,207 reviews on{" "}
+              28,739 reviews on{" "}
               <span className="text-[#00B67A]">★ Trustpilot</span>
             </span>
           </div>
