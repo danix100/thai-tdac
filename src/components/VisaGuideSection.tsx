@@ -1,4 +1,4 @@
-import thailandCoupleImage from '@/assets/thailand-couple.png';
+import arrivalCardImage from '@/assets/arrival-card-form.jpg';
 
 const VisaGuideSection = () => {
   return (
@@ -30,8 +30,8 @@ const VisaGuideSection = () => {
           {/* Image */}
           <div className="w-full md:w-2/5 lg:w-1/2 flex-shrink-0 order-1 md:order-2">
             <img 
-              src={thailandCoupleImage}
-              alt="Couple in traditional Thai dress at temple"
+              src={arrivalCardImage}
+              alt="Thailand Visa on Arrival card form preview"
               className="w-full h-full object-cover rounded-lg shadow-soft"
             />
           </div>
