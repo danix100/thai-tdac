@@ -1,7 +1,9 @@
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
 const faqData = [
   {
     question: "What exactly is the Thailand Digital Arrival Card (TDAC)?",
-    answer: "The TDAC is Thailand’s official digital arrival form, required for all travelers. It must be completed online within 72 hours before entering the country."
+    answer: "The TDAC is Thailand's official digital arrival form, required for all travelers. It must be completed online within 72 hours before entering the country."
   },
   {
     question: "How much will it cost me to apply?",
@@ -17,11 +19,11 @@ const faqData = [
   },
   {
     question: "How will I get my TDAC after applying?",
-    answer: "Once processed, you’ll get the TDAC confirmation via email as a PDF. You can either print it or show it digitally at immigration."
+    answer: "Once processed, you'll get the TDAC confirmation via email as a PDF. You can either print it or show it digitally at immigration."
   },
   {
     question: "What if I accidentally make a mistake on the form?",
-    answer: "Our team reviews applications for common mistakes. If any corrections are needed, we’ll assist you to ensure the form is accepted."
+    answer: "Our team reviews applications for common mistakes. If any corrections are needed, we'll assist you to ensure the form is accepted."
   },
   {
     question: "Do I still need a visa if I complete the TDAC?",
@@ -32,3 +34,29 @@ const faqData = [
     answer: "We provide a simple, guided process with English support, 24/7 assistance, error checking, and guaranteed delivery of your TDAC confirmation email."
   }
 ];
+
+const FAQSection = () => {
+  return (
+    <section id="faq" className="py-16 px-4 bg-muted/50">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12 text-foreground">
+          Frequently Asked Questions
+        </h2>
+        <Accordion type="single" collapsible className="w-full space-y-4">
+          {faqData.map((faq, index) => (
+            <AccordionItem key={index} value={`item-${index}`} className="bg-background border rounded-lg px-6">
+              <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground pt-2 pb-4">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+};
+
+export default FAQSection;
