@@ -7,23 +7,23 @@ const InfoSection = () => {
   const advantages = [
     {
       icon: Clock,
-      title: "Request the document any day of the year",
-      description: "Available 24/7, 365 days a year"
+      title: "Request Anytime",
+      description: "Available 24/7, all year round"
     },
     {
       icon: RefreshCw,
-      title: "Refund guarantee",
-      description: "Not satisfied? Request a refund."
+      title: "Money-back Guarantee",
+      description: "Not satisfied? Claim a refund easily."
     },
     {
       icon: Headphones,
-      title: "24/7 customer support",
-      description: "Contact us anytime for assistance."
+      title: "Support Around the Clock",
+      description: "Get help whenever you need it."
     },
     {
       icon: Shield,
-      title: "Simple steps",
-      description: "Easy and straightforward process"
+      title: "Simple Process",
+      description: "Quick and easy application steps"
     }
   ];
 
@@ -36,20 +36,20 @@ const InfoSection = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h2 className="text-3xl lg:text-4xl font-bold text-primary">
-                What Is an <span className="text-primary-light">Thailand Visa On Arrival</span>?
+                What Is a <span className="text-primary-light">Thailand Visa On Arrival</span>?
               </h2>
               
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  The <strong className="text-primary">Thailand Visa On Arrival</strong>, is a <strong>mandatory document</strong> for travelers visiting Thailand. The system gathers important information about international visitors entering and leaving the country.
+                  The <strong className="text-primary">Thailand Visa On Arrival</strong> is an essential document for travelers entering Thailand. It collects key information about international visitors for entry and exit records.
                 </p>
                 
                 <p>
-                  The purpose of the Travel Declaration Card is to <strong className="text-primary">facilitate the immigration process on arrival in Thailand</strong> and collect data for statistical and security purposes.
+                  The Travel Declaration Card helps <strong className="text-primary">speed up immigration procedures upon arrival</strong> and supports statistical and security requirements.
                 </p>
                 
                 <p>
-                  Previously, the Thailand Visa On Arrival was a physical form that passengers had to fill out upon arrival. The system has now moved to an electronic format, removing all physical paperwork.
+                  Previously a paper form filled out at the airport, the process is now fully electronic, eliminating all physical paperwork.
                 </p>
               </div>
               
@@ -58,14 +58,14 @@ const InfoSection = () => {
                   size="lg"
                   className="bg-primary hover:bg-primary-dark text-primary-foreground font-semibold px-6 py-3 rounded-lg shadow-soft transition-all duration-200"
                 >
-                  Entry to Thailand &gt;&gt;
+                  Enter Thailand &gt;&gt;
                 </Button>
                 <Button 
                   variant="outline"
                   size="lg"
                   className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-6 py-3 rounded-lg transition-all duration-200"
                 >
-                  Check status
+                  Check Status
                 </Button>
               </div>
             </div>
@@ -86,7 +86,7 @@ const InfoSection = () => {
         <div className="bg-primary rounded-3xl p-8 lg:p-12 space-y-8">
           <div className="text-center">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground mb-4">
-              Advantages of processing your application with us
+              Why Choose Us for Your Application
             </h2>
           </div>
           
@@ -113,31 +113,9 @@ const InfoSection = () => {
         {/* Do I Need Section */}
         <div className="bg-accent/30 rounded-3xl p-8 lg:p-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6 text-center">
-              Do I need an <span className="text-primary-light">Thailand Visa On Arrival</span>?
+              Do I need a <span className="text-primary-light">Thailand Visa On Arrival</span>?
             </h2>
           
           <div className="space-y-4 text-center max-w-4xl mx-auto">
             <p className="text-lg text-muted-foreground">
-              <strong className="text-primary">Yes</strong>, all arriving passengers must have an approved Travel Declaration Card to enter and exit Thailand.
-            </p>
-            
-            <p className="text-lg text-muted-foreground">
-              <strong className="text-primary-dark">You will not be granted entry into the country without this vital document.</strong>
-            </p>
-            
-            <p className="text-muted-foreground">
-              Remember that an Travel Declaration Card is not the same as a visa. Although you may or may not need a visa to travel to Thailand, <strong className="text-primary">you will always need an Travel Declaration Card.</strong>
-            </p>
-          </div>
-        </div>
-        
-        {/* Countries Section */}
-        <div className="text-center">
-        </div>
-        
-      </div>
-    </div>
-  );
-};
-
-export default InfoSection;
+              <strong className="text-primary">Yes</strong>, every arriving traveler must have an approved Travel Declaration Card to enter or
