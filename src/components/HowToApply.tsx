@@ -5,24 +5,24 @@ const HowToApply = () => {
   const steps = [
     {
       number: "1",
-      title: "Fill out the online form",
+      title: "Complete the online form",
       icon: FileText,
       description:
-        "Complete our simple online application form with your travel details and personal information.",
+        "Provide your travel information and personal details using our straightforward online application form.",
     },
     {
       number: "2",
-      title: "Receive your TDAC instantly by email (PDF)",
+      title: "Receive your TDAC by email (PDF)",
       icon: Mail,
       description:
-        "Get your Thailand Digital Arrival Card delivered directly to your email as a PDF document.",
+        "Your Thailand Digital Arrival Card will be sent directly to your email as a PDF, ready for use.",
     },
     {
       number: "3",
-      title: "Show it at the airport upon arrival",
+      title: "Present it at the airport",
       icon: Plane,
       description:
-        "Present your digital arrival card to immigration officials when you arrive in Thailand.",
+        "Show your digital arrival card to immigration officers upon arrival in Thailand to complete entry procedures.",
     },
   ];
 
@@ -73,7 +73,7 @@ const HowToApply = () => {
           <div className="inline-flex items-center gap-4 bg-white rounded-lg px-10 py-6 shadow-soft text-lg sm:text-xl lg:text-2xl">
             {/* Great + Big Trustpilot SVG */}
             <span className="flex items-center gap-3 font-semibold text-[#00B67A]">
-              Great
+              Excellent
               <img
                 src="https://images-static.trustpilot.com/api/stars/4/star.svg"
                 alt="Trustpilot rating"
