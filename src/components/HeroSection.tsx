@@ -1,7 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { FileText, Mail } from "lucide-react";
-import bannerImage from "@/assets/thailand-beach-boat.jpg";
-
 const HeroSection = () => {
   return (
     <section className="font-quicksand">
@@ -25,7 +21,7 @@ const HeroSection = () => {
                   Thailand Digital Arrival Card
                 </h1>
                 <p className="text-sm md:text-base lg:text-2xl text-gray-800 mb-3 md:mb-4 lg:mb-6 leading-relaxed font-medium">
-                  All travellers must present the Thailand Digital Arrival Card to arrival in Thailand
+                  Travelers must present a valid Thailand Digital Arrival Card to complete entry formalities upon arrival.
                 </p>
               </div>
 
@@ -37,10 +33,10 @@ const HeroSection = () => {
                   </div>
                   <div>
                     <h3 className="text-xs md:text-sm lg:text-lg font-bold text-primary mb-1">
-                      Complete application
+                      Fill Out the Form
                     </h3>
                     <p className="text-gray-700 text-xs md:text-xs lg:text-base font-medium">
-                      Complete the application form.
+                      Provide your details accurately to generate your digital arrival card.
                     </p>
                   </div>
                 </div>
@@ -51,10 +47,10 @@ const HeroSection = () => {
                   </div>
                   <div>
                     <h3 className="text-xs md:text-sm lg:text-lg font-bold text-primary mb-1">
-                      Receive your document
+                      Receive Your Card
                     </h3>
                     <p className="text-gray-700 text-xs md:text-xs lg:text-base font-medium">
-                      Receive your digital arrival card (PDF) via email.
+                      Your Thailand Digital Arrival Card will be sent to your email as a PDF document.
                     </p>
                   </div>
                 </div>
@@ -67,7 +63,7 @@ const HeroSection = () => {
                     onClick={() => window.location.href = '/apply'}
                   className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-bold px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 shadow-lg hover:shadow-xl transition-all duration-300 text-xs md:text-sm lg:text-base"
                 >
-                  Apply For Thailand Digital Arrival Card
+                  Apply for Your Thailand Digital Arrival Card
                 </Button>
                 <Button
                   variant="outline"
@@ -75,7 +71,7 @@ const HeroSection = () => {
                   onClick={() => window.location.href = '/contact'}
                   className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 transition-all duration-300 text-xs md:text-sm lg:text-base"
                 >
-                  Contact us
+                  Contact Us
                 </Button>
               </div>
             </div>
@@ -105,7 +101,7 @@ const HeroSection = () => {
                   Thailand Digital Arrival Card
                 </h1>
                 <p className="text-sm text-gray-800 mb-4 leading-relaxed font-medium">
-                  All travellers must present the Thailand Digital Arrival Card to arrival in Thailand
+                  A valid Thailand Digital Arrival Card is required for all travelers to complete entry procedures.
                 </p>
               </div>
 
@@ -117,10 +113,10 @@ const HeroSection = () => {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-primary mb-1">
-                      Complete application
+                      Fill Out the Form
                     </h3>
                     <p className="text-gray-700 text-xs font-medium">
-                      Complete the application form.
+                      Complete your details to generate the digital arrival card.
                     </p>
                   </div>
                 </div>
@@ -131,10 +127,10 @@ const HeroSection = () => {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-primary mb-1">
-                      Receive your document
+                      Receive Your Card
                     </h3>
                     <p className="text-gray-700 text-xs font-medium">
-                      Receive your digital arrival card (PDF) via email.
+                      Your digital arrival card will be sent directly to your email as a PDF.
                     </p>
                   </div>
                 </div>
@@ -146,7 +142,7 @@ const HeroSection = () => {
                   size="lg"
                   className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-bold px-4 py-3 shadow-lg hover:shadow-xl transition-all duration-300 text-sm"
                 >
-                  Apply For Thailand Digital Arrival Card
+                  Apply for Your Thailand Digital Arrival Card
                 </Button>
                 <Button
                   variant="outline"
@@ -154,7 +150,7 @@ const HeroSection = () => {
                   onClick={() => window.location.href = '/contact'}
                   className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-4 py-3 transition-all duration-300 text-sm"
                 >
-                  Contact us
+                  Contact Us
                 </Button>
               </div>
             </div>
@@ -167,5 +163,3 @@ const HeroSection = () => {
     </section>
   );
 };
-
-export default HeroSection;
