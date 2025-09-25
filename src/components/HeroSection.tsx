@@ -1,3 +1,7 @@
+import { Button } from "@/components/ui/button";
+import { FileText, Mail } from "lucide-react";
+import bannerImage from "@/assets/phuket-beach-banner.webp";
+
 const HeroSection = () => {
   return (
     <section className="font-quicksand">
@@ -163,3 +167,5 @@ const HeroSection = () => {
     </section>
   );
 };
+
+export default HeroSection;
