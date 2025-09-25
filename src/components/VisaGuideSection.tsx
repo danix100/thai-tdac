@@ -8,22 +8,21 @@ const VisaGuideSection = () => {
           {/* Content */}
           <div className="w-full md:w-3/5 lg:w-1/2 flex flex-col justify-center space-y-4 order-2 md:order-1">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary leading-tight">
-              How to Get an Thailand Visa On Arrival
+              Applying for a Thailand Visa On Arrival
             </h2>
             
             <div className="space-y-4 text-muted-foreground">
               <p className="text-lg">
-                You can easily apply for your Thailand Visa On Arrival using our simple electronic form. 
-                Just follow the steps, pay the fee, and wait to receive your approved card via email.
+                Applying for your Thailand Visa On Arrival is quick and straightforward with our online form. 
+                Complete the steps, submit the payment, and receive your approved card directly via email.
               </p>
               
               <p className="text-lg">
-                Our application page provides clear instructions on how to get your Thailand Visa On Arrival.
+                Our application page guides you clearly through each step to ensure your Visa On Arrival is processed smoothly.
               </p>
               
               <p className="text-lg">
-                To make the process smoother, be sure you have all the necessary documents ready and 
-                understand the steps involved.
+                To avoid delays, have all required documents ready and familiarize yourself with the procedure beforehand.
               </p>
             </div>
           </div>
