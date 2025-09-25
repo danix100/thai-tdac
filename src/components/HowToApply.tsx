@@ -5,24 +5,24 @@ const HowToApply = () => {
   const steps = [
     {
       number: "1",
-      title: "Complete the online form",
+      title: "Complete the form",
       icon: FileText,
       description:
-        "Provide your travel information and personal details using our straightforward online application form.",
+        "Enter your travel and personal details in the online application.",
     },
     {
       number: "2",
-      title: "Receive your TDAC by email (PDF)",
+      title: "Get your TDAC by email",
       icon: Mail,
       description:
-        "Your Thailand Digital Arrival Card will be sent directly to your email as a PDF, ready for use.",
+        "Receive your Thailand Digital Arrival Card as a PDF via email.",
     },
     {
       number: "3",
-      title: "Present it at the airport",
+      title: "Show it at the airport",
       icon: Plane,
       description:
-        "Show your digital arrival card to immigration officers upon arrival in Thailand to complete entry procedures.",
+        "Present the card to immigration on arrival in Thailand.",
     },
   ];
 
@@ -71,7 +71,6 @@ const HowToApply = () => {
         {/* Trustpilot Rating */}
         <div className="text-center mt-12">
           <div className="inline-flex items-center gap-4 bg-white rounded-lg px-10 py-6 shadow-soft text-lg sm:text-xl lg:text-2xl">
-            {/* Great + Big Trustpilot SVG */}
             <span className="flex items-center gap-3 font-semibold text-[#00B67A]">
               Excellent
               <img
@@ -80,8 +79,6 @@ const HowToApply = () => {
                 className="w-16 h-16 sm:w-20 sm:h-20 lg:w-28 lg:h-28 align-middle"
               />
             </span>
-
-            {/* Reviews + Unicode Star + Trustpilot */}
             <span className="text-black font-medium">
               30,207 reviews on{" "}
               <span className="text-[#00B67A]">★ Trustpilot</span>
