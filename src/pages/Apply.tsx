@@ -110,6 +110,10 @@ const formSchema = z.object({
   flightNumber: z.string().optional(),
   accommodationType: z.string().min(1, "Accommodation type is required"),
   accommodationDetails: z.string().optional(),
+  // Processing options
+  processingOption: z.enum(["standard", "fast", "ultra"], {
+    required_error: "Processing option is required",
+  }),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -144,6 +148,7 @@ const Apply = () => {
       flightNumber: "",
       accommodationType: "",
       accommodationDetails: "",
+      processingOption: undefined,
     },
   });
 
@@ -205,7 +210,7 @@ const Apply = () => {
         description: "Application submitted successfully! We'll process your application and payment separately via secure channels.",
       });
       
-      setCurrentStep(3);
+      setCurrentStep(4);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -245,6 +250,7 @@ const Apply = () => {
   const steps = [
     { number: 1, title: "Prerequisite", active: currentStep === 1 },
     { number: 2, title: "Travel Information", active: currentStep === 2 },
+    { number: 3, title: "Processing Options", active: currentStep === 3 },
   ];
 
   return (
@@ -254,18 +260,19 @@ const Apply = () => {
       <main className="py-8 font-quicksand">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Mobile Title Only */}
-          {currentStep <= 2 && (
+          {currentStep <= 3 && (
             <div className="md:hidden mb-6">
               <h1 className="text-2xl font-bold text-slate-800">
                 {currentStep === 1 && "Prerequisite"}
                 {currentStep === 2 && "Travel Information"}
+                {currentStep === 3 && "Processing Options"}
               </h1>
             </div>
           )}
 
           <div className="grid lg:grid-cols-5 gap-6">
             {/* Desktop Stepper - Left Column */}
-            {currentStep <= 2 && (
+            {currentStep <= 3 && (
               <div className="hidden md:block lg:col-span-1">
                 <div className="sticky top-0 space-y-4">
                   <h2 className="text-xl font-bold text-slate-800 mb-6">Application Steps</h2>
@@ -313,10 +320,10 @@ const Apply = () => {
 
             {/* Main Form Content */}
             <div className={cn(
-              currentStep <= 2 ? "lg:col-span-4" : "lg:col-span-5"
+              currentStep <= 3 ? "lg:col-span-4" : "lg:col-span-5"
             )}>
               {/* Mobile Stepper */}
-              {currentStep <= 2 && (
+              {currentStep <= 3 && (
                 <div className="md:hidden mb-6">
                   <div className="flex justify-between items-center">
                     {steps.map((step, index) => (
@@ -860,20 +867,136 @@ const Apply = () => {
                           Previous Step
                         </Button>
                         <Button
-                          type="submit"
-                          onClick={form.handleSubmit(onSubmit)}
-                          disabled={isSubmitting}
+                          type="button"
+                          onClick={() => {
+                            const isValid = form.trigger(["departureCountry", "purposeOfVisit", "accommodationType"]);
+                            if (isValid) {
+                              setCurrentStep(3);
+                            }
+                          }}
                           className="px-8"
                         >
-                          {isSubmitting ? "Submitting..." : "Submit Application"}
+                          Next Step
                         </Button>
                       </div>
                     </div>
                   </Form>
                 )}
 
-                {/* Step 3: Success */}
+                {/* Step 3: Processing Options */}
                 {currentStep === 3 && (
+                  <Form {...form}>
+                    <div className="space-y-8">
+                      <div>
+                        <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
+                          <p className="text-center text-slate-700 font-medium">
+                            This document has a cost of $49.99 by traveler - Estimated delivery time ~ less than 4 hours.
+                          </p>
+                        </div>
+                        
+                        <h2 className="text-2xl font-bold text-slate-800 mb-4">Processing Options</h2>
+                        <p className="text-slate-600 mb-8">Choose your preferred processing speed</p>
+                      </div>
+
+                      {/* Processing Options */}
+                      <FormField
+                        control={form.control}
+                        name="processingOption"
+                        render={({ field }) => (
+                          <FormItem className="space-y-6">
+                            <FormControl>
+                              <RadioGroup
+                                onValueChange={field.onChange}
+                                value={field.value}
+                                className="space-y-4"
+                              >
+                                {/* Standard Option */}
+                                <div className="flex items-center space-x-4 p-4 border-2 border-slate-200 rounded-lg hover:border-slate-300 transition-colors">
+                                  <RadioGroupItem value="standard" id="standard" />
+                                  <Label htmlFor="standard" className="flex-1 cursor-pointer">
+                                    <div className="flex justify-between items-center">
+                                      <div>
+                                        <div className="font-semibold text-slate-800">Standard</div>
+                                        <div className="text-slate-600">Processed in less than 4 hours</div>
+                                      </div>
+                                      <div className="text-right">
+                                        <div className="text-xl font-bold text-slate-800">$49.99</div>
+                                        <div className="text-sm text-slate-600">Per traveler</div>
+                                      </div>
+                                    </div>
+                                  </Label>
+                                </div>
+
+                                {/* Fast Option */}
+                                <div className="flex items-center space-x-4 p-4 border-2 border-blue-200 rounded-lg hover:border-blue-300 transition-colors bg-blue-50">
+                                  <RadioGroupItem value="fast" id="fast" />
+                                  <Label htmlFor="fast" className="flex-1 cursor-pointer">
+                                    <div className="flex justify-between items-center">
+                                      <div>
+                                        <div className="font-semibold text-blue-800">Fast</div>
+                                        <div className="text-blue-600">Processed in less than 4 hours</div>
+                                      </div>
+                                      <div className="text-right">
+                                        <div className="text-xl font-bold text-blue-600">+ $20.00</div>
+                                        <div className="text-sm text-blue-600">Additional fee</div>
+                                      </div>
+                                    </div>
+                                  </Label>
+                                </div>
+
+                                {/* Ultra Premium Option */}
+                                <div className="flex items-center space-x-4 p-4 border-2 border-slate-200 rounded-lg hover:border-slate-300 transition-colors">
+                                  <RadioGroupItem value="ultra" id="ultra" />
+                                  <Label htmlFor="ultra" className="flex-1 cursor-pointer">
+                                    <div className="flex justify-between items-center">
+                                      <div>
+                                        <div className="font-semibold text-slate-800">Ultra Premium</div>
+                                        <div className="inline-block bg-yellow-200 text-yellow-800 text-sm px-2 py-1 rounded-full">
+                                          Processed in less than one hour
+                                        </div>
+                                      </div>
+                                      <div className="text-right">
+                                        <div className="text-xl font-bold text-slate-800">+ $50.00</div>
+                                        <div className="text-sm text-slate-600">Additional fee</div>
+                                      </div>
+                                    </div>
+                                  </Label>
+                                </div>
+                              </RadioGroup>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <div className="text-center text-sm text-slate-600 bg-slate-50 p-4 rounded-lg">
+                        * The price to be paid is multiplied by the number of travelers.
+                      </div>
+
+                      {/* Navigation Buttons */}
+                      <div className="flex justify-between">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCurrentStep(2)}
+                        >
+                          Previous
+                        </Button>
+                        <Button
+                          type="submit"
+                          onClick={form.handleSubmit(onSubmit)}
+                          disabled={isSubmitting}
+                          className="px-8 bg-red-600 hover:bg-red-700 text-white"
+                        >
+                          {isSubmitting ? "Submitting..." : "Submit"}
+                        </Button>
+                      </div>
+                    </div>
+                  </Form>
+                )}
+
+                {/* Step 4: Success */}
+                {currentStep === 4 && (
                   <div className="text-center space-y-6">
                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                       <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
