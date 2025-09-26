@@ -317,8 +317,8 @@ const Apply = () => {
 
             {/* Tablet Horizontal Stepper */}
             {currentStep <= 3 && (
-              <div className="hidden md:block lg:hidden col-span-full mb-6">
-                <div className="flex justify-between items-center bg-white rounded-lg shadow-sm p-6">
+            <div className="hidden md:block lg:hidden col-span-full mb-6 sticky top-0 z-10 bg-background">
+              <div className="flex justify-between items-center bg-white rounded-lg shadow-sm p-6">
                   {steps.map((step, index) => (
                     <div key={step.number} className="flex items-center">
                       <div className="flex items-center">
