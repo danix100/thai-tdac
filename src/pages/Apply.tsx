@@ -917,7 +917,7 @@ const Apply = () => {
                                     <div className="flex justify-between items-center">
                                       <div>
                                         <div className="font-semibold text-slate-800">Standard</div>
-                                        <div className="text-slate-600">Processed in less than 4 hours</div>
+                                        <div className="text-slate-600 mt-2">Processed in less than 4 hours</div>
                                       </div>
                                       <div className="text-right">
                                         <div className="text-xl font-bold text-slate-800">$49.99</div>
@@ -934,7 +934,7 @@ const Apply = () => {
                                     <div className="flex justify-between items-center">
                                       <div>
                                         <div className="font-semibold text-blue-800">Fast</div>
-                                        <div className="text-blue-600">Processed in less than 4 hours</div>
+                                        <div className="text-blue-600 mt-2">Processed in less than 4 hours</div>
                                       </div>
                                       <div className="text-right">
                                         <div className="text-xl font-bold text-blue-600">+ $20.00</div>
