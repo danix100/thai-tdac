@@ -267,7 +267,7 @@ const Apply = () => {
             {/* Desktop Stepper - Left Column */}
             {currentStep <= 2 && (
               <div className="hidden md:block lg:col-span-1">
-                <div className="sticky top-4 space-y-4">
+                <div className="sticky top-0 space-y-4">
                   <h2 className="text-xl font-bold text-slate-800 mb-6">Application Steps</h2>
                   {steps.map((step) => (
                     <div
