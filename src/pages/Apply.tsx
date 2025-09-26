@@ -890,7 +890,7 @@ const Apply = () => {
                       <div>
                         <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
                           <p className="text-center text-slate-700 font-medium">
-                            This document has a cost of $49.99 by traveler - Estimated delivery time ~ less than 4 hours.
+                            This document has a cost of $49.99 by traveler - Estimated delivery time ~ less than 24 hours.
                           </p>
                         </div>
                         
@@ -910,23 +910,6 @@ const Apply = () => {
                                 value={field.value}
                                 className="space-y-4"
                               >
-                                {/* Standard Option */}
-                                <div className="flex items-center space-x-4 p-4 border-2 border-slate-200 rounded-lg hover:border-slate-300 transition-colors">
-                                  <RadioGroupItem value="standard" id="standard" />
-                                  <Label htmlFor="standard" className="flex-1 cursor-pointer">
-                                    <div className="flex justify-between items-center">
-                                      <div>
-                                        <div className="font-semibold text-slate-800">Standard</div>
-                                        <div className="text-slate-600 mt-2">Processed in less than 4 hours</div>
-                                      </div>
-                                      <div className="text-right">
-                                        <div className="text-xl font-bold text-slate-800">$49.99</div>
-                                        <div className="text-sm text-slate-600">Per traveler</div>
-                                      </div>
-                                    </div>
-                                  </Label>
-                                </div>
-
                                 {/* Fast Option */}
                                 <div className="flex items-center space-x-4 p-4 border-2 border-blue-200 rounded-lg hover:border-blue-300 transition-colors bg-blue-50">
                                   <RadioGroupItem value="fast" id="fast" />
