@@ -12,6 +12,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
@@ -117,6 +118,7 @@ type FormData = z.infer<typeof formSchema>;
 
 const Apply = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -153,6 +155,72 @@ const Apply = () => {
     name: "travelers"
   });
 
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    try {
+      // Removed dangerous logging of sensitive data
+      
+      // Generate unique session ID for this application
+      const sessionId = crypto.randomUUID();
+      
+      // Save visa application with processing option
+      const { data: visaApplication, error: visaError } = await supabase
+        .from('visa_applications')
+        .insert({
+          session_id: sessionId,
+          departure_country: data.departureCountry,
+          purpose_of_visit: data.purposeOfVisit,
+          flight_number: data.flightNumber,
+          accommodation_type: data.accommodationType,
+          accommodation_details: data.accommodationDetails,
+          processing_option: data.processingOption || 'standard', // Default to standard if not selected
+          status: 'pending'
+        })
+        .select()
+        .single();
+
+      if (visaError) {
+        throw visaError;
+      }
+
+      // Save travelers
+      const travelersData = data.travelers.map(traveler => ({
+        visa_application_id: visaApplication.id,
+        first_name: traveler.firstName,
+        last_name: traveler.lastName,
+        passport_number: traveler.passport,
+        date_of_birth: traveler.birthDate.toISOString().split('T')[0],
+        arrival_date: traveler.arrivalDate.toISOString().split('T')[0],
+        phone: `${traveler.phoneCode}${traveler.phone}`,
+        email: traveler.email,
+        gender: traveler.gender,
+      }));
+
+      const { error: travelersError } = await supabase
+        .from('travelers')
+        .insert(travelersData);
+
+      if (travelersError) {
+        throw travelersError;
+      }
+
+      toast({
+        title: "Application submitted successfully!",
+        description: "Application submitted successfully! We'll process your application and payment separately via secure channels.",
+      });
+      
+      setCurrentStep(4);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to submit application. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const addTraveler = () => {
     if (fields.length < 4) {
       append({
@@ -181,6 +249,7 @@ const Apply = () => {
   const steps = [
     { number: 1, title: "Prerequisite", active: currentStep === 1 },
     { number: 2, title: "Travel Information", active: currentStep === 2 },
+    { number: 3, title: "Payment", active: currentStep === 3 },
   ];
 
   return (
@@ -194,101 +263,108 @@ const Apply = () => {
             <h1 className="text-2xl font-bold text-slate-800">
               {currentStep === 1 && "Prerequisite"}
               {currentStep === 2 && "Travel Information"}
+              {currentStep === 3 && "Payment"}
             </h1>
           </div>
 
           <div className="grid lg:grid-cols-5 gap-6">
             {/* Desktop Stepper - Vertical Left Column */}
-            <div className="hidden lg:block lg:col-span-1">
-              <div className="sticky top-8 space-y-6 bg-white p-6 rounded-lg shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-800 mb-8">Application Steps</h2>
-                <div className="relative">
-                  {steps.map((step, index) => (
-                    <div key={step.number} className="relative flex items-center mb-8 last:mb-0">
-                      {/* Connecting Line */}
-                      {index < steps.length - 1 && (
-                        <div className="absolute left-6 top-12 w-0.5 h-16 bg-gray-200"></div>
-                      )}
-                      
-                      {/* Step Circle */}
-                      <div
-                        className={cn(
-                          "w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold z-10 mr-4 flex-shrink-0",
-                          step.active
-                            ? "bg-primary text-white"
-                            : currentStep > step.number
-                            ? "bg-green-500 text-white"
-                            : "bg-gray-200 text-gray-600"
+            {currentStep <= 3 && (
+              <div className="hidden lg:block lg:col-span-1">
+                <div className="sticky top-8 space-y-6 bg-white p-6 rounded-lg shadow-sm">
+                  <h2 className="text-2xl font-bold text-slate-800 mb-8">Application Steps</h2>
+    <div className="relative">
+                    {steps.map((step, index) => (
+                      <div key={step.number} className="relative flex items-center mb-8 last:mb-0">
+                        {/* Connecting Line */}
+                        {index < steps.length - 1 && (
+                          <div className="absolute left-6 top-12 w-0.5 h-16 bg-gray-200"></div>
                         )}
-                      >
-                        {currentStep > step.number ? "✓" : step.number}
+                        
+                        {/* Step Circle */}
+                        <div
+                          className={cn(
+                            "w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold z-10 mr-4 flex-shrink-0",
+                            step.active
+                              ? "bg-primary text-white"
+                              : currentStep > step.number
+                              ? "bg-green-500 text-white"
+                              : "bg-gray-200 text-gray-600"
+                          )}
+                        >
+                          {currentStep > step.number ? "✓" : step.number}
+                        </div>
+                        
+                        {/* Step Title */}
+                        <span
+                          className={cn(
+                            "text-lg font-medium",
+                            step.active
+                              ? "text-primary"
+                              : currentStep > step.number
+                              ? "text-green-700"
+                              : "text-gray-600"
+                          )}
+                        >
+                          {step.title}
+                        </span>
                       </div>
-                      
-                      {/* Step Title */}
-                      <span
-                        className={cn(
-                          "text-lg font-medium",
-                          step.active
-                            ? "text-primary"
-                            : currentStep > step.number
-                            ? "text-green-700"
-                            : "text-gray-600"
-                        )}
-                      >
-                        {step.title}
-                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Tablet Horizontal Stepper */}
+            {currentStep <= 3 && (
+            <div className="hidden md:block lg:hidden col-span-full mb-6 sticky top-0 z-10 bg-background">
+              <div className="flex justify-between items-center bg-white rounded-lg shadow-sm p-6">
+                  {steps.map((step, index) => (
+                    <div key={step.number} className="flex items-center">
+                      <div className="flex items-center">
+                        <div
+                          className={cn(
+                            "w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold",
+                            step.active
+                              ? "bg-primary text-white"
+                              : currentStep > step.number
+                              ? "bg-green-500 text-white"
+                              : "bg-gray-200 text-gray-600"
+                          )}
+                        >
+                          {currentStep > step.number ? "✓" : step.number}
+                        </div>
+                        <span
+                          className={cn(
+                            "ml-3 font-medium",
+                            step.active
+                              ? "text-primary"
+                              : currentStep > step.number
+                              ? "text-green-700"
+                              : "text-gray-600"
+                          )}
+                        >
+                          {step.title}
+                        </span>
+                      </div>
+                      {index < steps.length - 1 && (
+                        <div
+                          className={cn(
+                            "w-16 h-0.5 mx-4",
+                            currentStep > step.number ? "bg-green-500" : "bg-gray-300"
+                          )}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
-
-            {/* Tablet Horizontal Stepper */}
-            <div className="hidden md:block lg:hidden col-span-full mb-6 sticky top-0 z-10 bg-background">
-              <div className="flex justify-between items-center bg-white rounded-lg shadow-sm p-6">
-                {steps.map((step, index) => (
-                  <div key={step.number} className="flex items-center">
-                    <div className="flex items-center">
-                      <div
-                        className={cn(
-                          "w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold",
-                          step.active
-                            ? "bg-primary text-white"
-                            : currentStep > step.number
-                            ? "bg-green-500 text-white"
-                            : "bg-gray-200 text-gray-600"
-                        )}
-                      >
-                        {currentStep > step.number ? "✓" : step.number}
-                      </div>
-                      <span
-                        className={cn(
-                          "ml-3 font-medium",
-                          step.active
-                            ? "text-primary"
-                            : currentStep > step.number
-                            ? "text-green-700"
-                            : "text-gray-600"
-                        )}
-                      >
-                        {step.title}
-                      </span>
-                    </div>
-                    {index < steps.length - 1 && (
-                      <div
-                        className={cn(
-                          "w-16 h-0.5 mx-4",
-                          currentStep > step.number ? "bg-green-500" : "bg-gray-300"
-                        )}
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+            )}
 
             {/* Main Form Content */}
-            <div className="lg:col-span-4">
+            <div className={cn(
+              currentStep <= 3 ? "lg:col-span-4" : "lg:col-span-5"
+            )}>
               <div className="bg-white rounded-lg shadow-soft p-6 md:p-8">
                 {/* Step 1: Traveler Details */}
                 {currentStep === 1 && (
@@ -325,15 +401,15 @@ const Apply = () => {
                             name={`travelers.${index}.arrivalDate`}
                             render={({ field }) => (
                               <FormItem className="space-y-3">
-                                <FormLabel className="text-base font-medium text-slate-700">
-                                  Arrival Date in Thailand
+                                <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                  Arrival Date in Thailand <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
                                   <DateInput
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                    placeholder="Select arrival date"
-                                    className="w-full"
+                                    date={field.value}
+                                    onDateChange={field.onChange}
+                                    placeholder="Pick arrival date"
+                                    minDate={new Date()}
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -341,71 +417,62 @@ const Apply = () => {
                             )}
                           />
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Passport */}
-                            <FormField
-                              control={form.control}
-                              name={`travelers.${index}.passport`}
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Passport Number</FormLabel>
-                                  <FormControl>
-                                    <Input {...field} placeholder="Enter passport number" />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
+                          {/* Passport Number */}
+                          <FormField
+                            control={form.control}
+                            name={`travelers.${index}.passport`}
+                            render={({ field }) => (
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                  Passport Number <span className="text-red-500">*</span>
+                                </FormLabel>
+                                <FormControl>
+                                  <Input 
+                                    placeholder="Passport number" 
+                                    {...field} 
+                                    className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
 
-                            {/* Gender */}
-                            <FormField
-                              control={form.control}
-                              name={`travelers.${index}.gender`}
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Gender</FormLabel>
-                                  <FormControl>
-                                    <Select onValueChange={field.onChange} value={field.value}>
-                                      <SelectTrigger>
-                                        <SelectValue placeholder="Select gender" />
-                                      </SelectTrigger>
-                                      <SelectContent>
-                                        <SelectItem value="male">Male</SelectItem>
-                                        <SelectItem value="female">Female</SelectItem>
-                                      </SelectContent>
-                                    </Select>
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* First Name */}
+                          {/* Full Name */}
+                          <div className="grid md:grid-cols-2 gap-4">
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.firstName`}
                               render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>First Name</FormLabel>
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                    First Name <span className="text-red-500">*</span>
+                                  </FormLabel>
                                   <FormControl>
-                                    <Input {...field} placeholder="Enter first name" />
+                                    <Input 
+                                      placeholder="First name" 
+                                      {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-
-                            {/* Last Name */}
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.lastName`}
                               render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Last Name</FormLabel>
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                    Last Name <span className="text-red-500">*</span>
+                                  </FormLabel>
                                   <FormControl>
-                                    <Input {...field} placeholder="Enter last name" />
+                                    <Input 
+                                      placeholder="Last name" 
+                                      {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -419,15 +486,16 @@ const Apply = () => {
                             name={`travelers.${index}.birthDate`}
                             render={({ field }) => (
                               <FormItem className="space-y-3">
-                                <FormLabel className="text-base font-medium text-slate-700">
-                                  Date of birth
+                                <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                  Date of Birth <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
                                   <DateInput
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                    placeholder="Select birth date"
-                                    className="w-full"
+                                    date={field.value}
+                                    onDateChange={field.onChange}
+                                    placeholder="Pick birth date"
+                                    maxDate={new Date()}
+                                    minDate={new Date("1900-01-01")}
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -435,85 +503,99 @@ const Apply = () => {
                             )}
                           />
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Nationality */}
+                          {/* Nationality and Country of Residence */}
+                          <div className="grid md:grid-cols-2 gap-4">
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.nationality`}
                               render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Nationality</FormLabel>
-                                  <FormControl>
-                                    <Select onValueChange={field.onChange} value={field.value}>
-                                      <SelectTrigger>
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                    Nationality <span className="text-red-500">*</span>
+                                  </FormLabel>
+                                  <Select onValueChange={field.onChange} value={field.value}>
+                                    <FormControl>
+                                      <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
                                         <SelectValue placeholder="Select nationality" />
                                       </SelectTrigger>
-                                      <SelectContent>
-                                        {countries.map((country) => (
-                                          <SelectItem key={country} value={country}>
-                                            {country}
-                                          </SelectItem>
-                                        ))}
-                                      </SelectContent>
-                                    </Select>
-                                  </FormControl>
+                                    </FormControl>
+                                    <SelectContent className="max-h-64">
+                                      {countries.map((country) => (
+                                        <SelectItem key={country} value={country}>
+                                          {country}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-
-                            {/* Country of Residence */}
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.countryOfResidence`}
                               render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Country of Residence</FormLabel>
-                                  <FormControl>
-                                    <Select onValueChange={field.onChange} value={field.value}>
-                                      <SelectTrigger>
-                                        <SelectValue placeholder="Select country" />
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                    Country of Residence <span className="text-red-500">*</span>
+                                  </FormLabel>
+                                  <Select onValueChange={field.onChange} value={field.value}>
+                                    <FormControl>
+                                      <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
+                                        <SelectValue placeholder="Select residence country" />
                                       </SelectTrigger>
-                                      <SelectContent>
-                                        {countries.map((country) => (
-                                          <SelectItem key={country} value={country}>
-                                            {country}
-                                          </SelectItem>
-                                        ))}
-                                      </SelectContent>
-                                    </Select>
-                                  </FormControl>
+                                    </FormControl>
+                                    <SelectContent className="max-h-64">
+                                      {countries.map((country) => (
+                                        <SelectItem key={country} value={country}>
+                                          {country}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
                           </div>
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Email */}
+                          {/* Email */}
+                          <div className="grid md:grid-cols-2 gap-4">
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.email`}
                               render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Email Address</FormLabel>
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                    Email Address <span className="text-red-500">*</span>
+                                  </FormLabel>
                                   <FormControl>
-                                    <Input {...field} type="email" placeholder="Enter email address" />
+                                    <Input 
+                                      placeholder="Email address" 
+                                      type="email"
+                                      {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-
-                            {/* Confirm Email */}
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.confirmEmail`}
                               render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Confirm Email Address</FormLabel>
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                    Confirm Email <span className="text-red-500">*</span>
+                                  </FormLabel>
                                   <FormControl>
-                                    <Input {...field} type="email" placeholder="Confirm email address" />
+                                    <Input 
+                                      placeholder="Confirm email address" 
+                                      type="email"
+                                      {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -521,67 +603,122 @@ const Apply = () => {
                             />
                           </div>
 
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {/* Phone Code */}
+                          {/* Phone */}
+                          <div className="grid md:grid-cols-3 gap-4">
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.phoneCode`}
                               render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Phone Code</FormLabel>
-                                  <FormControl>
-                                    <Select onValueChange={field.onChange} value={field.value}>
-                                      <SelectTrigger>
-                                        <SelectValue placeholder="Code" />
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                    Phone Code <span className="text-red-500">*</span>
+                                  </FormLabel>
+                                  <Select onValueChange={field.onChange} value={field.value}>
+                                    <FormControl>
+                                      <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
+                                        <SelectValue placeholder="Select country code" />
                                       </SelectTrigger>
-                                      <SelectContent>
-                                        {phoneCodes.map((item) => (
-                                          <SelectItem key={item.code} value={item.code}>
-                                            {item.country} ({item.code})
-                                          </SelectItem>
-                                        ))}
-                                      </SelectContent>
-                                    </Select>
-                                  </FormControl>
+                                    </FormControl>
+                                    <SelectContent className="max-h-64">
+                                      {phoneCodes.map((phone) => (
+                                        <SelectItem key={phone.code} value={phone.code}>
+                                          <div className="flex items-center gap-2">
+                                            <span>{phone.flag}</span>
+                                            <span>{phone.code}</span>
+                                            <span className="text-muted-foreground text-sm">{phone.country}</span>
+                                          </div>
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-
-                            {/* Phone */}
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.phone`}
                               render={({ field }) => (
-                                <FormItem className="md:col-span-2">
-                                  <FormLabel>Phone Number</FormLabel>
+                                <FormItem className="md:col-span-2 space-y-3">
+                                  <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                    Phone Number <span className="text-red-500">*</span>
+                                  </FormLabel>
                                   <FormControl>
-                                    <Input {...field} placeholder="Enter phone number" />
+                                    <Input 
+                                      placeholder="Phone number" 
+                                      {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
                           </div>
+
+                          {/* Gender */}
+                          <FormField
+                            control={form.control}
+                            name={`travelers.${index}.gender`}
+                            render={({ field }) => (
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                  Gender <span className="text-red-500">*</span>
+                                </FormLabel>
+                                <FormControl>
+                                  <RadioGroup
+                                    onValueChange={field.onChange}
+                                    value={field.value}
+                                    className="flex space-x-6"
+                                  >
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="male" id={`male-${index}`} />
+                                      <Label htmlFor={`male-${index}`} className="font-medium">Male</Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="female" id={`female-${index}`} />
+                                      <Label htmlFor={`female-${index}`} className="font-medium">Female</Label>
+                                    </div>
+                                  </RadioGroup>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
                         </div>
                       ))}
 
                       {/* Add Traveler Button */}
                       {fields.length < 4 && (
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={addTraveler}
-                          className="w-full border-dashed border-2 h-12 text-slate-600 hover:text-slate-800"
-                        >
-                          <Plus className="h-4 w-4 mr-2" />
-                          Add Another Traveler (Max 4)
-                        </Button>
+                        <div className="flex flex-col items-center gap-2 p-6 border-2 border-dashed border-primary/30 rounded-lg bg-primary/5 hover:bg-primary/10 transition-all">
+                          <Button
+                            type="button"
+                            variant="default"
+                            onClick={addTraveler}
+                            className="flex items-center gap-2 bg-primary hover:bg-primary/90"
+                            size="lg"
+                          >
+                            <Plus className="h-5 w-5" />
+                            Add Another Traveler
+                          </Button>
+                          <p className="text-sm text-slate-600">
+                            You can add up to 4 travelers ({fields.length}/4)
+                          </p>
+                        </div>
                       )}
 
-                      {/* Navigation */}
+                      {/* Next Step Button */}
                       <div className="flex justify-end">
-                        <Button onClick={() => setCurrentStep(2)} className="px-8">
+                        <Button
+                          type="button"
+                          onClick={() => {
+                            const travelersValid = form.trigger("travelers");
+                            if (travelersValid) {
+                              setCurrentStep(2);
+                            }
+                          }}
+                          className="px-8"
+                        >
                           Next Step
                         </Button>
                       </div>
@@ -598,233 +735,356 @@ const Apply = () => {
                           <Plane className="h-6 w-6" />
                           Travel Information
                         </h2>
-                        <p className="text-slate-600 mb-8">Tell us about your travel plans</p>
+                        <p className="text-slate-600 mb-8">Tell us about your travel plans to Thailand</p>
                       </div>
 
-                      <div className="space-y-6">
-                        {/* Departure Country */}
-                        <FormField
-                          control={form.control}
-                          name="departureCountry"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Departure Country</FormLabel>
+                      {/* Departure Country */}
+                      <FormField
+                        control={form.control}
+                        name="departureCountry"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                              Departure Country <span className="text-red-500">*</span>
+                            </FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
                               <FormControl>
-                                <Select onValueChange={field.onChange} value={field.value}>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select departure country" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {countries.map((country) => (
-                                      <SelectItem key={country} value={country}>
-                                        {country}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
+                                <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
+                                  <SelectValue placeholder="Select departure country" />
+                                </SelectTrigger>
                               </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                              <SelectContent className="max-h-64">
+                                {countries.map((country) => (
+                                  <SelectItem key={country} value={country}>
+                                    {country}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {/* Purpose of Visit */}
-                          <FormField
-                            control={form.control}
-                            name="purposeOfVisit"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Purpose of Visit</FormLabel>
-                                <FormControl>
-                                  <Select onValueChange={field.onChange} value={field.value}>
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Select purpose" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                      <SelectItem value="tourism">Tourism</SelectItem>
-                                      <SelectItem value="business">Business</SelectItem>
-                                      <SelectItem value="transit">Transit</SelectItem>
-                                      <SelectItem value="medical">Medical</SelectItem>
-                                      <SelectItem value="education">Education</SelectItem>
-                                      <SelectItem value="other">Other</SelectItem>
-                                    </SelectContent>
-                                  </Select>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
+                      {/* Purpose of Visit */}
+                      <FormField
+                        control={form.control}
+                        name="purposeOfVisit"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                              Purpose of Visit <span className="text-red-500">*</span>
+                            </FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
+                                  <SelectValue placeholder="Select purpose of visit" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="tourism">Tourism</SelectItem>
+                                <SelectItem value="business">Business</SelectItem>
+                                <SelectItem value="transit">Transit</SelectItem>
+                                <SelectItem value="visiting-family">Visiting Family/Friends</SelectItem>
+                                <SelectItem value="medical">Medical Treatment</SelectItem>
+                                <SelectItem value="education">Education</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                          {/* Flight Number */}
-                          <FormField
-                            control={form.control}
-                            name="flightNumber"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Flight Number (Optional)</FormLabel>
-                                <FormControl>
-                                  <Input {...field} placeholder="e.g., TG123" />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
+                      {/* Flight Number */}
+                      <FormField
+                        control={form.control}
+                        name="flightNumber"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                              Flight Number (Optional)
+                            </FormLabel>
+                            <FormControl>
+                              <Input 
+                                placeholder="e.g., TG123" 
+                                {...field} 
+                                className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                        {/* Accommodation */}
-                        <div className="space-y-4">
-                          <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-                            <MapPin className="h-5 w-5" />
-                            Accommodation in Thailand
-                          </h3>
-                          
-                          <FormField
-                            control={form.control}
-                            name="accommodationType"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Accommodation Type</FormLabel>
-                                <FormControl>
-                                  <Select onValueChange={field.onChange} value={field.value}>
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Select accommodation type" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                      <SelectItem value="hotel">Hotel</SelectItem>
-                                      <SelectItem value="hostel">Hostel</SelectItem>
-                                      <SelectItem value="guesthouse">Guesthouse</SelectItem>
-                                      <SelectItem value="apartment">Apartment/Condo</SelectItem>
-                                      <SelectItem value="resort">Resort</SelectItem>
-                                      <SelectItem value="friends_family">Friends/Family</SelectItem>
-                                      <SelectItem value="other">Other</SelectItem>
-                                    </SelectContent>
-                                  </Select>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
+                      {/* Accommodation */}
+                      <FormField
+                        control={form.control}
+                        name="accommodationType"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                              <MapPin className="inline h-5 w-5 mr-2" />
+                              Accommodation Type <span className="text-red-500">*</span>
+                            </FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
+                                  <SelectValue placeholder="Select accommodation type" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="hotel">Hotel</SelectItem>
+                                <SelectItem value="hostel">Hostel</SelectItem>
+                                <SelectItem value="resort">Resort</SelectItem>
+                                <SelectItem value="airbnb">Airbnb/Vacation Rental</SelectItem>
+                                <SelectItem value="friends-family">Friends/Family</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                          <FormField
-                            control={form.control}
-                            name="accommodationDetails"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Accommodation Details (Optional)</FormLabel>
-                                <FormControl>
-                                  <Input 
-                                    {...field} 
-                                    placeholder="Hotel name, address, or other details" 
-                                  />
-                                </FormControl>
-                                <FormDescription>
-                                  Please provide the name and address of your accommodation
-                                </FormDescription>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
+                      {/* Accommodation Details */}
+                      <FormField
+                        control={form.control}
+                        name="accommodationDetails"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                              Accommodation Details (Optional)
+                            </FormLabel>
+                            <FormControl>
+                              <Input 
+                                placeholder="Hotel name, address, or other details" 
+                                {...field} 
+                                className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                        {/* Processing Options */}
-                        <div className="space-y-4">
-                          <h3 className="text-lg font-semibold text-slate-800">Processing Options</h3>
-                          
-                          <FormField
-                            control={form.control}
-                            name="processingOption"
-                            render={({ field }) => (
-                              <FormItem className="space-y-3">
-                                <FormControl>
-                                  <RadioGroup
-                                    onValueChange={field.onChange}
-                                    value={field.value}
-                                    className="grid grid-cols-1 gap-4"
-                                  >
-                                    <div>
-                                      <RadioGroupItem value="fast" id="fast" className="peer sr-only" />
-                                      <Label
-                                        htmlFor="fast"
-                                        className="flex items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
-                                      >
-                                        <div className="flex items-center justify-between w-full">
-                                          <div className="flex items-center space-x-3">
-                                            <div className="space-y-1">
-                                              <div className="font-semibold">Fast Track Processing</div>
-                                              <div className="text-sm text-slate-600">
-                                                Get your visa processed within 24-48 hours
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div className="text-right">
-                                            <div className="text-xl font-bold text-slate-800">+ $20.00</div>
-                                            <div className="text-sm text-slate-600">Additional fee</div>
-                                          </div>
-                                        </div>
-                                      </Label>
-                                    </div>
-                                    
-                                    <div>
-                                      <RadioGroupItem value="ultra" id="ultra" className="peer sr-only" />
-                                      <Label
-                                        htmlFor="ultra"
-                                        className="flex items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
-                                      >
-                                        <div className="flex items-center justify-between w-full">
-                                          <div className="flex items-center space-x-3">
-                                            <div className="space-y-1">
-                                              <div className="font-semibold">Ultra Fast Processing</div>
-                                              <div className="text-sm text-slate-600">
-                                                Emergency processing within 12-24 hours
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div className="text-right">
-                                            <div className="text-xl font-bold text-slate-800">+ $50.00</div>
-                                            <div className="text-sm text-slate-600">Additional fee</div>
-                                          </div>
-                                        </div>
-                                      </Label>
-                                    </div>
-                                  </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-
-                        <div className="text-center text-sm text-slate-600 bg-slate-50 p-4 rounded-lg">
-                          * The price to be paid is multiplied by the number of travelers.
-                        </div>
-
-                        {/* Navigation Buttons */}
-                        <div className="flex justify-between">
-                          <Button
-                            type="button"
-                            variant="outline"
-                            onClick={() => setCurrentStep(1)}
-                          >
-                            Previous
-                          </Button>
-                          <Button
-                            type="button"
-                            onClick={async () => {
-                              const isValid = await form.trigger(); // Validate form
-                              if (isValid) {
-                                const formData = form.getValues();
-                                navigate('/payment', { state: { formData } });
-                              }
-                            }}
-                            className="px-8 bg-red-600 hover:bg-red-700 text-white"
-                          >
-                            Continue to Payment
-                          </Button>
-                        </div>
+                      {/* Navigation Buttons */}
+                      <div className="flex justify-between">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCurrentStep(1)}
+                        >
+                          Previous Step
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => {
+                            const isValid = form.trigger(["departureCountry", "purposeOfVisit", "accommodationType"]);
+                            if (isValid) {
+                              setCurrentStep(3);
+                            }
+                          }}
+                          className="px-8"
+                        >
+                          Next Step
+                        </Button>
                       </div>
                     </div>
                   </Form>
+                )}
+
+                {/* Step 3: Processing Options */}
+                {currentStep === 3 && (
+                  <Form {...form}>
+                    <div className="space-y-8">
+                      <div>
+                        <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
+                          <p className="text-center text-slate-800 text-lg font-bold">
+                            This document has a cost of <span className="text-2xl font-extrabold text-primary">$49.99</span> by traveler - Estimated delivery time ~ less than 24 hours.
+                          </p>
+                        </div>
+                        
+                        <h2 className="text-2xl font-bold text-slate-800 mb-4">Payment</h2>
+                        <p className="text-slate-600 mb-8">Choose your preferred processing speed</p>
+                      </div>
+
+                      {/* Processing Options */}
+                      <FormField
+                        control={form.control}
+                        name="processingOption"
+                        render={({ field }) => (
+                          <FormItem className="space-y-6">
+                            <FormControl>
+                              <RadioGroup
+                                onValueChange={field.onChange}
+                                value={field.value}
+                                className="space-y-4"
+                              >
+                                {/* Fast Option */}
+                                <div className="flex items-center space-x-4 p-4 border-2 border-blue-200 rounded-lg hover:border-blue-300 transition-colors bg-blue-50">
+                                  <RadioGroupItem value="fast" id="fast" />
+                                  <Label htmlFor="fast" className="flex-1 cursor-pointer">
+                                    <div className="flex justify-between items-center">
+                                      <div>
+                                        <div className="font-semibold text-blue-800">Fast</div>
+                                        <div className="text-blue-600 mt-2">Processed in less than 4 hours</div>
+                                      </div>
+                                      <div className="text-right">
+                                        <div className="text-xl font-bold text-blue-600">+ $20.00</div>
+                                        <div className="text-sm text-blue-600">Additional fee</div>
+                                      </div>
+                                    </div>
+                                  </Label>
+                                </div>
+
+                                {/* Ultra Premium Option */}
+                                <div className="flex items-center space-x-4 p-4 border-2 border-slate-200 rounded-lg hover:border-slate-300 transition-colors">
+                                  <RadioGroupItem value="ultra" id="ultra" />
+                                  <Label htmlFor="ultra" className="flex-1 cursor-pointer">
+                                    <div className="flex justify-between items-center">
+                                      <div>
+                                        <div className="font-semibold text-slate-800">Ultra Premium</div>
+                                        <div className="inline-block bg-yellow-200 text-yellow-800 text-sm px-2 py-1 rounded-full mt-2">
+                                          Processed in less than one hour
+                                        </div>
+                                      </div>
+                                      <div className="text-right">
+                                        <div className="text-xl font-bold text-slate-800">+ $50.00</div>
+                                        <div className="text-sm text-slate-600">Additional fee</div>
+                                      </div>
+                                    </div>
+                                  </Label>
+                                </div>
+                              </RadioGroup>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <div className="text-center text-sm text-slate-600 bg-slate-50 p-4 rounded-lg">
+                        * The price to be paid is multiplied by the number of travelers.
+                      </div>
+
+                      {/* Navigation Buttons */}
+                      <div className="flex justify-between">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCurrentStep(2)}
+                        >
+                          Previous
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => setCurrentStep(3)}
+                          className="px-8 bg-red-600 hover:bg-red-700 text-white"
+                        >
+                          Continue to Payment
+                        </Button>
+                      </div>
+                    </div>
+                  </Form>
+                )}
+
+                {/* Step 3: Payment */}
+                {currentStep === 3 && (
+                  <div className="space-y-8">
+                    <div>
+                      <h2 className="text-3xl font-bold text-center text-green-600 mb-8">Confirm Payment</h2>
+                    </div>
+
+                    <div className="max-w-md mx-auto space-y-6">
+                      {/* Card Number */}
+                      <div className="space-y-2">
+                        <div className="relative">
+                          <Input
+                            placeholder="Card Number"
+                            className="pr-20 h-14 text-lg rounded-2xl border-2"
+                            disabled
+                          />
+                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex space-x-1">
+                            <div className="w-8 h-5 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">VISA</div>
+                            <div className="w-8 h-5 bg-red-600 rounded text-white text-xs flex items-center justify-center font-bold">MC</div>
+                            <div className="w-8 h-5 bg-blue-400 rounded text-white text-xs flex items-center justify-center font-bold">AE</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Expiration and CVV */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <Input
+                          placeholder="Expiration (MM/YY)"
+                          className="h-14 text-lg rounded-2xl border-2"
+                          disabled
+                        />
+                        <Input
+                          placeholder="CVV"
+                          className="h-14 text-lg rounded-2xl border-2"
+                          disabled
+                        />
+                      </div>
+
+                      {/* Pay Now Button */}
+                      <Button
+                        onClick={async () => {
+                          await form.handleSubmit(onSubmit)();
+                          setCurrentStep(4);
+                        }}
+                        disabled={isSubmitting}
+                        className="w-full h-14 text-xl font-semibold bg-green-500 hover:bg-green-600 rounded-2xl"
+                      >
+                        {isSubmitting ? "Processing..." : "Pay Now"}
+                      </Button>
+
+                      {/* Security Messages */}
+                      <div className="text-center space-y-2">
+                        <p className="text-slate-600">We accept all major credit cards.</p>
+                        <div className="flex items-center justify-center gap-2 text-green-600">
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                          </svg>
+                          <span className="font-medium">Secure payment.</span>
+                        </div>
+                      </div>
+
+                      {/* Previous Button */}
+                      <div className="flex justify-start mt-8">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCurrentStep(2)}
+                          className="px-8 py-3 rounded-xl border-2"
+                        >
+                          Previous
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 4: Thank You Page */}
+                {currentStep === 4 && (
+                  <div className="text-center space-y-6">
+                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                      <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                    <h2 className="text-3xl font-bold text-slate-800">Application Submitted Successfully!</h2>
+                    <p className="text-slate-600 max-w-md mx-auto">
+                      Thank you for your visa application. We'll process your application and contact you soon with further instructions.
+                    </p>
+                    <div className="space-y-4">
+                      <Button
+                        onClick={() => navigate('/')}
+                        className="px-8"
+                      >
+                        Return to Home
+                      </Button>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
