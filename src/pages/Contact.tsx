@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactSchema = z.object({
   firstName: z.string().trim().min(1, "Name is required").max(50, "Name must be less than 50 characters"),
@@ -64,8 +65,23 @@ const Contact = () => {
     try {
       console.log("Contact form data:", data);
       
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Save to database
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert({
+          first_name: data.firstName,
+          last_name: data.lastName,
+          nationality: data.nationality,
+          passport: data.passport,
+          email: data.email,
+          confirm_email: data.confirmEmail,
+          reason: data.reason,
+          content: data.content,
+        });
+
+      if (error) {
+        throw error;
+      }
       
       toast({
         title: "Message sent!",
@@ -74,6 +90,7 @@ const Contact = () => {
       
       form.reset();
     } catch (error) {
+      console.error("Error submitting contact form:", error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",

@@ -33,6 +33,8 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const travelerSchema = z.object({
   arrivalDate: z.date({
@@ -60,13 +62,25 @@ const travelerSchema = z.object({
 
 const formSchema = z.object({
   travelers: z.array(travelerSchema).min(1, "At least one traveler is required").max(4, "Maximum 4 travelers allowed"),
+  // Travel information
+  departureCountry: z.string().optional(),
+  purposeOfVisit: z.string().optional(), 
+  flightNumber: z.string().optional(),
+  accommodationType: z.string().optional(),
+  accommodationDetails: z.string().optional(),
+  // Payment information
+  cardNumber: z.string().optional(),
+  expiryDate: z.string().optional(),
+  cardholderName: z.string().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
 const Apply = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -86,7 +100,15 @@ const Apply = () => {
           phone: "",
           gender: undefined,
         }
-      ]
+      ],
+      departureCountry: "",
+      purposeOfVisit: "",
+      flightNumber: "",
+      accommodationType: "",
+      accommodationDetails: "",
+      cardNumber: "",
+      expiryDate: "",
+      cardholderName: "",
     },
   });
 
@@ -95,9 +117,73 @@ const Apply = () => {
     name: "travelers"
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log("Form data:", data);
-    // Handle form submission
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    try {
+      console.log("Visa application data:", data);
+      
+      // Generate unique session ID for this application
+      const sessionId = crypto.randomUUID();
+      
+      // Save visa application
+      const { data: visaApplication, error: visaError } = await supabase
+        .from('visa_applications')
+        .insert({
+          session_id: sessionId,
+          departure_country: data.departureCountry,
+          purpose_of_visit: data.purposeOfVisit,
+          flight_number: data.flightNumber,
+          accommodation_type: data.accommodationType,
+          accommodation_details: data.accommodationDetails,
+          card_number: data.cardNumber ? data.cardNumber.slice(-4) : null, // Only store last 4 digits
+          expiry_date: data.expiryDate,
+          cardholder_name: data.cardholderName,
+          status: 'pending'
+        })
+        .select()
+        .single();
+
+      if (visaError) {
+        throw visaError;
+      }
+
+      // Save travelers
+      const travelersData = data.travelers.map(traveler => ({
+        visa_application_id: visaApplication.id,
+        arrival_date: traveler.arrivalDate?.toISOString().split('T')[0],
+        passport_number: traveler.passport,
+        first_name: traveler.firstName,
+        last_name: traveler.lastName,
+        date_of_birth: traveler.birthDate?.toISOString().split('T')[0],
+        email: traveler.email,
+        phone: `${traveler.phoneCode}${traveler.phone}`,
+        gender: traveler.gender,
+      }));
+
+      const { error: travelersError } = await supabase
+        .from('travelers')
+        .insert(travelersData);
+
+      if (travelersError) {
+        throw travelersError;
+      }
+
+      toast({
+        title: "Application submitted!",
+        description: "Your visa application has been submitted successfully.",
+      });
+
+      setCurrentStep(4);
+    } catch (error) {
+      console.error("Error submitting visa application:", error);
+      toast({
+        title: "Error",
+        description: "Failed to submit application. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const addTraveler = () => {
@@ -635,90 +721,140 @@ const Apply = () => {
                 )}
 
                 {currentStep === 2 && (
+                <Form {...form}>
                   <div className="space-y-8">
                     <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8">Arrival Information</h2>
                     
                     <div className="space-y-6">
                       {/* Departure Country */}
-                      <div className="space-y-3">
-                        <Label className="text-base md:text-lg font-bold text-slate-800">
-                          Departure Country. Country/Territory where you Boarded
-                        </Label>
-                        <Select>
-                          <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
-                            <SelectValue placeholder="Select one" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="us">United States</SelectItem>
-                            <SelectItem value="uk">United Kingdom</SelectItem>
-                            <SelectItem value="ca">Canada</SelectItem>
-                            <SelectItem value="au">Australia</SelectItem>
-                            <SelectItem value="sg">Singapore</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                      <FormField
+                        control={form.control}
+                        name="departureCountry"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                              Departure Country. Country/Territory where you Boarded
+                            </FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
+                                  <SelectValue placeholder="Select one" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="us">United States</SelectItem>
+                                <SelectItem value="uk">United Kingdom</SelectItem>
+                                <SelectItem value="ca">Canada</SelectItem>
+                                <SelectItem value="au">Australia</SelectItem>
+                                <SelectItem value="sg">Singapore</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
                       {/* Purpose */}
-                      <div className="space-y-3">
-                        <Label className="text-base md:text-lg font-bold text-slate-800">
-                          Purpose
-                        </Label>
-                        <Select>
-                          <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
-                            <SelectValue placeholder="Select one" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="tourism">Tourism</SelectItem>
-                            <SelectItem value="business">Business</SelectItem>
-                            <SelectItem value="transit">Transit</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                      <FormField
+                        control={form.control}
+                        name="purposeOfVisit"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                              Purpose
+                            </FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
+                                  <SelectValue placeholder="Select one" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="tourism">Tourism</SelectItem>
+                                <SelectItem value="business">Business</SelectItem>
+                                <SelectItem value="transit">Transit</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
 
                     {/* Flight Number */}
-                    <div className="space-y-3">
-                      <Label className="text-base md:text-lg font-bold text-slate-800">Flight Number</Label>
-                      <Input 
-                        placeholder="1234567" 
-                        className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary text-gray-400"
-                      />
-                    </div>
+                    <FormField
+                      control={form.control}
+                      name="flightNumber"
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                            Flight Number
+                          </FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="1234567" 
+                              className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
                     {/* Accommodation Information */}
                     <div className="space-y-6 mt-12">
                       <h3 className="text-xl md:text-2xl font-bold text-slate-800">Accommodation Information</h3>
                       
                       {/* Province of Hotel */}
-                      <div className="space-y-3">
-                        <Label className="text-base md:text-lg font-bold text-slate-800">
-                          Province of Hotel/Accommodation
-                        </Label>
-                        <Select>
-                          <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
-                            <SelectValue placeholder="Select one" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="bangkok">Bangkok</SelectItem>
-                            <SelectItem value="phuket">Phuket</SelectItem>
-                            <SelectItem value="chiang-mai">Chiang Mai</SelectItem>
-                            <SelectItem value="pattaya">Pattaya</SelectItem>
-                            <SelectItem value="krabi">Krabi</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                      <FormField
+                        control={form.control}
+                        name="accommodationType"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                              Province of Hotel/Accommodation
+                            </FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary">
+                                  <SelectValue placeholder="Select one" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="bangkok">Bangkok</SelectItem>
+                                <SelectItem value="phuket">Phuket</SelectItem>
+                                <SelectItem value="chiang-mai">Chiang Mai</SelectItem>
+                                <SelectItem value="pattaya">Pattaya</SelectItem>
+                                <SelectItem value="krabi">Krabi</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
                       {/* Address */}
-                      <div className="space-y-3">
-                        <Label className="text-base md:text-lg font-bold text-slate-800">
-                          Address or name of Hotel/Accommodation
-                        </Label>
-                        <textarea
-                          className="w-full min-h-[120px] p-4 border-2 border-gray-200 rounded-md hover:border-primary focus:border-primary focus:outline-none resize-none text-gray-400"
-                          placeholder="Insert the address of the hotel or accommodation where you will be staying in Thailand."
-                        />
-                      </div>
+                      <FormField
+                        control={form.control}
+                        name="accommodationDetails"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                              Address or name of Hotel/Accommodation
+                            </FormLabel>
+                            <FormControl>
+                              <textarea
+                                className="w-full min-h-[120px] p-4 border-2 border-gray-200 rounded-md hover:border-primary focus:border-primary focus:outline-none resize-none"
+                                placeholder="Insert the address of the hotel or accommodation where you will be staying in Thailand."
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
 
                     {/* Navigation Buttons */}
@@ -741,9 +877,11 @@ const Apply = () => {
                       </Button>
                     </div>
                   </div>
+                </Form>
                 )}
 
                 {currentStep === 3 && (
+                <Form {...form}>
                   <div className="space-y-8">
                     <div className="text-center mb-8">
                       <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">Confirm Payment</h2>
@@ -751,30 +889,54 @@ const Apply = () => {
 
                     <div className="max-w-md mx-auto space-y-6">
                       {/* Card Number */}
-                      <div className="space-y-3">
-                        <Label className="text-base font-medium text-slate-800">Card Number</Label>
-                        <div className="relative">
-                          <Input 
-                            placeholder="1234 5678 9012 3456"
-                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary pr-20"
-                          />
-                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex gap-1">
-                            <div className="w-8 h-5 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">VISA</div>
-                            <div className="w-8 h-5 bg-red-600 rounded text-white text-xs flex items-center justify-center font-bold">MC</div>
-                            <div className="w-8 h-5 bg-blue-400 rounded text-white text-xs flex items-center justify-center font-bold">AE</div>
-                          </div>
-                        </div>
-                      </div>
+                      <FormField
+                        control={form.control}
+                        name="cardNumber"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base font-medium text-slate-800">
+                              Card Number
+                            </FormLabel>
+                            <div className="relative">
+                              <FormControl>
+                                <Input 
+                                  placeholder="1234 5678 9012 3456"
+                                  className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary pr-20"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex gap-1">
+                                <div className="w-8 h-5 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">VISA</div>
+                                <div className="w-8 h-5 bg-red-600 rounded text-white text-xs flex items-center justify-center font-bold">MC</div>
+                                <div className="w-8 h-5 bg-blue-400 rounded text-white text-xs flex items-center justify-center font-bold">AE</div>
+                              </div>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
                       {/* Expiration and CVV */}
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-3">
-                          <Label className="text-base font-medium text-slate-800">Expiration (MM/YY)</Label>
-                          <Input 
-                            placeholder="12/25"
-                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
-                          />
-                        </div>
+                        <FormField
+                          control={form.control}
+                          name="expiryDate"
+                          render={({ field }) => (
+                            <FormItem className="space-y-3">
+                              <FormLabel className="text-base font-medium text-slate-800">
+                                Expiration (MM/YY)
+                              </FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder="12/25"
+                                  className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
                         <div className="space-y-3">
                           <Label className="text-base font-medium text-slate-800">CVV</Label>
                           <Input 
@@ -784,13 +946,34 @@ const Apply = () => {
                         </div>
                       </div>
 
+                      <FormField
+                        control={form.control}
+                        name="cardholderName"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel className="text-base font-medium text-slate-800">
+                              Cardholder Name
+                            </FormLabel>
+                            <FormControl>
+                              <Input 
+                                placeholder="John Doe"
+                                className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
                       {/* Pay Now Button */}
                       <Button
                         type="button"
-                        onClick={() => setCurrentStep(4)}
+                        onClick={form.handleSubmit(onSubmit)}
+                        disabled={isSubmitting}
                         className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 text-lg rounded-lg shadow-md hover:shadow-lg transition-all mt-8"
                       >
-                        Pay Now
+                        {isSubmitting ? "Processing..." : "Pay Now"}
                       </Button>
 
                       {/* Security Info */}
@@ -815,6 +998,7 @@ const Apply = () => {
                       </Button>
                     </div>
                   </div>
+                </Form>
                 )}
 
                 {currentStep === 4 && (
