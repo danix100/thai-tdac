@@ -263,7 +263,7 @@ const Apply = () => {
             </div>
           )}
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-5 gap-6">
             {/* Desktop Stepper - Left Column */}
             {currentStep <= 2 && (
               <div className="hidden md:block lg:col-span-1">
@@ -313,7 +313,7 @@ const Apply = () => {
 
             {/* Main Form Content */}
             <div className={cn(
-              currentStep <= 2 ? "lg:col-span-2" : "lg:col-span-3"
+              currentStep <= 2 ? "lg:col-span-4" : "lg:col-span-5"
             )}>
               {/* Mobile Stepper */}
               {currentStep <= 2 && (
