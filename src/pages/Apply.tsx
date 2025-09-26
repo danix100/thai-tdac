@@ -111,9 +111,7 @@ const formSchema = z.object({
   accommodationType: z.string().min(1, "Accommodation type is required"),
   accommodationDetails: z.string().optional(),
   // Processing options
-  processingOption: z.enum(["standard", "fast", "ultra"], {
-    required_error: "Processing option is required",
-  }),
+  processingOption: z.enum(["fast", "ultra"]).optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -165,7 +163,7 @@ const Apply = () => {
       // Generate unique session ID for this application
       const sessionId = crypto.randomUUID();
       
-      // Save visa application
+      // Save visa application with processing option
       const { data: visaApplication, error: visaError } = await supabase
         .from('visa_applications')
         .insert({
@@ -175,6 +173,7 @@ const Apply = () => {
           flight_number: data.flightNumber,
           accommodation_type: data.accommodationType,
           accommodation_details: data.accommodationDetails,
+          processing_option: data.processingOption || 'standard', // Default to standard if not selected
           status: 'pending'
         })
         .select()
@@ -889,8 +888,8 @@ const Apply = () => {
                     <div className="space-y-8">
                       <div>
                         <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
-                          <p className="text-center text-slate-700 font-medium">
-                            This document has a cost of $49.99 by traveler - Estimated delivery time ~ less than 24 hours.
+                          <p className="text-center text-slate-800 text-lg font-bold">
+                            This document has a cost of <span className="text-2xl font-extrabold text-primary">$49.99</span> by traveler - Estimated delivery time ~ less than 24 hours.
                           </p>
                         </div>
                         
