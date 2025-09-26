@@ -3,22 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { format } from 'date-fns';
-import { Calendar as CalendarIcon, Plus, Trash2, Users, Plane, MapPin } from 'lucide-react';
+import { Plus, Trash2, Users, Plane, MapPin } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
+import { DateInput } from '@/components/ui/date-input';
+import { phoneCodes } from '@/data/phoneCodes';
 
 // Country options for select components
 const countries = [
@@ -387,37 +386,14 @@ const Apply = () => {
                                 <FormLabel className="text-base md:text-lg font-bold text-slate-800">
                                   Arrival Date in Thailand <span className="text-red-500">*</span>
                                 </FormLabel>
-                                <Popover>
-                                  <PopoverTrigger asChild>
-                                    <FormControl>
-                                      <Button
-                                        variant={"outline"}
-                                        className={cn(
-                                          "w-full h-12 border-2 border-gray-200 hover:border-primary focus:border-primary pl-3 text-left font-normal",
-                                          !field.value && "text-muted-foreground"
-                                        )}
-                                      >
-                                        {field.value ? (
-                                          format(field.value, "PPP")
-                                        ) : (
-                                          <span>Pick a date</span>
-                                        )}
-                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                      </Button>
-                                    </FormControl>
-                                  </PopoverTrigger>
-                                  <PopoverContent className="w-auto p-0" align="start">
-                                    <Calendar
-                                      mode="single"
-                                      selected={field.value}
-                                      onSelect={field.onChange}
-                                      disabled={(date) =>
-                                        date < new Date() || date < new Date("1900-01-01")
-                                      }
-                                      initialFocus
-                                    />
-                                  </PopoverContent>
-                                </Popover>
+                                <FormControl>
+                                  <DateInput
+                                    date={field.value}
+                                    onDateChange={field.onChange}
+                                    placeholder="Pick arrival date"
+                                    minDate={new Date()}
+                                  />
+                                </FormControl>
                                 <FormMessage />
                               </FormItem>
                             )}
@@ -434,9 +410,9 @@ const Apply = () => {
                                 </FormLabel>
                                 <FormControl>
                                   <Input 
-                                    placeholder="Enter passport number" 
-                                    className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                    placeholder="Passport number" 
                                     {...field} 
+                                    className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -444,8 +420,8 @@ const Apply = () => {
                             )}
                           />
 
-                          {/* Name Fields */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {/* Full Name */}
+                          <div className="grid md:grid-cols-2 gap-4">
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.firstName`}
@@ -456,16 +432,15 @@ const Apply = () => {
                                   </FormLabel>
                                   <FormControl>
                                     <Input 
-                                      placeholder="Enter first name" 
-                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                      placeholder="First name" 
                                       {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                                     />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.lastName`}
@@ -476,9 +451,9 @@ const Apply = () => {
                                   </FormLabel>
                                   <FormControl>
                                     <Input 
-                                      placeholder="Enter last name" 
-                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                      placeholder="Last name" 
                                       {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                                     />
                                   </FormControl>
                                   <FormMessage />
@@ -496,44 +471,22 @@ const Apply = () => {
                                 <FormLabel className="text-base md:text-lg font-bold text-slate-800">
                                   Date of Birth <span className="text-red-500">*</span>
                                 </FormLabel>
-                                <Popover>
-                                  <PopoverTrigger asChild>
-                                    <FormControl>
-                                      <Button
-                                        variant={"outline"}
-                                        className={cn(
-                                          "w-full h-12 border-2 border-gray-200 hover:border-primary focus:border-primary pl-3 text-left font-normal",
-                                          !field.value && "text-muted-foreground"
-                                        )}
-                                      >
-                                        {field.value ? (
-                                          format(field.value, "PPP")
-                                        ) : (
-                                          <span>Pick your birth date</span>
-                                        )}
-                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                      </Button>
-                                    </FormControl>
-                                  </PopoverTrigger>
-                                  <PopoverContent className="w-auto p-0" align="start">
-                                    <Calendar
-                                      mode="single"
-                                      selected={field.value}
-                                      onSelect={field.onChange}
-                                      disabled={(date) =>
-                                        date > new Date() || date < new Date("1900-01-01")
-                                      }
-                                      initialFocus
-                                    />
-                                  </PopoverContent>
-                                </Popover>
+                                <FormControl>
+                                  <DateInput
+                                    date={field.value}
+                                    onDateChange={field.onChange}
+                                    placeholder="Pick birth date"
+                                    maxDate={new Date()}
+                                    minDate={new Date("1900-01-01")}
+                                  />
+                                </FormControl>
                                 <FormMessage />
                               </FormItem>
                             )}
                           />
 
                           {/* Nationality and Country of Residence */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="grid md:grid-cols-2 gap-4">
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.nationality`}
@@ -542,13 +495,13 @@ const Apply = () => {
                                   <FormLabel className="text-base md:text-lg font-bold text-slate-800">
                                     Nationality <span className="text-red-500">*</span>
                                   </FormLabel>
-                                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                  <Select onValueChange={field.onChange} value={field.value}>
                                     <FormControl>
                                       <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
                                         <SelectValue placeholder="Select nationality" />
                                       </SelectTrigger>
                                     </FormControl>
-                                    <SelectContent>
+                                    <SelectContent className="max-h-64">
                                       {countries.map((country) => (
                                         <SelectItem key={country} value={country}>
                                           {country}
@@ -560,7 +513,6 @@ const Apply = () => {
                                 </FormItem>
                               )}
                             />
-
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.countryOfResidence`}
@@ -569,13 +521,13 @@ const Apply = () => {
                                   <FormLabel className="text-base md:text-lg font-bold text-slate-800">
                                     Country of Residence <span className="text-red-500">*</span>
                                   </FormLabel>
-                                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                  <Select onValueChange={field.onChange} value={field.value}>
                                     <FormControl>
                                       <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
-                                        <SelectValue placeholder="Select country of residence" />
+                                        <SelectValue placeholder="Select residence country" />
                                       </SelectTrigger>
                                     </FormControl>
-                                    <SelectContent>
+                                    <SelectContent className="max-h-64">
                                       {countries.map((country) => (
                                         <SelectItem key={country} value={country}>
                                           {country}
@@ -589,8 +541,8 @@ const Apply = () => {
                             />
                           </div>
 
-                          {/* Contact Information */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {/* Email */}
+                          <div className="grid md:grid-cols-2 gap-4">
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.email`}
@@ -601,17 +553,16 @@ const Apply = () => {
                                   </FormLabel>
                                   <FormControl>
                                     <Input 
+                                      placeholder="Email address" 
                                       type="email"
-                                      placeholder="Enter email address" 
-                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                                       {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                                     />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.confirmEmail`}
@@ -622,10 +573,10 @@ const Apply = () => {
                                   </FormLabel>
                                   <FormControl>
                                     <Input 
-                                      type="email"
                                       placeholder="Confirm email address" 
-                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                      type="email"
                                       {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                                     />
                                   </FormControl>
                                   <FormMessage />
@@ -634,8 +585,8 @@ const Apply = () => {
                             />
                           </div>
 
-                          {/* Phone Number */}
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                          {/* Phone */}
+                          <div className="grid md:grid-cols-3 gap-4">
                             <FormField
                               control={form.control}
                               name={`travelers.${index}.phoneCode`}
@@ -644,39 +595,47 @@ const Apply = () => {
                                   <FormLabel className="text-base md:text-lg font-bold text-slate-800">
                                     Phone Code <span className="text-red-500">*</span>
                                   </FormLabel>
+                                  <Select onValueChange={field.onChange} value={field.value}>
+                                    <FormControl>
+                                      <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
+                                        <SelectValue placeholder="Select country code" />
+                                      </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent className="max-h-64">
+                                      {phoneCodes.map((phone) => (
+                                        <SelectItem key={phone.code} value={phone.code}>
+                                          <div className="flex items-center gap-2">
+                                            <span>{phone.flag}</span>
+                                            <span>{phone.code}</span>
+                                            <span className="text-muted-foreground text-sm">{phone.country}</span>
+                                          </div>
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={form.control}
+                              name={`travelers.${index}.phone`}
+                              render={({ field }) => (
+                                <FormItem className="md:col-span-2 space-y-3">
+                                  <FormLabel className="text-base md:text-lg font-bold text-slate-800">
+                                    Phone Number <span className="text-red-500">*</span>
+                                  </FormLabel>
                                   <FormControl>
                                     <Input 
-                                      placeholder="+1" 
-                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                      placeholder="Phone number" 
                                       {...field} 
+                                      className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                                     />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-
-                            <div className="md:col-span-2">
-                              <FormField
-                                control={form.control}
-                                name={`travelers.${index}.phone`}
-                                render={({ field }) => (
-                                  <FormItem className="space-y-3">
-                                    <FormLabel className="text-base md:text-lg font-bold text-slate-800">
-                                      Phone Number <span className="text-red-500">*</span>
-                                    </FormLabel>
-                                    <FormControl>
-                                      <Input 
-                                        placeholder="Enter phone number" 
-                                        className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
-                                        {...field} 
-                                      />
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
-                            </div>
                           </div>
 
                           {/* Gender */}
@@ -691,16 +650,16 @@ const Apply = () => {
                                 <FormControl>
                                   <RadioGroup
                                     onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                    className="flex gap-6"
+                                    value={field.value}
+                                    className="flex space-x-6"
                                   >
                                     <div className="flex items-center space-x-2">
                                       <RadioGroupItem value="male" id={`male-${index}`} />
-                                      <Label htmlFor={`male-${index}`}>Male</Label>
+                                      <Label htmlFor={`male-${index}`} className="font-medium">Male</Label>
                                     </div>
                                     <div className="flex items-center space-x-2">
                                       <RadioGroupItem value="female" id={`female-${index}`} />
-                                      <Label htmlFor={`female-${index}`}>Female</Label>
+                                      <Label htmlFor={`female-${index}`} className="font-medium">Female</Label>
                                     </div>
                                   </RadioGroup>
                                 </FormControl>
@@ -713,25 +672,32 @@ const Apply = () => {
 
                       {/* Add Traveler Button */}
                       {fields.length < 4 && (
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={addTraveler}
-                          className="w-full py-3 border-dashed border-2 border-primary text-primary hover:bg-primary/5"
-                        >
-                          <Plus className="mr-2 h-4 w-4" />
-                          Add Another Traveler (up to 4 total)
-                        </Button>
+                        <div className="flex justify-center">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={addTraveler}
+                            className="flex items-center gap-2"
+                          >
+                            <Plus className="h-4 w-4" />
+                            Add Another Traveler
+                          </Button>
+                        </div>
                       )}
 
-                      {/* Navigation */}
-                      <div className="pt-6 border-t border-gray-200 flex justify-end">
+                      {/* Next Step Button */}
+                      <div className="flex justify-end">
                         <Button
                           type="button"
-                          onClick={() => setCurrentStep(2)}
-                          className="px-8 py-3"
+                          onClick={() => {
+                            const travelersValid = form.trigger("travelers");
+                            if (travelersValid) {
+                              setCurrentStep(2);
+                            }
+                          }}
+                          className="px-8"
                         >
-                          Next
+                          Next Step
                         </Button>
                       </div>
                     </div>
@@ -743,8 +709,11 @@ const Apply = () => {
                   <Form {...form}>
                     <div className="space-y-8">
                       <div>
-                        <h2 className="text-2xl font-bold text-slate-800 mb-4">Travel Information</h2>
-                        <p className="text-slate-600 mb-8">Please provide your travel details</p>
+                        <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
+                          <Plane className="h-6 w-6" />
+                          Travel Information
+                        </h2>
+                        <p className="text-slate-600 mb-8">Tell us about your travel plans to Thailand</p>
                       </div>
 
                       {/* Departure Country */}
@@ -754,15 +723,15 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="space-y-3">
                             <FormLabel className="text-base md:text-lg font-bold text-slate-800">
-                              Departure Country. Country/Territory where you Boarded <span className="text-red-500">*</span>
+                              Departure Country <span className="text-red-500">*</span>
                             </FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select onValueChange={field.onChange} value={field.value}>
                               <FormControl>
                                 <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
                                   <SelectValue placeholder="Select departure country" />
                                 </SelectTrigger>
                               </FormControl>
-                              <SelectContent>
+                              <SelectContent className="max-h-64">
                                 {countries.map((country) => (
                                   <SelectItem key={country} value={country}>
                                     {country}
@@ -782,9 +751,9 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="space-y-3">
                             <FormLabel className="text-base md:text-lg font-bold text-slate-800">
-                              Purpose <span className="text-red-500">*</span>
+                              Purpose of Visit <span className="text-red-500">*</span>
                             </FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select onValueChange={field.onChange} value={field.value}>
                               <FormControl>
                                 <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
                                   <SelectValue placeholder="Select purpose of visit" />
@@ -794,13 +763,10 @@ const Apply = () => {
                                 <SelectItem value="tourism">Tourism</SelectItem>
                                 <SelectItem value="business">Business</SelectItem>
                                 <SelectItem value="transit">Transit</SelectItem>
-                                <SelectItem value="medical">Medical</SelectItem>
+                                <SelectItem value="visiting-family">Visiting Family/Friends</SelectItem>
+                                <SelectItem value="medical">Medical Treatment</SelectItem>
                                 <SelectItem value="education">Education</SelectItem>
-                                <SelectItem value="meeting_friends_family">Meeting Friends/Family</SelectItem>
-                                <SelectItem value="sports">Sports</SelectItem>
-                                <SelectItem value="employment">Employment</SelectItem>
-                                <SelectItem value="investment">Investment</SelectItem>
-                                <SelectItem value="others">Others</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage />
@@ -820,8 +786,8 @@ const Apply = () => {
                             <FormControl>
                               <Input 
                                 placeholder="e.g., TG123" 
-                                className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                                 {...field} 
+                                className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                               />
                             </FormControl>
                             <FormMessage />
@@ -829,27 +795,29 @@ const Apply = () => {
                         )}
                       />
 
-                      {/* Accommodation Type */}
+                      {/* Accommodation */}
                       <FormField
                         control={form.control}
                         name="accommodationType"
                         render={({ field }) => (
                           <FormItem className="space-y-3">
                             <FormLabel className="text-base md:text-lg font-bold text-slate-800">
-                              Province of Hotel/Accommodation <span className="text-red-500">*</span>
+                              <MapPin className="inline h-5 w-5 mr-2" />
+                              Accommodation Type <span className="text-red-500">*</span>
                             </FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select onValueChange={field.onChange} value={field.value}>
                               <FormControl>
                                 <SelectTrigger className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary">
-                                  <SelectValue placeholder="Select province" />
+                                  <SelectValue placeholder="Select accommodation type" />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
-                                {provinces.map((province) => (
-                                  <SelectItem key={province} value={province}>
-                                    {province}
-                                  </SelectItem>
-                                ))}
+                                <SelectItem value="hotel">Hotel</SelectItem>
+                                <SelectItem value="hostel">Hostel</SelectItem>
+                                <SelectItem value="resort">Resort</SelectItem>
+                                <SelectItem value="airbnb">Airbnb/Vacation Rental</SelectItem>
+                                <SelectItem value="friends-family">Friends/Family</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage />
@@ -864,13 +832,13 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="space-y-3">
                             <FormLabel className="text-base md:text-lg font-bold text-slate-800">
-                              Hotel/Accommodation Name & Address (Optional)
+                              Accommodation Details (Optional)
                             </FormLabel>
                             <FormControl>
                               <Input 
-                                placeholder="Enter hotel name and address" 
-                                className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
+                                placeholder="Hotel name, address, or other details" 
                                 {...field} 
+                                className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
                               />
                             </FormControl>
                             <FormMessage />
@@ -879,20 +847,19 @@ const Apply = () => {
                       />
 
                       {/* Navigation Buttons */}
-                      <div className="pt-6 border-t border-gray-200 flex justify-between">
+                      <div className="flex justify-between">
                         <Button
                           type="button"
-                          onClick={() => setCurrentStep(1)}
                           variant="outline"
-                          className="px-8 py-3"
+                          onClick={() => setCurrentStep(1)}
                         >
-                          Back
+                          Previous Step
                         </Button>
                         <Button
-                          type="button"
+                          type="submit"
                           onClick={form.handleSubmit(onSubmit)}
                           disabled={isSubmitting}
-                          className="px-8 py-3"
+                          className="px-8"
                         >
                           {isSubmitting ? "Submitting..." : "Submit Application"}
                         </Button>
@@ -904,21 +871,21 @@ const Apply = () => {
                 {/* Step 3: Success */}
                 {currentStep === 3 && (
                   <div className="text-center space-y-6">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                      <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                      <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                       </svg>
                     </div>
-                    <h2 className="text-3xl font-bold text-slate-800">Application Submitted Successfully!</h2>
-                    <p className="text-lg text-slate-600 max-w-md mx-auto">
-                      Thank you for your application. We'll review it and contact you with payment instructions and next steps.
+                    <h2 className="text-3xl font-bold text-slate-800">Application Submitted!</h2>
+                    <p className="text-slate-600 max-w-md mx-auto">
+                      Your visa application has been successfully submitted. We'll process your application and contact you regarding payment through secure channels.
                     </p>
-                    <div className="flex gap-4 justify-center">
-                      <Button onClick={() => navigate('/')} variant="outline">
-                        Go Home
-                      </Button>
-                      <Button onClick={() => window.location.reload()}>
-                        Apply Again
+                    <div className="space-y-4">
+                      <Button
+                        onClick={() => navigate('/')}
+                        className="px-8"
+                      >
+                        Return to Home
                       </Button>
                     </div>
                   </div>
