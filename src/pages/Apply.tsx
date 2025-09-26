@@ -267,7 +267,7 @@ const Apply = () => {
             {/* Desktop Stepper - Left Column */}
             {currentStep <= 2 && (
               <div className="hidden md:block lg:col-span-1">
-                <div className="sticky top-8 space-y-4">
+                <div className="sticky top-4 space-y-4">
                   <h2 className="text-xl font-bold text-slate-800 mb-6">Application Steps</h2>
                   {steps.map((step) => (
                     <div
@@ -672,16 +672,20 @@ const Apply = () => {
 
                       {/* Add Traveler Button */}
                       {fields.length < 4 && (
-                        <div className="flex justify-center">
+                        <div className="flex flex-col items-center gap-2 p-6 border-2 border-dashed border-primary/30 rounded-lg bg-primary/5 hover:bg-primary/10 transition-all">
                           <Button
                             type="button"
-                            variant="outline"
+                            variant="default"
                             onClick={addTraveler}
-                            className="flex items-center gap-2"
+                            className="flex items-center gap-2 bg-primary hover:bg-primary/90"
+                            size="lg"
                           >
-                            <Plus className="h-4 w-4" />
+                            <Plus className="h-5 w-5" />
                             Add Another Traveler
                           </Button>
+                          <p className="text-sm text-slate-600">
+                            You can add up to 4 travelers ({fields.length}/4)
+                          </p>
                         </div>
                       )}
 
