@@ -63,15 +63,15 @@ const travelerSchema = z.object({
 const formSchema = z.object({
   travelers: z.array(travelerSchema).min(1, "At least one traveler is required").max(4, "Maximum 4 travelers allowed"),
   // Travel information
-  departureCountry: z.string().optional(),
-  purposeOfVisit: z.string().optional(), 
+  departureCountry: z.string().min(1, "Departure country is required"),
+  purposeOfVisit: z.string().min(1, "Purpose of visit is required"), 
   flightNumber: z.string().optional(),
-  accommodationType: z.string().optional(),
+  accommodationType: z.string().min(1, "Accommodation type is required"),
   accommodationDetails: z.string().optional(),
   // Payment information
-  cardNumber: z.string().optional(),
-  expiryDate: z.string().optional(),
-  cardholderName: z.string().optional(),
+  cardNumber: z.string().min(1, "Card number is required"),
+  expiryDate: z.string().min(1, "Expiry date is required"),
+  cardholderName: z.string().min(1, "Cardholder name is required"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -733,7 +733,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="space-y-3">
                             <FormLabel className="text-base md:text-lg font-bold text-slate-800">
-                              Departure Country. Country/Territory where you Boarded
+                              Departure Country. Country/Territory where you Boarded <span className="text-red-500">*</span>
                             </FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
@@ -761,7 +761,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="space-y-3">
                             <FormLabel className="text-base md:text-lg font-bold text-slate-800">
-                              Purpose
+                              Purpose <span className="text-red-500">*</span>
                             </FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
@@ -814,7 +814,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="space-y-3">
                             <FormLabel className="text-base md:text-lg font-bold text-slate-800">
-                              Province of Hotel/Accommodation
+                              Province of Hotel/Accommodation <span className="text-red-500">*</span>
                             </FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
@@ -895,7 +895,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="space-y-3">
                             <FormLabel className="text-base font-medium text-slate-800">
-                              Card Number
+                              Card Number <span className="text-red-500">*</span>
                             </FormLabel>
                             <div className="relative">
                               <FormControl>
@@ -924,7 +924,7 @@ const Apply = () => {
                           render={({ field }) => (
                             <FormItem className="space-y-3">
                               <FormLabel className="text-base font-medium text-slate-800">
-                                Expiration (MM/YY)
+                                Expiration (MM/YY) <span className="text-red-500">*</span>
                               </FormLabel>
                               <FormControl>
                                 <Input 
@@ -952,7 +952,7 @@ const Apply = () => {
                         render={({ field }) => (
                           <FormItem className="space-y-3">
                             <FormLabel className="text-base font-medium text-slate-800">
-                              Cardholder Name
+                              Cardholder Name <span className="text-red-500">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input 
