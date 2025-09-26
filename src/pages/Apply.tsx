@@ -249,7 +249,7 @@ const Apply = () => {
   const steps = [
     { number: 1, title: "Prerequisite", active: currentStep === 1 },
     { number: 2, title: "Travel Information", active: currentStep === 2 },
-    { number: 3, title: "Processing Options", active: currentStep === 3 },
+    { number: 3, title: "Payment", active: currentStep === 3 },
   ];
 
   return (
@@ -259,58 +259,102 @@ const Apply = () => {
       <main className="py-8 font-quicksand">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Mobile Title Only */}
-          {currentStep <= 3 && (
-            <div className="md:hidden mb-6">
-              <h1 className="text-2xl font-bold text-slate-800">
-                {currentStep === 1 && "Prerequisite"}
-                {currentStep === 2 && "Travel Information"}
-                {currentStep === 3 && "Processing Options"}
-              </h1>
-            </div>
-          )}
+          <div className="lg:hidden mb-6">
+            <h1 className="text-2xl font-bold text-slate-800">
+              {currentStep === 1 && "Prerequisite"}
+              {currentStep === 2 && "Travel Information"}
+              {currentStep === 3 && "Payment"}
+            </h1>
+          </div>
 
           <div className="grid lg:grid-cols-5 gap-6">
-            {/* Desktop Stepper - Left Column */}
+            {/* Desktop Stepper - Vertical Left Column */}
             {currentStep <= 3 && (
-              <div className="hidden md:block lg:col-span-1">
-                <div className="sticky top-0 space-y-4">
-                  <h2 className="text-xl font-bold text-slate-800 mb-6">Application Steps</h2>
-                  {steps.map((step) => (
-                    <div
-                      key={step.number}
-                      className={cn(
-                        "flex items-center gap-4 p-4 rounded-lg border-2 transition-all",
-                        step.active
-                          ? "border-primary bg-primary/5"
-                          : currentStep > step.number
-                          ? "border-green-200 bg-green-50"
-                          : "border-gray-200 bg-gray-50"
-                      )}
-                    >
-                      <div
-                        className={cn(
-                          "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
-                          step.active
-                            ? "bg-primary text-white"
-                            : currentStep > step.number
-                            ? "bg-green-500 text-white"
-                            : "bg-gray-300 text-gray-600"
+              <div className="hidden lg:block lg:col-span-1">
+                <div className="sticky top-0 space-y-6">
+                  <h2 className="text-2xl font-bold text-slate-800 mb-8">Application Steps</h2>
+                  <div className="relative">
+                    {steps.map((step, index) => (
+                      <div key={step.number} className="relative flex items-center mb-8 last:mb-0">
+                        {/* Connecting Line */}
+                        {index < steps.length - 1 && (
+                          <div className="absolute left-6 top-12 w-0.5 h-16 bg-gray-200"></div>
                         )}
-                      >
-                        {currentStep > step.number ? "✓" : step.number}
+                        
+                        {/* Step Circle */}
+                        <div
+                          className={cn(
+                            "w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold z-10 mr-4",
+                            step.active
+                              ? "bg-primary text-white"
+                              : currentStep > step.number
+                              ? "bg-green-500 text-white"
+                              : "bg-gray-200 text-gray-600"
+                          )}
+                        >
+                          {currentStep > step.number ? "✓" : step.number}
+                        </div>
+                        
+                        {/* Step Title */}
+                        <span
+                          className={cn(
+                            "text-lg font-medium",
+                            step.active
+                              ? "text-primary"
+                              : currentStep > step.number
+                              ? "text-green-700"
+                              : "text-gray-600"
+                          )}
+                        >
+                          {step.title}
+                        </span>
                       </div>
-                      <span
-                        className={cn(
-                          "font-medium",
-                          step.active
-                            ? "text-primary"
-                            : currentStep > step.number
-                            ? "text-green-700"
-                            : "text-gray-600"
-                        )}
-                      >
-                        {step.title}
-                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Tablet Horizontal Stepper */}
+            {currentStep <= 3 && (
+              <div className="hidden md:block lg:hidden col-span-full mb-6">
+                <div className="flex justify-between items-center bg-white rounded-lg shadow-sm p-6">
+                  {steps.map((step, index) => (
+                    <div key={step.number} className="flex items-center">
+                      <div className="flex items-center">
+                        <div
+                          className={cn(
+                            "w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold",
+                            step.active
+                              ? "bg-primary text-white"
+                              : currentStep > step.number
+                              ? "bg-green-500 text-white"
+                              : "bg-gray-200 text-gray-600"
+                          )}
+                        >
+                          {currentStep > step.number ? "✓" : step.number}
+                        </div>
+                        <span
+                          className={cn(
+                            "ml-3 font-medium",
+                            step.active
+                              ? "text-primary"
+                              : currentStep > step.number
+                              ? "text-green-700"
+                              : "text-gray-600"
+                          )}
+                        >
+                          {step.title}
+                        </span>
+                      </div>
+                      {index < steps.length - 1 && (
+                        <div
+                          className={cn(
+                            "w-16 h-0.5 mx-4",
+                            currentStep > step.number ? "bg-green-500" : "bg-gray-300"
+                          )}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
@@ -321,38 +365,6 @@ const Apply = () => {
             <div className={cn(
               currentStep <= 3 ? "lg:col-span-4" : "lg:col-span-5"
             )}>
-              {/* Mobile Stepper */}
-              {currentStep <= 3 && (
-                <div className="md:hidden mb-6">
-                  <div className="flex justify-between items-center">
-                    {steps.map((step, index) => (
-                      <div key={step.number} className="flex items-center">
-                        <div
-                          className={cn(
-                            "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
-                            step.active
-                              ? "bg-primary text-white"
-                              : currentStep > step.number
-                              ? "bg-green-500 text-white"
-                              : "bg-gray-300 text-gray-600"
-                          )}
-                        >
-                          {currentStep > step.number ? "✓" : step.number}
-                        </div>
-                        {index < steps.length - 1 && (
-                          <div
-                            className={cn(
-                              "w-12 h-0.5 mx-2",
-                              currentStep > step.number ? "bg-green-500" : "bg-gray-300"
-                            )}
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               <div className="bg-white rounded-lg shadow-soft p-6 md:p-8">
                 {/* Step 1: Traveler Details */}
                 {currentStep === 1 && (
@@ -893,7 +905,7 @@ const Apply = () => {
                           </p>
                         </div>
                         
-                        <h2 className="text-2xl font-bold text-slate-800 mb-4">Processing Options</h2>
+                        <h2 className="text-2xl font-bold text-slate-800 mb-4">Payment</h2>
                         <p className="text-slate-600 mb-8">Choose your preferred processing speed</p>
                       </div>
 
