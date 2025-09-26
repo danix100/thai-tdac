@@ -978,7 +978,7 @@ const Apply = () => {
                         </Button>
                         <Button
                           type="button"
-                          onClick={() => setCurrentStep(3)}
+                          onClick={() => navigate("/confirm-payment")}
                           className="px-8 bg-red-600 hover:bg-red-700 text-white"
                         >
                           Continue to Payment

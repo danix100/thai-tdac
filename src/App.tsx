@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import Apply from "./pages/Apply";
+import ConfirmPayment from "./pages/ConfirmPayment";
+import PaymentSuccess from "./pages/PaymentSuccess";
 import Contact from "./pages/Contact";
 import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
@@ -24,6 +26,8 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/apply" element={<Apply />} />
+          <Route path="/confirm-payment" element={<ConfirmPayment />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/legal" element={<Legal />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
