@@ -271,9 +271,9 @@ const Apply = () => {
             {/* Desktop Stepper - Vertical Left Column */}
             {currentStep <= 3 && (
               <div className="hidden lg:block lg:col-span-1">
-                <div className="sticky top-0 h-screen space-y-6">
-                  <h2 className="text-2xl font-bold text-slate-800 mb-8">Application Steps</h2>
-                  <div className="relative">
+  <div className="fixed top-0 left-0 h-screen w-64 space-y-6 bg-white shadow-md">
+    <h2 className="text-2xl font-bold text-slate-800 mb-8">Application Steps</h2>
+    <div className="relative">
                     {steps.map((step, index) => (
                       <div key={step.number} className="relative flex items-center mb-8 last:mb-0">
                         {/* Connecting Line */}
