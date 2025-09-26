@@ -951,7 +951,7 @@ const Apply = () => {
                                     <div className="flex justify-between items-center">
                                       <div>
                                         <div className="font-semibold text-slate-800">Ultra Premium</div>
-                                        <div className="inline-block bg-yellow-200 text-yellow-800 text-sm px-2 py-1 rounded-full">
+                                        <div className="inline-block bg-yellow-200 text-yellow-800 text-sm px-2 py-1 rounded-full mt-2">
                                           Processed in less than one hour
                                         </div>
                                       </div>
