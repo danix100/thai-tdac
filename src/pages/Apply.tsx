@@ -284,7 +284,7 @@ const Apply = () => {
                         {/* Step Circle */}
                         <div
                           className={cn(
-                            "w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold z-10 mr-4",
+                            "w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold z-10 mr-4 flex-shrink-0",
                             step.active
                               ? "bg-primary text-white"
                               : currentStep > step.number
