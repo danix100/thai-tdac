@@ -68,22 +68,7 @@ const HowToApply = () => {
           })}
         </div>
 
-        {/* Trustpilot Rating */}
-        <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-4 bg-white rounded-lg px-10 py-6 shadow-soft text-lg sm:text-xl lg:text-2xl">
-            <span className="flex items-center gap-3 font-semibold text-[#00B67A]">
-              Excellent
-              <img
-                src="https://images-static.trustpilot.com/api/stars/4/star.svg"
-                alt="Trustpilot rating"
-                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-28 lg:h-28 align-middle"
-              />
-            </span>
-            <span className="text-black font-medium">
-              28,739 reviews on{" "}
-              <span className="text-[#00B67A]">★ Trustpilot</span>
-            </span>
-          </div>
+     
         </div>
       </div>
     </section>
