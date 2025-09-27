@@ -28,45 +28,45 @@ const Legal = () => {
               <div className="space-y-6 text-slate-700 leading-relaxed">
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">1. Acceptance of Terms</h3>
-                  <p>Welcome to <strong>thaidigitalarrival.com</strong> ("Site"). These Terms and Conditions of Use ("T&C") outline the rules and regulations for using our Site. By accessing or using our Site, you agree to these T&C. If you do not agree, please refrain from using the Site.</p>
+                  <p>Welcome to <strong>thaidigitalarrival.com</strong> ("Site"). These Terms of Use (“Agreement”) explain the rules for accessing and using our Site. By using the Site, you confirm your acceptance of these terms. If you do not agree, please stop using the Site.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">2. Usage Guidelines</h3>
-                  <p className="mb-2"><strong>2.1.</strong> The information on the Site is for general informational purposes only and should not be considered as legal, financial, or professional advice.</p>
-                  <p><strong>2.2.</strong> You must be of legal age in your jurisdiction to use the Site.</p>
+                  <p className="mb-2"><strong>2.1.</strong> The content on this Site is provided for general information only and should not be taken as professional, legal, or financial advice.</p>
+                  <p><strong>2.2.</strong> You must meet the legal age requirements of your country or region to access or use this Site.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">3. Intellectual Property Rights</h3>
-                  <p className="mb-2"><strong>3.1.</strong> All materials on the Site, including text, graphics, images, videos, logos, and trademarks, are protected by copyright and other intellectual property laws.</p>
-                  <p><strong>3.2.</strong> You may not copy, modify, distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any information, software, products, or services obtained from the Site without prior written consent from thaidigitalarrival.com.</p>
+                  <p className="mb-2"><strong>3.1.</strong> All material on the Site, including images, text, graphics, designs, videos, trademarks, and logos, is legally protected by copyright and intellectual property laws.</p>
+                  <p><strong>3.2.</strong> You may not copy, share, adapt, or resell any material from this Site without prior written permission from thaidigitalarrival.com.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">4. Privacy and Data Security</h3>
-                  <p>We value your privacy. Please review our Privacy Policy to understand how we handle your personal information.</p>
+                  <p>We respect your privacy. Please read our Privacy Policy to understand how we handle and protect your personal data.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">5. External Links</h3>
-                  <p>Our Site may contain links to external websites. We do not control the content or privacy practices of these sites and are not responsible for them.</p>
+                  <p>Our Site may include links to third-party websites. We are not responsible for their content, policies, or practices.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">6. Limitation of Liability</h3>
-                  <p className="mb-2"><strong>6.1.</strong> Your use of the Site is at your own risk. We do not guarantee the accuracy, completeness, or usefulness of the information provided on the Site.</p>
-                  <p><strong>6.2.</strong> We are not liable for any damages resulting from your use of the Site, including direct, indirect, incidental, punitive, or consequential damages.</p>
+                  <p className="mb-2"><strong>6.1.</strong> You use this Site at your own risk. We do not guarantee that the information provided is always accurate, complete, or up to date.</p>
+                  <p><strong>6.2.</strong> We are not responsible for any damages that result from your use of this Site, including direct, indirect, or incidental losses.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">7. Modifications to Terms</h3>
-                  <p><strong>7.1.</strong> We may revise these T&C from time to time. Changes will be posted on this page and take effect immediately. We encourage you to review these T&C regularly.</p>
+                  <p><strong>7.1.</strong> These Terms may be updated from time to time. Any changes will be posted here and will take effect immediately. We encourage you to review them regularly.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">8. Contact Information</h3>
-                  <p><strong>8.1.</strong> For questions or concerns about these T&C, please contact us via the web form on thaidigitalarrival.com.</p>
+                  <p><strong>8.1.</strong> For questions about these Terms, please reach us through the contact form on thaidigitalarrival.com.</p>
                 </div>
               </div>
             </section>
@@ -80,60 +80,60 @@ const Legal = () => {
               <div className="space-y-6 text-slate-700 leading-relaxed">
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">1. General Information</h3>
-                  <p>This Privacy Policy describes how <strong>thaidigitalarrival.com</strong> ("we", "our", "us") collects, uses, and shares personal information from users ("you") of thaidigitalarrival.com (the "Service"). By using the Service, you agree to this Policy.</p>
+                  <p>This Privacy Policy explains how <strong>thaidigitalarrival.com</strong> ("we", "our", "us") collects, uses, and shares personal data from users ("you") of thaidigitalarrival.com (the "Service"). By using the Service, you agree to the practices described here.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">2. Information We Collect</h3>
-                  <p className="mb-4">We may collect personal information you provide voluntarily. This may include:</p>
+                  <p className="mb-4">We may collect information you provide directly. This may include:</p>
                   <ul className="list-disc pl-6 space-y-2">
-                    <li>Contact info: name, email, phone</li>
-                    <li>Account details: username, password</li>
-                    <li>Payment info: card or billing data</li>
+                    <li>Contact details: name, email address, phone number</li>
+                    <li>Account details: username and password</li>
+                    <li>Billing information: payment method and related data</li>
                     <li>Demographics: age, gender, location</li>
-                    <li>Usage data: browsing history and activity on the site</li>
+                    <li>Usage information: browsing activity on our Site</li>
                   </ul>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">3. Use of Information</h3>
                   <ul className="list-disc pl-6 space-y-2">
-                    <li>Provide and maintain the Service</li>
-                    <li>Personalize and enhance user experience</li>
-                    <li>Process transactions and send related info</li>
-                    <li>Send promotional communications</li>
-                    <li>Analyze usage and improve products/services</li>
+                    <li>To operate and maintain the Service</li>
+                    <li>To personalize your experience on the Site</li>
+                    <li>To process payments and send related updates</li>
+                    <li>To send promotional or marketing messages</li>
+                    <li>To analyze activity and improve services</li>
                   </ul>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">4. Sharing of Information</h3>
                   <ul className="list-disc pl-6 space-y-2">
-                    <li>With third-party service providers supporting the Service</li>
-                    <li>To comply with legal obligations</li>
-                    <li>For transaction processing</li>
-                    <li>During mergers, acquisitions, or sales of assets</li>
+                    <li>With trusted third-party service providers</li>
+                    <li>As required by law or regulation</li>
+                    <li>To process transactions</li>
+                    <li>During business transfers such as mergers or sales</li>
                   </ul>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">5. Cookies & Similar Technologies</h3>
-                  <p>We use cookies to improve your experience. You can disable them in your browser, but some features may not work.</p>
+                  <p>We use cookies to improve your browsing experience. You may disable them in your browser, though this may affect functionality.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">6. Security</h3>
-                  <p>We use commercially reasonable measures to protect your personal info, but cannot guarantee absolute security over the internet.</p>
+                  <p>We take reasonable measures to protect your information, but no system is completely secure when transmitting data online.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">7. Your Rights</h3>
-                  <p>You may access, correct, delete, or restrict processing of your personal information by contacting us through the web form.</p>
+                  <p>You may request access, updates, or deletion of your personal data by contacting us via the web form.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">8. Policy Updates</h3>
-                  <p>We may update this Policy occasionally. Updates will be posted here. Contact us via web form for questions.</p>
+                  <p>This Privacy Policy may change from time to time. Updates will be posted here. Please contact us if you have any questions.</p>
                 </div>
               </div>
             </section>
@@ -147,47 +147,47 @@ const Legal = () => {
               <div className="space-y-6 text-slate-700 leading-relaxed">
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">1. Use of Cookies</h3>
-                  <p>At <strong>thaidigitalarrival.com</strong>, we use cookies to enhance your experience. By using our site, you consent to cookies.</p>
+                  <p>At <strong>thaidigitalarrival.com</strong>, we use cookies to make your browsing experience smoother and more personalized. By using our Site, you agree to our use of cookies.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">2. What are Cookies?</h3>
-                  <p>Cookies are small files stored on your device to recognize it and collect information about interactions with our content.</p>
+                  <p>Cookies are small text files stored on your device. They help us recognize your browser and track how you interact with our Site.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">3. Types of Cookies We Use</h3>
                   <ul className="list-disc pl-6 space-y-2">
-                    <li><strong>Essential:</strong> Required for basic functionality.</li>
-                    <li><strong>Performance:</strong> Analyze site usage and performance.</li>
-                    <li><strong>Functionality:</strong> Remember user preferences.</li>
-                    <li><strong>Advertising:</strong> Third-party cookies for relevant ads.</li>
+                    <li><strong>Essential:</strong> Required for the Site to function properly.</li>
+                    <li><strong>Performance:</strong> Help us measure site usage and improve performance.</li>
+                    <li><strong>Functionality:</strong> Store your preferences and settings.</li>
+                    <li><strong>Advertising:</strong> Used by partners to provide relevant ads.</li>
                   </ul>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">4. Managing Cookies</h3>
-                  <p>Control cookie preferences via your browser. Disabling cookies may affect website functionality.</p>
+                  <p>You can control or disable cookies in your browser settings. Some features may not work if cookies are disabled.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">5. Third-Party Links</h3>
-                  <p>We are not responsible for external sites linked from our platform. Review their privacy policies separately.</p>
+                  <p>We are not responsible for how external websites use cookies. Please check their policies separately.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">6. Policy Updates</h3>
-                  <p>We may modify this Cookie Policy at any time. Updates take effect once posted.</p>
+                  <p>We may update this Cookie Policy at any time. Changes become effective once published on this page.</p>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 mb-3">7. Contact</h3>
-                  <p>For questions about our Cookie Policy, contact us via web form.</p>
+                  <p>If you have questions about our Cookie Policy, please reach out through our contact form.</p>
                 </div>
 
                 <div className="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
                   <p className="text-green-800 font-medium text-center">
-                    Your personal information is securely encrypted using SSL.
+                    Your personal data is encrypted and protected with SSL security.
                   </p>
                   <div className="text-center mt-2">
                     <span className="inline-block px-3 py-1 bg-green-600 text-white text-sm font-bold rounded">
