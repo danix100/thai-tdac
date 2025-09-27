@@ -67,9 +67,6 @@ const HowToApply = () => {
             );
           })}
         </div>
-
-     
-        </div>
       </div>
     </section>
   );
