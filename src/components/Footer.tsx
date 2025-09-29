@@ -56,7 +56,9 @@ const Footer = () => {
             © 2025 thaidigitalarrival.com All rights reserved.
           </p>
           <p className="text-primary-foreground/60 text-xs">
-            Legal Disclaimer: thaidigitalarrival.com is not affiliated with the Government or its sponsors.
+           Sunset Commerce Limited is a third-party service provider and is not affiliated with the Royal Thai Government or Thai Immigration Bureau. The official Thailand Digital Arrival Card (TDAC) can be submitted directly at no cost via the official government portal.
+Our service provides value-added support, including guidance, error-checking, and customer assistance. A service fee is charged for the convenience and assistance we provide.
+
           </p>
         </div>
       </div>
