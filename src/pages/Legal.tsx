@@ -19,54 +19,132 @@ const Legal = () => {
               <p className="text-lg text-slate-600">Terms of Use, Privacy Policy, and Cookie Policy</p>
             </div>
 
-            {/* Terms of Use Section */}
+                       {/* Terms of Use Section */}
             <section id="terms" className="mb-16">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8 pb-4 border-b border-gray-200">
                 Terms of Use
               </h2>
-              
               <div className="space-y-6 text-slate-700 leading-relaxed">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">1. Acceptance of Terms</h3>
-                  <p>Welcome to <strong>thaidigitalarrival.com</strong> ("Site"). These Terms of Use (“Agreement”) explain the rules for accessing and using our Site. By using the Site, you confirm your acceptance of these terms. If you do not agree, please stop using the Site.</p>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    1. Acceptance of Terms
+                  </h3>
+                  <p>
+                    Welcome to <strong>thaidigitalarrival.com</strong> ("Site").
+                    These Terms of Use (“Agreement”) explain the rules for
+                    accessing and using our Site. By using the Site, you confirm
+                    your acceptance of these terms. If you do not agree, please
+                    stop using the Site.
+                  </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">2. Usage Guidelines</h3>
-                  <p className="mb-2"><strong>2.1.</strong> The content on this Site is provided for general information only and should not be taken as professional, legal, or financial advice.</p>
-                  <p><strong>2.2.</strong> You must meet the legal age requirements of your country or region to access or use this Site.</p>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    2. Usage Guidelines
+                  </h3>
+                  <p className="mb-2">
+                    <strong>2.1.</strong> The content on this Site is provided
+                    for general information only and should not be taken as
+                    professional, legal, or financial advice.
+                  </p>
+                  <p>
+                    <strong>2.2.</strong> You must meet the legal age
+                    requirements of your country or region to access or use this
+                    Site.
+                  </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">3. Intellectual Property Rights</h3>
-                  <p className="mb-2"><strong>3.1.</strong> All material on the Site, including images, text, graphics, designs, videos, trademarks, and logos, is legally protected by copyright and intellectual property laws.</p>
-                  <p><strong>3.2.</strong> You may not copy, share, adapt, or resell any material from this Site without prior written permission from thaidigitalarrival.com.</p>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    3. Intellectual Property Rights
+                  </h3>
+                  <p className="mb-2">
+                    <strong>3.1.</strong> All material on the Site, including
+                    images, text, graphics, designs, videos, trademarks, and
+                    logos, is legally protected by copyright and intellectual
+                    property laws.
+                  </p>
+                  <p>
+                    <strong>3.2.</strong> You may not copy, share, adapt, or
+                    resell any material from this Site without prior written
+                    permission from thaidigitalarrival.com.
+                  </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">4. Privacy and Data Security</h3>
-                  <p>We respect your privacy. Please read our Privacy Policy to understand how we handle and protect your personal data.</p>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    4. Privacy and Data Security
+                  </h3>
+                  <p>
+                    We respect your privacy. Please read our Privacy Policy to
+                    understand how we handle and protect your personal data.
+                  </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">5. External Links</h3>
-                  <p>Our Site may include links to third-party websites. We are not responsible for their content, policies, or practices.</p>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    5. External Links
+                  </h3>
+                  <p>
+                    Our Site may include links to third-party websites. We are
+                    not responsible for their content, policies, or practices.
+                  </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">6. Limitation of Liability</h3>
-                  <p className="mb-2"><strong>6.1.</strong> You use this Site at your own risk. We do not guarantee that the information provided is always accurate, complete, or up to date.</p>
-                  <p><strong>6.2.</strong> We are not responsible for any damages that result from your use of this Site, including direct, indirect, or incidental losses.</p>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    6. Limitation of Liability
+                  </h3>
+                  <p className="mb-2">
+                    <strong>6.1.</strong> You use this Site at your own risk. We
+                    do not guarantee that the information provided is always
+                    accurate, complete, or up to date.
+                  </p>
+                  <p>
+                    <strong>6.2.</strong> We are not responsible for any damages
+                    that result from your use of this Site, including direct,
+                    indirect, or incidental losses.
+                  </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">7. Modifications to Terms</h3>
-                  <p><strong>7.1.</strong> These Terms may be updated from time to time. Any changes will be posted here and will take effect immediately. We encourage you to review them regularly.</p>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    7. Modifications to Terms
+                  </h3>
+                  <p>
+                    <strong>7.1.</strong> These Terms may be updated from time
+                    to time. Any changes will be posted here and will take
+                    effect immediately. We encourage you to review them
+                    regularly.
+                  </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">8. Contact Information</h3>
-                  <p><strong>8.1.</strong> For questions about these Terms, please reach us through the contact form on thaidigitalarrival.com.</p>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    8. Contact Information
+                  </h3>
+                  <p>
+                    <strong>8.1.</strong> For questions about these Terms,
+                    please reach us through the contact form on
+                    thaidigitalarrival.com.
+                  </p>
+                </div>
+
+                {/* New Disclaimer */}
+                <div>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    9. Disclaimer
+                  </h3>
+                  <p>
+                    Sunset Commerce Limited is a third-party service provider
+                    and is not affiliated with the Royal Thai Government or Thai
+                    Immigration Bureau. The official Thailand Digital Arrival
+                    Card (TDAC) can be submitted directly at no cost via the
+                    official government portal. Our service provides value-added
+                    support, including guidance, error-checking, and customer
+                    assistance. A service fee is charged for the convenience and
+                    assistance we provide.
+                  </p>
                 </div>
               </div>
             </section>
