@@ -1,11 +1,12 @@
+import adeccoLogo from "@/assets/adecco-logo-white.png";
+
 const Footer = () => {
   return <footer className="bg-primary py-12 font-quicksand">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src="https://www.svgrepo.com/show/405628/flag-for-flag-thailand.svg" alt="Thailand Flag" className="w-10 h-6 object-contain" />
-              <span className="text-xl font-bold text-primary-foreground">Thailand TDAC</span>
+              <img src={adeccoLogo} alt="Adecco Logo" className="w-32 h-12 object-contain" />
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
               Your personal information is securely encrypted using SSL.
