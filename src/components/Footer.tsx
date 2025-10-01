@@ -5,7 +5,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <div className="mb-4">
+            <div className="mb-4 -ml-2">
               <img src={adeccoLogo} alt="Adecco Logo" className="w-32 h-12 object-contain" />
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
