@@ -1,52 +1,116 @@
-import adeccoLogo from "@/assets/adecco-logo-white.png";
-
 const Footer = () => {
-  return <footer className="bg-primary py-12 font-quicksand">
+  return (
+    <footer className="bg-primary py-12 font-quicksand">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <div className="mb-4">
-              <img src={adeccoLogo} alt="Adecco Logo" className="w-32 h-12 object-contain" />
+            {/* Logo flush left */}
+            <div className="flex items-center gap-3 mb-4 justify-start">
+              <img
+                src="https://www.svgrepo.com/show/405628/flag-for-flag-thailand.svg"
+                alt="Thailand Flag"
+                className="w-10 h-6 object-contain"
+              />
+              <span className="text-xl font-bold text-primary-foreground">
+                Thailand TDAC
+              </span>
             </div>
+
             <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
               Your personal information is securely encrypted using SSL.
             </p>
             <div className="flex gap-3">
               <div className="w-8 h-6 bg-white/20 rounded flex items-center justify-center p-1">
-                <img src="https://www.svgrepo.com/show/510183/secure.svg" alt="Secure" className="w-full h-full filter brightness-0 invert" />
+                <img
+                  src="https://www.svgrepo.com/show/510183/secure.svg"
+                  alt="Secure"
+                  className="w-full h-full filter brightness-0 invert"
+                />
               </div>
               <div className="w-8 h-6 bg-white/20 rounded flex items-center justify-center p-1">
-                <img src="https://www.svgrepo.com/show/383769/security-protection-ssl-certificate.svg" alt="SSL Certificate" className="w-full h-full filter brightness-0 invert" />
+                <img
+                  src="https://www.svgrepo.com/show/383769/security-protection-ssl-certificate.svg"
+                  alt="SSL Certificate"
+                  className="w-full h-full filter brightness-0 invert"
+                />
               </div>
             </div>
           </div>
-          
+
           <div>
-            <h3 className="font-semibold text-primary-foreground mb-4">Resources</h3>
+            <h3 className="font-semibold text-primary-foreground mb-4">
+              Resources
+            </h3>
             <ul className="space-y-2 text-primary-foreground/80 text-sm">
-              <li><a href="/#faq" className="hover:text-primary-foreground transition-colors">FAQs</a></li>
-              <li><a href="/contact" className="hover:text-primary-foreground transition-colors">Contact us</a></li>
+              <li>
+                <a
+                  href="/#faq"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  FAQs
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/contact"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  Contact us
+                </a>
+              </li>
             </ul>
           </div>
-          
+
           <div>
-            <h3 className="font-semibold text-primary-foreground mb-4">Legal</h3>
+            <h3 className="font-semibold text-primary-foreground mb-4">
+              Legal
+            </h3>
             <ul className="space-y-2 text-primary-foreground/80 text-sm">
-              <li><a href="/legal#terms" className="hover:text-primary-foreground transition-colors">Terms of Use</a></li>
-              <li><a href="/legal#privacy" className="hover:text-primary-foreground transition-colors">Privacy Policy</a></li>
-              <li><a href="/legal#cookies" className="hover:text-primary-foreground transition-colors">Cookie Policy</a></li>
+              <li>
+                <a
+                  href="/legal#terms"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  Terms of Use
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/legal#privacy"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/legal#cookies"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  Cookie Policy
+                </a>
+              </li>
             </ul>
           </div>
         </div>
-        
+
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
           <p className="text-primary-foreground/80 text-sm mb-2">
             © 2025 thaidigitalarrival.com All rights reserved.
           </p>
-          <p className="text-primary-foreground/60 text-xs">Adecco New Petchburi Co.,Ltd. is a third-party service provider and are not affiliated with the Royal Thai Government or the Thai Immigration Bureau. Our role is to provide consultation, preparation, and application support services for Long-Term Resident (LTR) Visa applicants. We are a certified/authorized visa preparer, recognized to assist applicants with the visa process, but we do not represent the government.
-        </p>
+          <p className="text-primary-foreground/60 text-xs">
+            Adecco New Petchburi Co.,Ltd. is a third-party service provider and
+            are not affiliated with the Royal Thai Government or the Thai
+            Immigration Bureau. Our role is to provide consultation, preparation,
+            and application support services for Long-Term Resident (LTR) Visa
+            applicants. We are a certified/authorized visa preparer, recognized
+            to assist applicants with the visa process, but we do not represent
+            the government.
+          </p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;
