@@ -1,10 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Shield } from "lucide-react";
-
 const Legal = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <main className="py-12 font-quicksand">
@@ -135,16 +133,12 @@ const Legal = () => {
                   <h3 className="text-xl font-bold text-slate-800 mb-3">
                     9. Disclaimer
                   </h3>
-                  <p>
-                    Sunset Commerce Limited is a third-party service provider
-                    and is not affiliated with the Royal Thai Government or Thai
-                    Immigration Bureau. The official Thailand Digital Arrival
-                    Card (TDAC) can be submitted directly at no cost via the
-                    official government portal. Our service provides value-added
-                    support, including guidance, error-checking, and customer
-                    assistance. A service fee is charged for the convenience and
-                    assistance we provide.
-                  </p>
+                  <p>Adecco New Petchburi Co.,Ltd. is a third-party service provider and are not affiliated with the Royal Thai Government or the Thai Immigration Bureau. Our role is to provide consultation, preparation, and application support services for Long-Term Resident (LTR) Visa applicants. We are a certified/authorized visa preparer, recognized to assist applicants with the visa process, but we do not represent the government.
+
+
+
+
+                </p>
                 </div>
               </div>
             </section>
@@ -280,8 +274,6 @@ const Legal = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Legal;
