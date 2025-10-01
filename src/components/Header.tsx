@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import adeccoLogo from "@/assets/adecco-logo.png";
 const Header = () => {
   return <header className="w-full sticky top-0 z-50 font-quicksand">
       {/* Top dark bar */}
@@ -14,7 +15,7 @@ const Header = () => {
             {/* Logo / Flag + Title */}
             <div className="flex items-center gap-3">
               <Link to="/" className="flex items-center gap-3">
-                <img src="https://www.svgrepo.com/show/405628/flag-for-flag-thailand.svg" alt="Thailand Flag" className="w-8 h-5 sm:w-10 sm:h-6 lg:w-12 lg:h-8 object-contain" />
+                <img src={adeccoLogo} alt="Adecco Logo" className="w-20 h-8 sm:w-24 sm:h-10 lg:w-28 lg:h-12 object-contain" />
                 <span className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800">thaidigitalarrival.com</span>
               </Link>
             </div>
