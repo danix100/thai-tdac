@@ -1,15 +1,10 @@
 const Footer = () => {
-  return (
-    <footer className="bg-primary py-12 font-quicksand">
+  return <footer className="bg-primary py-12 font-quicksand">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img
-                src="https://www.svgrepo.com/show/405628/flag-for-flag-thailand.svg"
-                alt="Thailand Flag"
-                className="w-10 h-6 object-contain"
-              />
+              <img src="https://www.svgrepo.com/show/405628/flag-for-flag-thailand.svg" alt="Thailand Flag" className="w-10 h-6 object-contain" />
               <span className="text-xl font-bold text-primary-foreground">Thailand TDAC</span>
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
@@ -17,18 +12,10 @@ const Footer = () => {
             </p>
             <div className="flex gap-3">
               <div className="w-8 h-6 bg-white/20 rounded flex items-center justify-center p-1">
-                <img 
-                  src="https://www.svgrepo.com/show/510183/secure.svg"
-                  alt="Secure"
-                  className="w-full h-full filter brightness-0 invert"
-                />
+                <img src="https://www.svgrepo.com/show/510183/secure.svg" alt="Secure" className="w-full h-full filter brightness-0 invert" />
               </div>
               <div className="w-8 h-6 bg-white/20 rounded flex items-center justify-center p-1">
-                <img 
-                  src="https://www.svgrepo.com/show/383769/security-protection-ssl-certificate.svg"
-                  alt="SSL Certificate"
-                  className="w-full h-full filter brightness-0 invert"
-                />
+                <img src="https://www.svgrepo.com/show/383769/security-protection-ssl-certificate.svg" alt="SSL Certificate" className="w-full h-full filter brightness-0 invert" />
               </div>
             </div>
           </div>
@@ -55,15 +42,10 @@ const Footer = () => {
           <p className="text-primary-foreground/80 text-sm mb-2">
             © 2025 thaidigitalarrival.com All rights reserved.
           </p>
-          <p className="text-primary-foreground/60 text-xs">
-           Sunset Commerce Limited is a third-party service provider and is not affiliated with the Royal Thai Government or Thai Immigration Bureau. The official Thailand Digital Arrival Card (TDAC) can be submitted directly at no cost via the official government portal.
-Our service provides value-added support, including guidance, error-checking, and customer assistance. A service fee is charged for the convenience and assistance we provide.
-
-          </p>
+          <p className="text-primary-foreground/60 text-xs">Adecco New Petchburi Co.,Ltd. is a third-party service provider and are not affiliated with the Royal Thai Government or the Thai Immigration Bureau. Our role is to provide consultation, preparation, and application support services for Long-Term Resident (LTR) Visa applicants. We are a certified/authorized visa preparer, recognized to assist applicants with the visa process, but we do not represent the government.
+        </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
