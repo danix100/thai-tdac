@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import adeccoLogo from "@/assets/adecco-logo.jpg";
+import gitiLogo from "@/assets/giti-logo.png";
 const Header = () => {
   return <header className="w-full sticky top-0 z-50 font-quicksand">
       {/* Top dark bar */}
@@ -15,7 +15,7 @@ const Header = () => {
             {/* Logo / Flag + Title */}
             <div className="flex items-center gap-3">
               <Link to="/">
-                <img src={adeccoLogo} alt="Adecco Logo" className="w-32 h-12 sm:w-40 sm:h-14 lg:w-48 lg:h-16 object-contain" />
+                <img src={gitiLogo} alt="Giti Migration Services Logo" className="w-32 h-12 sm:w-40 sm:h-14 lg:w-48 lg:h-16 object-contain" />
               </Link>
             </div>
 
