@@ -8,23 +8,19 @@ import { Separator } from "@/components/ui/separator";
 import { Shield, CreditCard, Lock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const ConfirmPayment = () => {
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
-
   const handlePayment = async () => {
     setIsProcessing(true);
-    
+
     // Simulate payment processing
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     // Navigate to success page
     navigate("/payment-success");
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  return <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <Header />
       
       <div className="container mx-auto px-4 py-8">
@@ -53,7 +49,7 @@ const ConfirmPayment = () => {
                 <h3 className="font-semibold mb-3">Order Summary</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Thailand Visa Application</span>
+                    <span>Australia Visa Application</span>
                     <span>$50.00</span>
                   </div>
                   <div className="flex justify-between">
@@ -72,38 +68,23 @@ const ConfirmPayment = () => {
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="card-number">Card Number</Label>
-                  <Input
-                    id="card-number"
-                    placeholder="1234 5678 9012 3456"
-                    maxLength={19}
-                  />
+                  <Input id="card-number" placeholder="1234 5678 9012 3456" maxLength={19} />
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="expiry">Expiry Date</Label>
-                    <Input
-                      id="expiry"
-                      placeholder="MM/YY"
-                      maxLength={5}
-                    />
+                    <Input id="expiry" placeholder="MM/YY" maxLength={5} />
                   </div>
                   <div>
                     <Label htmlFor="cvv">CVV</Label>
-                    <Input
-                      id="cvv"
-                      placeholder="123"
-                      maxLength={4}
-                    />
+                    <Input id="cvv" placeholder="123" maxLength={4} />
                   </div>
                 </div>
 
                 <div>
                   <Label htmlFor="cardholder">Cardholder Name</Label>
-                  <Input
-                    id="cardholder"
-                    placeholder="John Doe"
-                  />
+                  <Input id="cardholder" placeholder="John Doe" />
                 </div>
               </div>
 
@@ -124,18 +105,10 @@ const ConfirmPayment = () => {
 
               {/* Action Buttons */}
               <div className="flex gap-4 pt-4">
-                <Button
-                  variant="outline"
-                  onClick={() => navigate("/apply")}
-                  className="flex-1"
-                >
+                <Button variant="outline" onClick={() => navigate("/apply")} className="flex-1">
                   Back to Application
                 </Button>
-                <Button
-                  onClick={handlePayment}
-                  disabled={isProcessing}
-                  className="flex-1 bg-red-600 hover:bg-red-700 text-white"
-                >
+                <Button onClick={handlePayment} disabled={isProcessing} className="flex-1 bg-red-600 hover:bg-red-700 text-white">
                   <Lock className="h-4 w-4 mr-2" />
                   {isProcessing ? "Processing..." : "Confirm Payment"}
                 </Button>
@@ -146,8 +119,6 @@ const ConfirmPayment = () => {
       </div>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default ConfirmPayment;
