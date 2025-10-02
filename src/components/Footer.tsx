@@ -43,7 +43,7 @@ const Footer = () => {
           <p className="text-primary-foreground/80 text-sm mb-2">
             © 2025 thaidigitalarrival.com All rights reserved.
           </p>
-          <p className="text-primary-foreground/60 text-xs">Adecco New Petchburi Co.,Ltd. is a third-party service provider and are not affiliated with the Royal Thai Government or the Thai Immigration Bureau. Our role is to provide consultation, preparation, and application support services for Long-Term Resident (LTR) Visa applicants. We are a certified/authorized visa preparer, recognized to assist applicants with the visa process, but we do not represent the government.
+          <p className="text-primary-foreground/60 text-xs">thaidigitalarrival.com It is an International Migration Agency registered with <a target="_blank" href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca" className="underline hover:text-primary-foreground/80">MARA</a> in Australia (Migration Agents Registration Authority). <a href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca" target="_blank" className="underline hover:text-primary-foreground/80">MARA</a> registration number: 1568772.
         </p>
         </div>
       </div>
