@@ -402,7 +402,7 @@ const Apply = () => {
                             render={({ field }) => (
                               <FormItem className="space-y-3">
                                 <FormLabel className="text-base md:text-lg font-bold text-slate-800">
-                                  Arrival Date in Thailand <span className="text-red-500">*</span>
+                                  Arrival Date in Australia <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
                                   <DateInput
