@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+
 interface Country {
   country: string;
   iso_code: string;
   flag_url: string;
 }
+
 const CountryFlagsSection = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,58 +46,89 @@ const CountryFlagsSection = () => {
     };
     loadCountries();
   }, []);
+
   const handleCountryClick = (country: Country) => {
     // Placeholder for URL navigation - user will provide URLs later
     console.log('Clicked country:', country.country, country.iso_code);
     // TODO: Navigate to URL when provided
   };
+
   const displayedCountries = showAll ? countries : countries.slice(0, INITIAL_DISPLAY_COUNT);
+
   if (loading) {
     return <section className="py-16 bg-background font-quicksand">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-8">
-              Countries that need the <span className="text-primary-light">Thailand Visa On Arrival</span>
+              Countries that Need an <span className="text-primary-light">Australian Visa on Arrival</span>
             </h2>
             <p className="text-lg text-muted-foreground">Loading countries...</p>
           </div>
         </div>
       </section>;
   }
+
   return <section className="py-16 bg-background font-quicksand">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
-            Countries Requiring a <span className="text-primary-light">Australia Visa On Arrival</span>
+            Countries Requiring an <span className="text-primary-light">Australian Visa on Arrival</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Travelers from these countries must complete an online application before entering Australia</p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Travelers from these countries must complete an online application before entering Australia.
+          </p>
         </div>
 
         <div className="grid grid-cols-5 gap-4 max-w-5xl mx-auto">
-          {displayedCountries.map((country, index) => <Card key={index} className="p-3 hover:shadow-soft transition-all duration-300 cursor-pointer hover:scale-105 border-primary/10 bg-white" onClick={() => handleCountryClick(country)}>
+          {displayedCountries.map((country, index) => (
+            <Card 
+              key={index} 
+              className="p-3 hover:shadow-soft transition-all duration-300 cursor-pointer hover:scale-105 border-primary/10 bg-white" 
+              onClick={() => handleCountryClick(country)}
+            >
               <div className="flex items-center gap-3">
-                <img src={country.flag_url} alt={`${country.country} flag`} className="w-8 h-6 object-cover flex-shrink-0" style={{
-              borderRadius: '3px'
-            }} loading="lazy" />
+                <img 
+                  src={country.flag_url} 
+                  alt={`${country.country} flag`} 
+                  className="w-8 h-6 object-cover flex-shrink-0" 
+                  style={{ borderRadius: '3px' }} 
+                  loading="lazy" 
+                />
                 <span className="text-sm font-medium text-foreground leading-tight truncate">
                   {country.country}
                 </span>
               </div>
-            </Card>)}
+            </Card>
+          ))}
         </div>
 
-        {!showAll && countries.length > INITIAL_DISPLAY_COUNT && <div className="text-center mt-8">
-            <Button onClick={() => setShowAll(true)} variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-3 rounded-lg transition-all duration-200">
+        {!showAll && countries.length > INITIAL_DISPLAY_COUNT && (
+          <div className="text-center mt-8">
+            <Button 
+              onClick={() => setShowAll(true)} 
+              variant="outline" 
+              size="lg" 
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-3 rounded-lg transition-all duration-200"
+            >
               Show More Countries ({countries.length - INITIAL_DISPLAY_COUNT} more)
             </Button>
-          </div>}
+          </div>
+        )}
         
-        {showAll && <div className="text-center mt-8">
-            <Button onClick={() => setShowAll(false)} variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-3 rounded-lg transition-all duration-200">
+        {showAll && (
+          <div className="text-center mt-8">
+            <Button 
+              onClick={() => setShowAll(false)} 
+              variant="outline" 
+              size="lg" 
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-8 py-3 rounded-lg transition-all duration-200"
+            >
               Show Less
             </Button>
-          </div>}
+          </div>
+        )}
       </div>
     </section>;
 };
+
 export default CountryFlagsSection;
