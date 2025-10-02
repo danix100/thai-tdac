@@ -1,4 +1,4 @@
-import australiaCoupleImage from '@/assets/sydney-opera-house.jpg';
+import australiaCoupleImage from '@/assets/australia-visitor.webp';
 
 const VisaGuideSection = () => {
   return (
