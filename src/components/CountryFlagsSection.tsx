@@ -66,9 +66,9 @@ const CountryFlagsSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
-            Countries Requiring a <span className="text-primary-light">Thailand Visa On Arrival</span>
+            Countries Requiring a <span className="text-primary-light">Australia Visa On Arrival</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Travelers from these countries must complete an online application before entering Thailand."</p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Travelers from these countries must complete an online application before entering Australia</p>
         </div>
 
         <div className="grid grid-cols-5 gap-4 max-w-5xl mx-auto">
