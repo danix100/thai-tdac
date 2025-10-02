@@ -7,25 +7,11 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-
 const contactSchema = z.object({
   firstName: z.string().trim().min(1, "Name is required").max(50, "Name must be less than 50 characters"),
   lastName: z.string().trim().min(1, "Last name is required").max(50, "Last name must be less than 50 characters"),
@@ -34,18 +20,17 @@ const contactSchema = z.object({
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
   confirmEmail: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
   reason: z.string().min(1, "Reason is required"),
-  content: z.string().trim().min(1, "Content is required").max(1000, "Content must be less than 1000 characters"),
-}).refine((data) => data.email === data.confirmEmail, {
+  content: z.string().trim().min(1, "Content is required").max(1000, "Content must be less than 1000 characters")
+}).refine(data => data.email === data.confirmEmail, {
   message: "Emails don't match",
-  path: ["confirmEmail"],
+  path: ["confirmEmail"]
 });
-
 type ContactFormData = z.infer<typeof contactSchema>;
-
 const Contact = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -56,53 +41,47 @@ const Contact = () => {
       email: "",
       confirmEmail: "",
       reason: "",
-      content: "",
-    },
+      content: ""
+    }
   });
-
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     try {
       console.log("Contact form data:", data);
-      
-      // Save to database
-      const { error } = await supabase
-        .from('contact_submissions')
-        .insert({
-          first_name: data.firstName,
-          last_name: data.lastName,
-          nationality: data.nationality,
-          passport: data.passport,
-          email: data.email,
-          confirm_email: data.confirmEmail,
-          reason: data.reason,
-          content: data.content,
-        });
 
+      // Save to database
+      const {
+        error
+      } = await supabase.from('contact_submissions').insert({
+        first_name: data.firstName,
+        last_name: data.lastName,
+        nationality: data.nationality,
+        passport: data.passport,
+        email: data.email,
+        confirm_email: data.confirmEmail,
+        reason: data.reason,
+        content: data.content
+      });
       if (error) {
         throw error;
       }
-      
       toast({
         title: "Message sent!",
-        description: "Thank you for contacting us. We'll get back to you soon.",
+        description: "Thank you for contacting us. We'll get back to you soon."
       });
-      
       form.reset();
     } catch (error) {
       console.error("Error submitting contact form:", error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <main className="py-12 font-quicksand">
@@ -127,9 +106,7 @@ const Contact = () => {
                   <p className="font-semibold">Giti Migration Services</p>
                   <p>41 Sporing Avenue Kings Langley NSW 2147 Australia</p>
                   <p>
-                    <a href="mailto:GitiMigration@Gmail.Com" className="text-primary hover:underline">
-                      GitiMigration@Gmail.Com
-                    </a>
+                    <a href="mailto:GitiMigration@Gmail.Com" className="text-primary hover:underline">GitiMigration@gmail.com</a>
                   </p>
                 </div>
               </div>
@@ -139,54 +116,36 @@ const Contact = () => {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 {/* Name and Last Name */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="firstName"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
+                  <FormField control={form.control} name="firstName" render={({
+                  field
+                }) => <FormItem className="space-y-3">
                         <FormLabel className="text-lg font-bold text-slate-800">
                           Name
                         </FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Wilson"
-                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
-                            {...field}
-                          />
+                          <Input placeholder="Wilson" className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary" {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
 
-                  <FormField
-                    control={form.control}
-                    name="lastName"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
+                  <FormField control={form.control} name="lastName" render={({
+                  field
+                }) => <FormItem className="space-y-3">
                         <FormLabel className="text-lg font-bold text-slate-800">
                           Last Name
                         </FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Johnson"
-                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
-                            {...field}
-                          />
+                          <Input placeholder="Johnson" className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary" {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
                 </div>
 
                 {/* Nationality and Passport */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="nationality"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
+                  <FormField control={form.control} name="nationality" render={({
+                  field
+                }) => <FormItem className="space-y-3">
                         <FormLabel className="text-lg font-bold text-slate-800">
                           Nationality
                         </FormLabel>
@@ -210,82 +169,52 @@ const Contact = () => {
                           </SelectContent>
                         </Select>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
 
-                  <FormField
-                    control={form.control}
-                    name="passport"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
+                  <FormField control={form.control} name="passport" render={({
+                  field
+                }) => <FormItem className="space-y-3">
                         <FormLabel className="text-lg font-bold text-slate-800">
                           Passport
                         </FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="1234567"
-                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
-                            {...field}
-                          />
+                          <Input placeholder="1234567" className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary" {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
                 </div>
 
                 {/* Email and Confirm Email */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
+                  <FormField control={form.control} name="email" render={({
+                  field
+                }) => <FormItem className="space-y-3">
                         <FormLabel className="text-lg font-bold text-slate-800">
                           Email
                         </FormLabel>
                         <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="wilson@johnson.com"
-                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
-                            {...field}
-                          />
+                          <Input type="email" placeholder="wilson@johnson.com" className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary" {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
 
-                  <FormField
-                    control={form.control}
-                    name="confirmEmail"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
+                  <FormField control={form.control} name="confirmEmail" render={({
+                  field
+                }) => <FormItem className="space-y-3">
                         <FormLabel className="text-lg font-bold text-slate-800">
                           Confirmar Email
                         </FormLabel>
                         <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="wilson@johnson.com"
-                            className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary"
-                            {...field}
-                          />
+                          <Input type="email" placeholder="wilson@johnson.com" className="h-12 border-2 border-gray-200 hover:border-primary focus:border-primary" {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
                 </div>
 
                 {/* Reason */}
-                <FormField
-                  control={form.control}
-                  name="reason"
-                  render={({ field }) => (
-                    <FormItem className="space-y-3">
+                <FormField control={form.control} name="reason" render={({
+                field
+              }) => <FormItem className="space-y-3">
                       <FormLabel className="text-lg font-bold text-slate-800">
                         Reason
                       </FormLabel>
@@ -305,38 +234,24 @@ const Contact = () => {
                         </SelectContent>
                       </Select>
                       <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    </FormItem>} />
 
                 {/* Content */}
-                <FormField
-                  control={form.control}
-                  name="content"
-                  render={({ field }) => (
-                    <FormItem className="space-y-3">
+                <FormField control={form.control} name="content" render={({
+                field
+              }) => <FormItem className="space-y-3">
                       <FormLabel className="text-lg font-bold text-slate-800">
                         Content
                       </FormLabel>
                       <FormControl>
-                        <Textarea
-                          placeholder="Please describe your question or issue in detail..."
-                          className="min-h-[120px] border-2 border-gray-200 hover:border-primary focus:border-primary resize-none"
-                          {...field}
-                        />
+                        <Textarea placeholder="Please describe your question or issue in detail..." className="min-h-[120px] border-2 border-gray-200 hover:border-primary focus:border-primary resize-none" {...field} />
                       </FormControl>
                       <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    </FormItem>} />
 
                 {/* Submit Button */}
                 <div className="pt-6">
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 text-lg rounded-lg shadow-md hover:shadow-lg transition-all"
-                  >
+                  <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 text-lg rounded-lg shadow-md hover:shadow-lg transition-all">
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </div>
@@ -347,8 +262,6 @@ const Contact = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
