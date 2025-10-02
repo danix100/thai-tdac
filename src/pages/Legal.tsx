@@ -1,8 +1,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Shield } from "lucide-react";
+
 const Legal = () => {
-  return <div className="min-h-screen bg-background">
+  return (
+    <div className="min-h-screen bg-background">
       <Header />
       
       <main className="py-12 font-quicksand">
@@ -17,7 +19,7 @@ const Legal = () => {
               <p className="text-lg text-slate-600">Terms of Use, Privacy Policy, and Cookie Policy</p>
             </div>
 
-                       {/* Terms of Use Section */}
+            {/* Terms of Use Section */}
             <section id="terms" className="mb-16">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8 pb-4 border-b border-gray-200">
                 Terms of Use
@@ -133,12 +135,25 @@ const Legal = () => {
                   <h3 className="text-xl font-bold text-slate-800 mb-3">
                     9. Disclaimer
                   </h3>
-                  <p>Adecco New Petchburi Co.,Ltd. is a third-party service provider and are not affiliated with the Royal Thai Government or the Thai Immigration Bureau. Our role is to provide consultation, preparation, and application support services for Long-Term Resident (LTR) Visa applicants. We are a certified/authorized visa preparer, recognized to assist applicants with the visa process, but we do not represent the government.
-
-
-
-
-                </p>
+                  <p>
+                    <strong>thaidigitalarrival.com</strong> is an International Migration Agency registered with{" "}
+                    <a
+                      target="_blank"
+                      href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca"
+                      className="text-primary underline"
+                    >
+                      MARA
+                    </a>{" "}
+                    in Australia (Migration Agents Registration Authority).{" "}
+                    <a
+                      href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca"
+                      target="_blank"
+                      className="text-primary underline"
+                    >
+                      MARA
+                    </a>{" "}
+                    registration number: 1568772.
+                  </p>
                 </div>
               </div>
             </section>
@@ -274,6 +289,8 @@ const Legal = () => {
       </main>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Legal;
