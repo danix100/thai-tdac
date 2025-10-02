@@ -12,7 +12,7 @@ const HowToApply = () => {
     },
     {
       number: "2",
-      title: "Get your TDAC by email",
+      title: "Get your arrival card by email",
       icon: Mail,
       description:
         "Receive your Thailand Digital Arrival Card as a PDF via email.",
