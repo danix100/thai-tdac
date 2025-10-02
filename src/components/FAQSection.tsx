@@ -2,36 +2,36 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqData = [
   {
-    question: "What exactly is the Thailand Digital Arrival Card (TDAC)?",
-    answer: "The TDAC is Thailand's official digital arrival form, required for all travelers. It must be completed online within 72 hours before entering the country."
+    question: "What exactly is the Australian Visa on Arrival (VOA)?",
+    answer: "The VOA is a short-term visa that certain eligible travelers can obtain upon arrival in Australia. It allows entry for tourism or business purposes, depending on your nationality."
   },
   {
-    question: "How much will it cost me to apply?",
-    answer: "The service fee ranges from $50 to $70 depending on the processing option. This fee includes application assistance, error verification, and 24/7 support."
+    question: "How much does the Visa on Arrival cost?",
+    answer: "The fee varies depending on your nationality and the processing option. Service fees may also apply if you use an online application service for guidance and support."
   },
   {
-    question: "When should I fill out the TDAC?",
-    answer: "You can complete the form anytime before your trip. The confirmation is delivered exactly 3 days (72 hours) prior to departure, as mandated by Thai Immigration."
+    question: "When should I apply for the Australian Visa on Arrival?",
+    answer: "You can prepare your application before traveling and complete the process at the airport upon arrival in Australia. Having documents ready will help avoid delays."
   },
   {
-    question: "Are children required to have a TDAC too?",
-    answer: "Yes. Every traveler, including children and infants, must have a TDAC. Parents or guardians should submit the form on their behalf."
+    question: "Are children required to have a Visa on Arrival too?",
+    answer: "Yes. Every traveler, including children and infants, must hold their own valid visa. Parents or guardians can apply on behalf of minors."
   },
   {
-    question: "How will I get my TDAC after applying?",
-    answer: "Once processed, you'll get the TDAC confirmation via email as a PDF. You can either print it or show it digitally at immigration."
+    question: "How will I receive my Visa on Arrival?",
+    answer: "The visa is issued at the immigration counter upon arrival. You may need to provide supporting documents and pay the applicable fee directly."
   },
   {
-    question: "What if I accidentally make a mistake on the form?",
-    answer: "Our team reviews applications for common mistakes. If any corrections are needed, we'll assist you to ensure the form is accepted."
+    question: "What if I make a mistake in my application?",
+    answer: "If errors are found, immigration officers may request corrections or additional documents at the border. Using a guided online service can help minimize mistakes before travel."
   },
   {
-    question: "Do I still need a visa if I complete the TDAC?",
-    answer: "Yes. The TDAC is not a visa. Depending on your nationality, a valid visa may still be required. This service only covers the TDAC application."
+    question: "Do I still need a visa if I’m from a visa-exempt country?",
+    answer: "No. Travelers from visa-exempt countries do not need a Visa on Arrival. However, most nationalities require either a pre-approved visa or a VOA. Check eligibility before traveling."
   },
   {
     question: "Why should I apply using this website?",
-    answer: "We provide a simple, guided process with English support, 24/7 assistance, error checking, and guaranteed delivery of your TDAC confirmation email."
+    answer: "We provide step-by-step guidance, document checking, and 24/7 support to make your Visa on Arrival process smoother and stress-free."
   }
 ];
 
