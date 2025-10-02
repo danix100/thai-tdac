@@ -1,17 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { FileText, Mail } from "lucide-react";
 import bannerImage from "@/assets/thailand-beach-boat.jpg";
-
 const HeroSection = () => {
-  return (
-    <section className="font-quicksand">
+  return <section className="font-quicksand">
       {/* Desktop and Tablet */}
-      <div 
-        className="hidden sm:flex relative bg-cover bg-center items-start justify-end max-h-[400px] md:max-h-[450px] lg:max-h-[500px]"
-        style={{
-          backgroundImage: `url(${bannerImage})`,
-        }}
-      >
+      <div className="hidden sm:flex relative bg-cover bg-center items-start justify-end max-h-[400px] md:max-h-[450px] lg:max-h-[500px]" style={{
+      backgroundImage: `url(${bannerImage})`
+    }}>
         {/* Overlay for readability */}
         <div className="absolute inset-0 bg-black/20" />
 
@@ -21,12 +16,8 @@ const HeroSection = () => {
             <div className="space-y-3 md:space-y-4 lg:space-y-6 text-left">
               {/* Headline */}
               <div>
-                <h1 className="text-2xl md:text-3xl lg:text-6xl font-bold text-primary mb-2 md:mb-3 lg:mb-4 leading-tight">
-                  Thailand Digital Arrival Card
-                </h1>
-                <p className="text-sm md:text-base lg:text-2xl text-gray-800 mb-3 md:mb-4 lg:mb-6 leading-relaxed font-medium">
-                  Travelers must present a valid Thailand Digital Arrival Card to complete entry formalities upon arrival.
-                </p>
+                <h1 className="text-2xl md:text-3xl lg:text-6xl font-bold text-primary mb-2 md:mb-3 lg:mb-4 leading-tight">Australia Digital Arrival Card</h1>
+                <p className="text-sm md:text-base lg:text-2xl text-gray-800 mb-3 md:mb-4 lg:mb-6 leading-relaxed font-medium">Travelers must present a valid Australia Digital Arrival Card to complete entry formalities upon arrival.</p>
               </div>
 
               {/* Process Steps */}
@@ -53,28 +44,15 @@ const HeroSection = () => {
                     <h3 className="text-xs md:text-sm lg:text-lg font-bold text-primary mb-1">
                       Receive Your Card
                     </h3>
-                    <p className="text-gray-700 text-xs md:text-xs lg:text-base font-medium">
-                      Your Thailand Digital Arrival Card will be sent to your email as a PDF document.
-                    </p>
+                    <p className="text-gray-700 text-xs md:text-xs lg:text-base font-medium">Your Australia Digital Arrival Card will be sent to your email as a PDF document.</p>
                   </div>
                 </div>
               </div>
 
               {/* CTA Buttons */}
               <div className="flex flex-col lg:flex-row gap-2 md:gap-3 lg:gap-4 pt-2 lg:pt-3">
-                <Button
-                  size="lg"
-                  onClick={() => window.location.href = '/apply'}
-                  className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-bold px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 shadow-lg hover:shadow-xl transition-all duration-300 text-xs md:text-sm lg:text-base"
-                >
-                  Apply for Your Thailand Digital Arrival Card
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => window.location.href = '/contact'}
-                  className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 transition-all duration-300 text-xs md:text-sm lg:text-base"
-                >
+                <Button size="lg" onClick={() => window.location.href = '/apply'} className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-bold px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 shadow-lg hover:shadow-xl transition-all duration-300 text-xs md:text-sm lg:text-base">Apply for Your Australia Digital Arrival Card</Button>
+                <Button variant="outline" size="lg" onClick={() => window.location.href = '/contact'} className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 transition-all duration-300 text-xs md:text-sm lg:text-base">
                   Contact Us
                 </Button>
               </div>
@@ -86,12 +64,9 @@ const HeroSection = () => {
       {/* Mobile */}
       <div className="sm:hidden relative">
         {/* Background Image Section */}
-        <div
-          className="h-[60vh] bg-cover bg-center relative"
-          style={{
-            backgroundImage: `url(${bannerImage})`,
-          }}
-        >
+        <div className="h-[60vh] bg-cover bg-center relative" style={{
+        backgroundImage: `url(${bannerImage})`
+      }}>
           <div className="absolute inset-0 bg-black/20" />
         </div>
 
@@ -142,18 +117,10 @@ const HeroSection = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col gap-3 pt-2">
-                <Button
-                  size="lg"
-                  className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-bold px-4 py-3 shadow-lg hover:shadow-xl transition-all duration-300 text-sm"
-                >
+                <Button size="lg" className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-bold px-4 py-3 shadow-lg hover:shadow-xl transition-all duration-300 text-sm">
                   Apply for Your Thailand Digital Arrival Card
                 </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => window.location.href = '/contact'}
-                  className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-4 py-3 transition-all duration-300 text-sm"
-                >
+                <Button variant="outline" size="lg" onClick={() => window.location.href = '/contact'} className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-4 py-3 transition-all duration-300 text-sm">
                   Contact Us
                 </Button>
               </div>
@@ -164,8 +131,6 @@ const HeroSection = () => {
         {/* White section below */}
         <div className="bg-white h-20"></div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
