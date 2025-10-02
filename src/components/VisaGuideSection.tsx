@@ -1,4 +1,4 @@
-import thailandCoupleImage from '@/assets/thailand-couple.png';
+import australiaCoupleImage from '@/assets/sydney-opera-house.jpg';
 
 const VisaGuideSection = () => {
   return (
