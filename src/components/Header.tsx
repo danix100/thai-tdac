@@ -15,7 +15,7 @@ const Header = () => {
             {/* Logo / Flag + Title */}
             <div className="flex items-center gap-3">
               <Link to="/">
-                <img src={gitiLogo} alt="Giti Migration Services Logo" className="w-32 h-12 sm:w-40 sm:h-14 lg:w-48 lg:h-16 object-contain" />
+                <img src={gitiLogo} alt="Giti Migration Services Logo" className="w-40 h-16 sm:w-52 sm:h-20 lg:w-64 lg:h-24 object-contain" />
               </Link>
             </div>
 
