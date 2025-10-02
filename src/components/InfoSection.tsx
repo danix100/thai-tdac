@@ -33,7 +33,7 @@ const InfoSection = () => {
               
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  The <strong className="text-primary">Thailand Visa On Arrival</strong> is a crucial travel document required for anyone entering Thailand. It collects essential information about visitors for immigration and entry tracking.
+                  The <strong className="text-primary">Australia Visa On Arrival</strong> is a crucial travel document required for anyone entering Thailand. It collects essential information about visitors for immigration and entry tracking.
                 </p>
                 
                 <p>
