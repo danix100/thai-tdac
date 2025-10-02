@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { FileText, Mail } from "lucide-react";
-import bannerImage from "@/assets/thailand-beach-boat.jpg";
+import bannerImage from "@/assets/sydney-opera-house.jpg";
 const HeroSection = () => {
   return <section className="font-quicksand">
       {/* Desktop and Tablet */}
