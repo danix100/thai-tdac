@@ -113,6 +113,21 @@ const Contact = () => {
               <p className="text-lg text-slate-600">Get your questions answered or request a refund</p>
             </div>
 
+            {/* Contact Information */}
+            <div className="mb-8 pb-8 border-b border-gray-200">
+              <div className="space-y-2 text-slate-700">
+                <p className="font-semibold text-lg">Ali Azimi</p>
+                <p>Migration agent registration number: 1568772</p>
+                <p className="font-semibold">Giti Migration Services</p>
+                <p>41 Sporing Avenue Kings Langley NSW 2147 Australia</p>
+                <p>
+                  <a href="mailto:GitiMigration@Gmail.Com" className="text-primary hover:underline">
+                    GitiMigration@Gmail.Com
+                  </a>
+                </p>
+              </div>
+            </div>
+
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 {/* Name and Last Name */}
@@ -320,21 +335,6 @@ const Contact = () => {
                 </div>
               </form>
             </Form>
-
-            {/* Contact Information */}
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <div className="space-y-2 text-slate-700">
-                <p className="font-semibold text-lg">Ali Azimi</p>
-                <p>Migration agent registration number: 1568772</p>
-                <p className="font-semibold">Giti Migration Services</p>
-                <p>41 Sporing Avenue Kings Langley NSW 2147 Australia</p>
-                <p>
-                  <a href="mailto:GitiMigration@Gmail.Com" className="text-primary hover:underline">
-                    GitiMigration@Gmail.Com
-                  </a>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </main>
