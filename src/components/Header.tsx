@@ -1,21 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import adeccoLogo from "@/assets/adecco-logo.jpg";
+import gitiLogo from "@/assets/giti-logo.png";
 const Header = () => {
   return <header className="w-full sticky top-0 z-50 font-quicksand">
       {/* Top dark bar */}
-      <div className="bg-gray-800 py-3 text-center">
-        <p className="text-xs sm:text-sm text-white font-medium">Required for all travellers wishing to enter Australia</p>
+      <div className="bg-gray-800 py-2 text-center">
+        <p className="text-xs sm:text-sm text-white font-medium">Required for all travellers wishing to enter Thailand</p>
       </div>
 
       {/* Main header */}
       <div className="bg-white shadow-sm border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-4 py-2">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             {/* Logo / Flag + Title */}
             <div className="flex items-center gap-3">
               <Link to="/">
-                <img src={adeccoLogo} alt="Adecco Logo" className="w-32 h-12 sm:w-40 sm:h-14 lg:w-48 lg:h-16 object-contain" />
+                <img src={gitiLogo} alt="Giti Migration Services Logo" className="w-40 h-16 sm:w-52 sm:h-20 lg:w-64 lg:h-24 object-contain" />
               </Link>
             </div>
 
