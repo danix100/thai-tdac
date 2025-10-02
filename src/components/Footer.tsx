@@ -1,4 +1,4 @@
-import adeccoLogo from "@/assets/adecco-logo-white.png";
+import newLogo from "@/assets/new-logo.png";
 
 const Footer = () => {
   return <footer className="bg-primary py-12 font-quicksand">
@@ -6,7 +6,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="mb-4 -ml-3">
-              <img src={adeccoLogo} alt="Adecco Logo" className="w-32 h-12 object-contain" />
+              <img src={newLogo} alt="Company Logo" className="w-32 h-12 object-contain" />
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
               Your personal information is securely encrypted using SSL.
