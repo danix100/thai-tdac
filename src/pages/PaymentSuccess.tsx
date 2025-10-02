@@ -4,12 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Download, Mail } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const PaymentSuccess = () => {
   const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
+  return <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
       <Header />
       
       <div className="container mx-auto px-4 py-8">
@@ -20,9 +17,7 @@ const PaymentSuccess = () => {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Payment Successful!
             </h1>
-            <p className="text-gray-600 text-lg">
-              Your Thailand Visa application has been submitted successfully
-            </p>
+            <p className="text-gray-600 text-lg">Your Australia Visa application has been submitted successfully</p>
           </div>
 
           {/* Confirmation Details */}
@@ -85,10 +80,7 @@ const PaymentSuccess = () => {
               <Download className="h-4 w-4" />
               Download Receipt
             </Button>
-            <Button 
-              onClick={() => navigate("/")}
-              className="bg-red-600 hover:bg-red-700 text-white"
-            >
+            <Button onClick={() => navigate("/")} className="bg-red-600 hover:bg-red-700 text-white">
               Return to Home
             </Button>
           </div>
@@ -96,8 +88,6 @@ const PaymentSuccess = () => {
       </div>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default PaymentSuccess;
