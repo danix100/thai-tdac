@@ -13,7 +13,7 @@ const Header = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             {/* Logo / Flag + Title */}
             <div className="flex items-center gap-3">
-              <Link to="/" className="text-xl sm:text-2xl lg:text-3xl font-bold text-primary hover:text-primary/90 transition-colors">
+              <Link to="/" className="text-base sm:text-lg lg:text-xl font-bold text-primary hover:text-primary/90 transition-colors">
                 Australia Digital Arrival Card
               </Link>
             </div>
