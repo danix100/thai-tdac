@@ -1,12 +1,10 @@
-import newLogo from "@/assets/new-logo.png";
-
 const Footer = () => {
   return <footer className="bg-primary py-12 font-quicksand">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <div className="mb-4 -ml-8">
-              <img src={newLogo} alt="Company Logo" className="w-48 h-20 object-contain" />
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-primary-foreground">Australia Digital Arrival Card</h2>
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
               Your personal information is securely encrypted using SSL.
