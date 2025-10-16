@@ -130,31 +130,6 @@ const Legal = () => {
                   </p>
                 </div>
 
-                {/* New Disclaimer */}
-                <div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">
-                    9. Disclaimer
-                  </h3>
-                  <p>
-                    <strong>thaidigitalarrival.com</strong> is an International Migration Agency registered with{" "}
-                    <a
-                      target="_blank"
-                      href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca"
-                      className="text-primary underline"
-                    >
-                      MARA
-                    </a>{" "}
-                    in Australia (Migration Agents Registration Authority).{" "}
-                    <a
-                      href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca"
-                      target="_blank"
-                      className="text-primary underline"
-                    >
-                      MARA
-                    </a>{" "}
-                    registration number: 1568772.
-                  </p>
-                </div>
               </div>
             </section>
 
