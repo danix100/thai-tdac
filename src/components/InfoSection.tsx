@@ -30,12 +30,12 @@ const InfoSection = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h2 className="text-3xl lg:text-4xl font-bold text-primary">
-                Understanding the <span className="text-primary-light">Australian Visa on Arrival</span>
+                Understanding the <span className="text-primary-light">Thai Visa on Arrival</span>
               </h2>
               
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  The <strong className="text-primary">Australian Visa on Arrival</strong> is a crucial travel document required for anyone entering Australia. It collects essential information about visitors for immigration and entry tracking.
+                  The <strong className="text-primary">Thai Visa on Arrival</strong> is a crucial travel document required for anyone entering Thailand. It collects essential information about visitors for immigration and entry tracking.
                 </p>
                 
                 <p>
@@ -59,7 +59,7 @@ const InfoSection = () => {
             
             <div className="flex justify-center">
               <div className="w-full max-w-md">
-                <img src={arrivalCardImage} alt="Australian Digital Arrival Card Preview" className="w-full h-auto rounded-lg shadow-soft" />
+                <img src={arrivalCardImage} alt="Thai Digital Arrival Card Preview" className="w-full h-auto rounded-lg shadow-soft" />
               </div>
             </div>
           </div>
@@ -94,12 +94,12 @@ const InfoSection = () => {
         {/* Do I Need Section */}
         <div className="bg-accent/30 rounded-3xl p-8 lg:p-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6 text-center">
-            Do You Need an <span className="text-primary-light">Australian Visa on Arrival</span>?
+            Do You Need a <span className="text-primary-light">Thai Visa on Arrival</span>?
           </h2>
           
           <div className="space-y-4 text-center max-w-4xl mx-auto">
             <p className="text-lg text-muted-foreground">
-              <strong className="text-primary">Yes</strong>, all travelers entering Australia must have a verified Travel Declaration Card.
+              <strong className="text-primary">Yes</strong>, all travelers entering Thailand must have a verified Travel Declaration Card.
             </p>
             
             <p className="text-lg text-muted-foreground">

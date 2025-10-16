@@ -49,7 +49,7 @@ const ConfirmPayment = () => {
                 <h3 className="font-semibold mb-3">Order Summary</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span>Australia Visa Application</span>
+                    <span>Thailand Visa Application</span>
                     <span>$50.00</span>
                   </div>
                   <div className="flex justify-between">

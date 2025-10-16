@@ -7,7 +7,7 @@ export const phoneCodes = [
   { country: "Angola", code: "+244", flag: "🇦🇴" },
   { country: "Argentina", code: "+54", flag: "🇦🇷" },
   { country: "Armenia", code: "+374", flag: "🇦🇲" },
-  { country: "Australia", code: "+61", flag: "🇦🇺" },
+  { country: "Thailand", code: "+66", flag: "🇹🇭" },
   { country: "Austria", code: "+43", flag: "🇦🇹" },
   { country: "Azerbaijan", code: "+994", flag: "🇦🇿" },
   { country: "Bahamas", code: "+1242", flag: "🇧🇸" },

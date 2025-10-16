@@ -17,7 +17,7 @@ const PaymentSuccess = () => {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Payment Successful!
             </h1>
-            <p className="text-gray-600 text-lg">Your Australia Visa application has been submitted successfully</p>
+            <p className="text-gray-600 text-lg">Your Thailand Visa application has been submitted successfully</p>
           </div>
 
           {/* Confirmation Details */}

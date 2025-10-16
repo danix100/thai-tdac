@@ -15,14 +15,14 @@ const HowToApply = () => {
       title: "Get your arrival card by email",
       icon: Mail,
       description:
-        "Receive your Australia Digital Arrival Card as a PDF via email.",
+        "Receive your Thailand Digital Arrival Card as a PDF via email.",
     },
     {
       number: "3",
       title: "Show it at the airport",
       icon: Plane,
       description:
-        "Present the card to immigration on arrival in Australia.",
+        "Present the card to immigration on arrival in Thailand.",
     },
   ];
 

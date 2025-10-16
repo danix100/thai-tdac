@@ -4,7 +4,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="mb-4">
-              <h2 className="text-xl font-bold text-primary-foreground">Australia Digital Arrival Card</h2>
+              <h2 className="text-xl font-bold text-primary-foreground">Thailand Digital Arrival Card</h2>
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4">
               Your personal information is securely encrypted using SSL.
@@ -41,7 +41,7 @@ const Footer = () => {
           <p className="text-primary-foreground/80 text-sm mb-2">
             © 2025 thaidigitalarrival.com All rights reserved.
           </p>
-          <p className="text-primary-foreground/60 text-xs mb-2">thaidigitalarrival.com It is an International Migration Agency registered with <a target="_blank" href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca" className="underline hover:text-primary-foreground/80">MARA</a> in Australia (Migration Agents Registration Authority). <a href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca" target="_blank" className="underline hover:text-primary-foreground/80">MARA</a> registration number: 1568772.
+          <p className="text-primary-foreground/60 text-xs mb-2">thaidigitalarrival.com It is an International Migration Agency registered with <a target="_blank" href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca" className="underline hover:text-primary-foreground/80">MARA</a> in Thailand (Migration Agents Registration Authority). <a href="https://portal.mara.gov.au/search-the-register-of-migration-agents/register-of-migration-agent-details/?ContactID=09441285-3f81-e411-9403-005056ab0eca" target="_blank" className="underline hover:text-primary-foreground/80">MARA</a> registration number: 1568772.
           </p>
           <p className="text-primary-foreground/60 text-xs">
             <strong>Legal Disclaimer:</strong> thaidigitalarrival.com is not affiliated with the Government or its sponsors.

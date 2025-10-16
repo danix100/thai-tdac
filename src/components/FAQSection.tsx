@@ -2,16 +2,16 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqData = [
   {
-    question: "What exactly is the Australian Visa on Arrival (VOA)?",
-    answer: "The VOA is a short-term visa that certain eligible travelers can obtain upon arrival in Australia. It allows entry for tourism or business purposes, depending on your nationality."
+    question: "What exactly is the Thai Visa on Arrival (VOA)?",
+    answer: "The VOA is a short-term visa that certain eligible travelers can obtain upon arrival in Thailand. It allows entry for tourism or business purposes, depending on your nationality."
   },
   {
     question: "How much does the Visa on Arrival cost?",
     answer: "The fee varies depending on your nationality and the processing option. Service fees may also apply if you use an online application service for guidance and support."
   },
   {
-    question: "When should I apply for the Australian Visa on Arrival?",
-    answer: "You can prepare your application before traveling and complete the process at the airport upon arrival in Australia. Having documents ready will help avoid delays."
+    question: "When should I apply for the Thai Visa on Arrival?",
+    answer: "You can prepare your application before traveling and complete the process at the airport upon arrival in Thailand. Having documents ready will help avoid delays."
   },
   {
     question: "Are children required to have a Visa on Arrival too?",
